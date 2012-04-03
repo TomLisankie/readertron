@@ -32,6 +32,9 @@ $(document).ready(function() {
 	$('#feed-all-items-filter').click(function() {
 		SETTINGS.page = 0;
 		SETTINGS.items_filter = "all";
+		SETTINGS.date_sort = "revchron";
+		$("#chron").removeClass("jfk-button-checked").addClass("jfk-button-unchecked");
+		$("#revchron").removeClass("jfk-button-unchecked").addClass("jfk-button-checked");
 		$("#unread-or-all .menu-button-caption").text("All items");
 		update_items_filter_control_counts();
 		fetch_entries();
@@ -40,6 +43,9 @@ $(document).ready(function() {
 	$("#feed-unread-items-filter").click(function() {
 		SETTINGS.items_filter = "unread";
 		SETTINGS.page = 0;
+		SETTINGS.date_sort = "chron";
+		$("#revchron").removeClass("jfk-button-checked").addClass("jfk-button-unchecked");
+		$("#chron").removeClass("jfk-button-unchecked").addClass("jfk-button-checked");
 		$("#unread-or-all .menu-button-caption").html("<span id='new-items-count-visible'>" + $("#new-items-count-hidden").text() + "</span> new items")
 		update_items_filter_control_counts();
 		fetch_entries();
