@@ -157,5 +157,7 @@ class ReaderController < ApplicationController
     content = params[:html].split('<div class="gmail_quote">').first.gsub("\r", "").gsub("\n", "").gsub(/(\<br\>)*$/, "").gsub(/(\<div\>)*$/, "")
     post.comments.create(user: user, content: content)
     render :text => "OK", :status => 200
+  rescue Exception => e
+    Report.create(report_type: "failed_cloudmailin", content: {email: params, exception: e})
   end
 end
