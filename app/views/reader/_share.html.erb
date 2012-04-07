@@ -37,7 +37,7 @@
 									<% if entry.url == "#quickpost" %>
 										<%= markdown(entry.content) %>
 									<% else %>
-										<%= clean(entry.content) %>
+										<%= clean(urlify_urls(entry.content)) %>
 									<% end %>
 								</div>
 							</div>

@@ -112,6 +112,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.1)
+    rinku (1.5.1)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -166,6 +167,7 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.1)
   redcarpet
+  rinku
   ruby-debug-base19
   ruby-debug19
   sanitize
