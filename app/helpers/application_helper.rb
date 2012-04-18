@@ -16,6 +16,7 @@ module ApplicationHelper
   def mdown(text)
     text = text.gsub(%r{(^|\s)([*_])(.+?)\2(\s|$)}x, %{\\1<em>\\3</em>\\4})
     text = text.gsub(/[\n]+/, "<br><br>")
+    text = text.gsub("<div>", "<p>").gsub("</div>", "</p>")
     raw(urlify_urls(text))
   end
   
