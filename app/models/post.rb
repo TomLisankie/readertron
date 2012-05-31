@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   
   validates_uniqueness_of :url, unless: ->(post) { post.shared? }
+  validate :not_a_shady_duplicate
   validates_presence_of :url
   validates_presence_of :title
   validates_presence_of :published
@@ -98,5 +99,9 @@ class Post < ActiveRecord::Base
   
   def sharer
     User.find_by_name(feed.title) if shared?
+  end
+  
+  def not_a_shady_duplicate
+    feed.posts.where(published: Post.last.published, title: Post.last.title).empty?
   end
 end
