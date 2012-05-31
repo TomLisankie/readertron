@@ -1,3 +1,8 @@
+- quickpost@readertron.com
+- No more caching for unread sequences
+- -1 counts?
+- legal theory blog formatting
+
 ## Readertron
 
 Readertron is an attempt to revive the old "social" Google Reader -- see particularly my [lament](#lament) below -- and a fun experiment in building useful software.
@@ -5,17 +10,17 @@ Readertron is an attempt to revive the old "social" Google Reader -- see particu
 ## Todos
 
 ### Core / New Features
-- Editing Quickposts
-- Previewing Quickposts
-- Polling for shared counts every 30s or so, and flashing on new content.
+- Collapsed view.
 - Comment / Quickpost / Note view, in reverse chronological order. Load them all. Call it the "thought stream."
-- Starring posts.
 - Search.
 	- Returns infinitely-scrollable results in the #entries div, but using a different partial, this one with a snippet view.
 	- The opened up version has the terms highlighted.
 	- "Back to search results" link.
-- Collapsed view.
+- Editing Quickposts
+- Previewing Quickposts
+- Starring posts.
 - One-click evernote integration.
+- Being able to see who has read the posts you've shared.
 - Subscribe to friends' feeds that you might like (that you don't already have).
 - Gamifying:
 	- Surfacing long comments.
@@ -29,6 +34,11 @@ Readertron is an attempt to revive the old "social" Google Reader -- see particu
 - The notion of circles.
 
 ### Feeds, Fetching
+- Fetching through the Google Reader API, e.g., http://www.google.com/reader/atom/feed/http://jsomers.tumblr.com/rss
+	- authenticate using the ClientLogin method
+	- pass that Auth token to Feedzirra?
+- Or fetching more explicitly.
+- Freedman's feeds not fetching properly.
 - Duplicate posts.
 - Keep an eye on feeds that haven't gotten a post in a while.
 - Is Feedzirra not getting new posts quickly enough? How does Google stay so up to date?
@@ -42,10 +52,14 @@ Readertron is an attempt to revive the old "social" Google Reader -- see particu
 - CSS -> SASS, and reusing rules.
 
 ### Performance, Ops
+- Put MySQL in memory
+- New Relic
+- Here's a crazy idea: one table of posts per user, with an "unread" boolean. No joins, indexes on all the columns. Maybe this would work better in something like Mongo?
 - Fix the logging situation. Maybe use Airbrake?
+- Potential problems with memcached and sharing across threads? "get_misses"?
 - Semantic joins, things like "subscribers," and AM's idea of dumping scopes on the associations themselves.
 - A queue to send e-mails after comments, rather than doing it inline.
-- Database backups.
+- Database backups (without content of posts).
 - /entries less than 1s.
 - Nginx speed tweaks.
 	- PCRE or whatever for compressing assets.
@@ -58,8 +72,11 @@ Readertron is an attempt to revive the old "social" Google Reader -- see particu
 - Sharing YouTube videos via the bookmarklet.
 
 ### UI, UX, Style
-- j & k & c & o on the /mine page.
 - Drew's n posts in "All Items" when he has no subscriptions.
+- The ability to rename feeds.
+- "-0" posts?
+- "notifications@readertron.com" should be "comments@readertron.com"
+- "quickpost@readertron.com"
 - The first post is being marked as read. (Silber)
 - Linkify URLs in comments and share-notes.
 - The overlap of the reading area onto the subscriptions pane.
