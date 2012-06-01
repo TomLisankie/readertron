@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<div id="quickpost-form" style="display: none;">
+<div id="quickpost-form-template" style="display: none;">
 	<%= form_tag("/reader/quickpost", :method => "post") do %>
 	  <%= text_field_tag(:title, nil, {placeholder: "Title for your quick post"}) %>
 	  <br/>
@@ -18,6 +18,9 @@
 	  <br/>
 	  <%= submit_tag("Submit") %> <a href="#" id="cancel-quickpost">Cancel</a>
 	<% end %>
+	<h3 class="title-preview"></h3>
+	<div class="preview">
+	</div>
 </div>
 
 <div id="panes">

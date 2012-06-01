@@ -106,13 +106,25 @@ $(document).ready(function() {
 		$(this).addClass("hover");
 	});
 	
+	var converter = new Showdown.converter();
+	
+	$("#quickpost-form input[name='title']").live("keyup", function() {
+		$("#quickpost-form .title-preview").html($(this).val());
+	});
+	
+	$("#quickpost-form #content").live("keyup", function() {
+		var txt = $("#quickpost-form #content").val();
+		var html = converter.makeHtml(txt);
+		$("#quickpost-form .preview").html(html)
+	});
+	
 	$("#quickpost-button").mouseout(function() {
 		$(this).removeClass("hover");
 	});
 	
 	$("#quickpost-button").live("click", function() {
 		scrollFetchFlag = false;
-		$("#entries").html($("#quickpost-form").clone().show());
+		$("#entries").html($("#quickpost-form-template").clone().attr("id", "quickpost-form").show());
 	});
 	
 	$("#cancel-quickpost").live("click", function() {

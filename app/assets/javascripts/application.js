@@ -16,4 +16,5 @@
 //= require jquery.scrollTo
 //= require jquery.slimScroll
 //= require jquery.ui.draggable.min
+//= require showdown
 //= require_tree .

@@ -1,3 +1,4 @@
+- invalid byte sequence in utf-8
 - quickpost@readertron.com
 - No more caching for unread sequences
 - -1 counts?
@@ -17,7 +18,6 @@ Readertron is an attempt to revive the old "social" Google Reader -- see particu
 	- The opened up version has the terms highlighted.
 	- "Back to search results" link.
 - Editing Quickposts
-- Previewing Quickposts
 - Starring posts.
 - One-click evernote integration.
 - Being able to see who has read the posts you've shared.
