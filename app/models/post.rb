@@ -102,6 +102,8 @@ class Post < ActiveRecord::Base
   end
   
   def not_a_shady_duplicate
-    feed.posts.where(published: Post.last.published, title: Post.last.title).empty?
+    if Post.last
+      feed.posts.where(published: Post.last.published, title: Post.last.title).empty?
+    end
   end
 end
