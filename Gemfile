@@ -28,6 +28,7 @@ end
 group :production do
   gem 'therubyracer'
   gem 'mysql2'
+  gem 'unicorn'
 end
 
 group :worker do
