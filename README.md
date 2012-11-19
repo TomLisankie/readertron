@@ -1,3 +1,5 @@
+- Automatically kill multiple copies of Feed.refresh if they're in `ps aux`
+
 - invalid byte sequence in utf-8
 - quickpost@readertron.com
 - No more caching for unread sequences
@@ -12,6 +14,7 @@ Readertron is an attempt to revive the old "social" Google Reader -- see particu
 
 ### Core / New Features
 - Collapsed view.
+- Printing a post.
 - Comment / Quickpost / Note view, in reverse chronological order. Load them all. Call it the "thought stream."
 - Search.
 	- Returns infinitely-scrollable results in the #entries div, but using a different partial, this one with a snippet view.

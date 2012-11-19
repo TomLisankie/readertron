@@ -66,6 +66,14 @@ class Feed < ActiveRecord::Base
   end
 
   def self.refresh
+    # If a Feed.refresh is already running, kill it!
+    `ps aux | grep ruby`.split("\n").each do |line|
+      if line.include? "Feed.refresh"
+        process = line.split(/\s+/)[1]
+        `kill -9 #{process}`
+      end
+    end
+
     t, failed_fetches, fallback_failed_fetches = Time.now, [], []
     posts_count = Post.count(1)
     
