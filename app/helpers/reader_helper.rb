@@ -22,7 +22,7 @@ module ReaderHelper
   end
   
   def clean(html)
-    raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({elements: Sanitize::Config::RELAXED[:elements] + ["style"], remove_contents: true})))
+    raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({elements: Sanitize::Config::RELAXED[:elements] + ["style"], remove_contents: ["script", "style"]})))
   end
   
   def feed_favicon(feed_id)
