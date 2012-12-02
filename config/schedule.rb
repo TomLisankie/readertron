@@ -7,7 +7,7 @@
 #
 set :output, "/home/jsomers/www/readertron/log/cron.log"
 #
-every 1.day do
+every 5.hours do
   runner "Feed.refresh"
 end
 
