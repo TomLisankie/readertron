@@ -70,7 +70,7 @@ class Feed < ActiveRecord::Base
     `ps aux | grep ruby`.split("\n").each do |line|
       if line.include? "Feed.refresh"
         process = line.split(/\s+/)[1]
-        `kill -9 #{process}`
+        `kill -9 #{process}` unless process == $$.to_s
       end
     end
 
