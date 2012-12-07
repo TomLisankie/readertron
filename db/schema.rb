@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120323030118) do
+ActiveRecord::Schema.define(:version => 20121202192908) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20120323030118) do
 
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"
   add_index "posts", ["shared"], :name => "index_posts_on_shared"
+  add_index "posts", ["url", "shared"], :name => "index_posts_on_url_and_shared", :unique => true
 
   create_table "reports", :force => true do |t|
     t.string   "report_type"
