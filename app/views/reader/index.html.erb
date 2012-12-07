@@ -16,10 +16,13 @@
 	  <br/>
 	  <%= text_area_tag(:content) %>
 	  <br/>
-	  <%= submit_tag("Submit") %> <a href="#" id="cancel-quickpost">Cancel</a>
+	  <%= submit_tag("Submit") %> <a href="#" id="cancel-quickpost">Cancel</a> | <a href="#" class="show-preview">Preview</a>
 	<% end %>
-	<h3 class="title-preview"></h3>
-	<div class="preview">
+	<div class="preview-pane" style="display: none;">
+	  <h3 class="title-preview"></h3>
+	  <div class="preview">
+	  </div>
+	  <a href="#" class="hide-preview">Hide Preview</a>
 	</div>
 </div>
 

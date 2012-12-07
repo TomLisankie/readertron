@@ -105,6 +105,16 @@ $(document).ready(function() {
 	$("#quickpost-button").mouseover(function() {
 		$(this).addClass("hover");
 	});
+
+	$("#quickpost-form a.show-preview").live("click", function() {
+		$("#quickpost-form .preview-pane").show();
+		return false;
+	});
+
+	$("#quickpost-form a.hide-preview").live("click", function() {
+		$("#quickpost-form .preview-pane").hide();
+		return false;
+	});
 	
 	var converter = new Showdown.converter();
 	
