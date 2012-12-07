@@ -1,6 +1,7 @@
 class ReaderController < ApplicationController
   before_filter :authenticate_user!, except: [:create_post, :bookmarklet, :email_comment]
   protect_from_forgery :except => [:create_post, :bookmarklet, :email_comment]
+  require 'iconv'
   
   def index
     redirect_to "/reader/posts/#{params[:post_id]}" if params[:post_id].present?
@@ -94,10 +95,10 @@ class ReaderController < ApplicationController
   
   def create_post
     @post = User.find_by_share_token(params[:token]).feed.posts.create(
-      content: params[:content],
-      url: params[:url],
-      note: params[:note],
-      title: params[:title],
+      content: utf8clean(params[:content]),
+      url: utf8clean(params[:url]),
+      note: utf8clean(params[:note]),
+      title: utf8clean(params[:title]),
       published: Time.now,
       shared: true
     )
@@ -160,5 +161,12 @@ class ReaderController < ApplicationController
     render :text => "OK", :status => 200
   rescue Exception => e
     Report.create(report_type: "failed_cloudmailin", content: {email: params, exception: e})
+  end
+
+  private
+
+  def utf8clean(str)
+    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+    ic.iconv(str + ' ')[0..-2]
   end
 end
