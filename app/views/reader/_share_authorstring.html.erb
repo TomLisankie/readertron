@@ -3,7 +3,7 @@
 	<span class="entry-sharer-name">Shared by <%= entry.sharer == current_user ? "you" : entry.sharer.name %></span>
 	<span class="entry-icons-placeholder">
 		<% if feed.title == entry.sharer.name %>
-			<% if entry.url == "#quickpost" %>
+			<% if entry.url.starts_with?("#quickpost-") %>
 				as a Quickpost
 			<% else %>
 				from the "Note in Readertron" bookmarklet

@@ -6,8 +6,8 @@ class Report < ActiveRecord::Base
     User.all.each do |user|
       stats = {}
       stats[:unread_count] = user.unreads.count
-      stats[:bookmarklets_today] = user.feed.posts.where("id = original_post_id AND url != '#quickpost' AND created_at > ?", [1.day.ago]).count
-      stats[:quickposts_today] = user.feed.posts.where("url = '#quickpost' AND created_at > ?", [1.day.ago]).count
+      stats[:bookmarklets_today] = user.feed.posts.where("id = original_post_id AND url NOT LIKE '#quickpost%' AND created_at > ?", [1.day.ago]).count
+      stats[:quickposts_today] = user.feed.posts.where("url LIKE '#quickpost%' AND created_at > ?", [1.day.ago]).count
       stats[:shares_today] = user.feed.posts.where("id != original_post_id AND created_at > ?", [1.day.ago]).count
       stats[:comments_today] = user.comments.where("created_at > ?", 1.day.ago).count
       stats[:subscriptions] = user.subscriptions.count

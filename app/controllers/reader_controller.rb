@@ -137,7 +137,7 @@ class ReaderController < ApplicationController
       content: params[:content],
       title: params[:title],
       published: Time.now,
-      url: "#quickpost",
+      url: "#quickpost-#{current_user.name.snake}-#{Time.now.to_i}",
       shared: true,
       author: "#{current_user.name} (Quickpost)"
     )

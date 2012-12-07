@@ -34,7 +34,7 @@
 						<div>
 							<div class="item-body">
 								<div>
-									<% if entry.url == "#quickpost" %>
+									<% if entry.url.starts_with?("#quickpost-") %>
 										<%= markdown(entry.content) %>
 									<% else %>
 										<%= clean(urlify_urls(entry.content)) %>
