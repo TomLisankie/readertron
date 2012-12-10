@@ -5,6 +5,6 @@ class ShareMailer < ActionMailer::Base
   def new_comment_email(user, comment)
     @user = user
     @comment = comment
-    mail(to: user.email, subject: "#{comment.user.name} commented on \"#{comment.post.title}\" (post_id: #{comment.post.id})")
+    mail(to: user.email, subject: "#{comment.user.name} commented on \"#{comment.post.title}\"", reply_to: "comment-replies-#{comment.post.id}@readertron.mailgun.org")
   end
 end

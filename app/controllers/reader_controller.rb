@@ -153,14 +153,13 @@ class ReaderController < ApplicationController
   end
   
   def email_comment
-    Report.create(report_type: "cloudmailin", content: {html: params[:html]})
-    post = Post.find(params[:subject][/\(post_id: (\d+)\)/, 1])
-    user = User.find_by_email(params[:from])
-    content = params[:html].split('<div class="gmail_quote">').first.gsub("\r", "").gsub("\n", "").gsub(/(\<br\>)*$/, "").gsub(/(\<div\>)*$/, "")
+    user = User.find_by_email(params[:sender])
+    post = Post.find(params[:recipient][/comment-replies-(.*?)@/, 1])
+    content = params[:stripped_html]
     post.comments.create(user: user, content: content)
     render :text => "OK", :status => 200
   rescue Exception => e
-    Report.create(report_type: "failed_cloudmailin", content: {email: params, exception: e})
+    Report.create(report_type: "failed_mailgun", content: {email: params, exception: e})
   end
 
   private

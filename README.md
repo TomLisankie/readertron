@@ -1,9 +1,11 @@
-- Automatically kill multiple copies of Feed.refresh if they're in `ps aux`
+1. Search.
+2. A page with everybody's comments and shares. For each share, show a truncated version and then the comments below it? What about just listing the comments? How to sort them? (If share-without-comments...)
+3. Emails to everybody regarding shared content? Emails in using Mailgun.
 
-- invalid byte sequence in utf-8
+* Bookmarklet extractor shouldn't mutate the page it's on!
+
 - quickpost@readertron.com
 - No more caching for unread sequences
-- -1 counts?
 - legal theory blog formatting
 
 ## Readertron
