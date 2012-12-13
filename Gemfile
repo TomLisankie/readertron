@@ -18,11 +18,13 @@ gem 'redcarpet'
 gem 'whenever'
 
 gem 'rinku'
+gem 'will_paginate', '~> 3.0'
 
 group :development do
   gem 'ruby-debug-base19'
   gem 'ruby-debug19'
   gem 'sqlite3'
+  gem 'faker'
 end
 
 group :production do

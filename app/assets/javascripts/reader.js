@@ -29,6 +29,10 @@ $(document).ready(function() {
 			window.location = "/reader/mine";
 			return false;
 		};
+		if ($(this).attr("id") == "comment-stream") {
+			window.location = "/reader/stream";
+			return false;
+		};
 		SETTINGS.feed_id = $(this).attr("feed_id");
 		update_items_filter_control_counts();
 		$("#subscriptions li").removeClass("selected");
@@ -72,6 +76,10 @@ $(document).ready(function() {
 	
 	$("#logo").click(function() {
 		window.location = "/";
+	});
+
+	$(".entry.stream-comment").live("click", function() {
+		window.location = $(this).find("a.entry-title-link").attr("href") + "#comment-" + $(this).attr("comment_id");
 	});
 });
 

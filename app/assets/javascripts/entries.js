@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$(".entry").live("click", function() {
-		if (!$(this).hasClass("current"))
+		if (!$(this).hasClass("current") && !$(this).hasClass("stream-comment"))
 			$(this).set_as_current_entry(true);
 	});
 

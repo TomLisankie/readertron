@@ -14,7 +14,7 @@
 				<div class="entry-main">
 					<%= render partial: "entry_note", locals: {entry: entry} %>
 					<div class="entry-date">
-						<%= pretty_date(entry.published) %>
+						<a href="/reader/posts/<%= entry.id %>" target="_blank"><%= pretty_date(entry.published) %></a>
 					</div>
 					<h2 class="entry-title">
 						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= entry.title %></a>

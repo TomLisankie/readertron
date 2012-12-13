@@ -1,0 +1,6 @@
+$('#comment-stream').append('<%= j render partial: "stream_comments", locals: { comments: @comments } %>');
+<% if @comments.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@comments) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

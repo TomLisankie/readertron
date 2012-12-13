@@ -144,6 +144,10 @@ class ReaderController < ApplicationController
     p.update_attributes({original_post_id: p.id})
     render text: "OK"
   end
+
+  def stream
+	  @comments = Comment.paginate(page: params[:page], per_page: 10).order("created_at DESC")
+  end
   
   def bookmarklet
     @token = params[:token]

@@ -1,6 +1,6 @@
+0. A page with everybody's comments in revchron order. (This way people who didn't comment on a share can see the comments.) No notion of read/unread activity item kind of thing -- just show the comments.
 1. Search.
-2. A page with everybody's comments and shares. For each share, show a truncated version and then the comments below it? What about just listing the comments? How to sort them? (If share-without-comments...)
-3. Emails to everybody regarding shared content? Emails in using Mailgun.
+2. Emails to everybody regarding shared content? Emails in using Mailgun.
 
 * Bookmarklet extractor shouldn't mutate the page it's on!
 

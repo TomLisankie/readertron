@@ -1,0 +1,23 @@
+<% comments.each do |comment| %>
+  <div class="entry stream-comment" comment_id="<%= comment.id %>">
+    <div class="card card-common">
+      <div class="card-content">
+        <div class="entry-container">
+          <div class="entry-main">
+            <div class="entry-date">
+              <%= pretty_date(comment.created_at) %>
+            </div>
+            <h2 class="entry-title">
+              <span>On</span> <a class="entry-title-link" target="_blank" href="/reader/posts/<%= comment.post.id %>"><%= comment.post.title %>,</a>
+              <strong><%= comment.user.name %></strong>
+              <span>writes:</span>
+            </h2>
+            <div class="stream-comment-content">
+              <%= mdown(comment.content) %>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

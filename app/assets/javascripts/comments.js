@@ -56,6 +56,11 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+
+  if (window.location.hash.indexOf("comment-") !== -1) {
+    var comment_id = window.location.hash.split("-")[1];
+    $(".comment[comment_id=" + comment_id + "]").addClass("featured");
+  }
 });
 
 var add_comment = function(entry) {

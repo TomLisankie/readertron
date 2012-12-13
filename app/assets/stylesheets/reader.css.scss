@@ -58,6 +58,10 @@ html, body, input {
 	margin-top: 0px;
 }
 
+#subscriptions h3 sup {
+	color: #FF3318;
+}
+
 #subscriptions h3 a {
 	color: black;
 	text-decoration: none;
@@ -128,6 +132,16 @@ html, body, input {
 	margin-bottom: 400px;
 }
 
+#right-pane #comment-stream {
+	margin-top: 50px;
+}
+
+.pagination {
+	margin: 0 auto;
+	width: 300px;
+	margin-bottom: 100px;
+}
+
 .entry.current .card {
 	border-left: 2px solid #4D90F0;
 };
@@ -174,6 +188,11 @@ html, body, input {
 
 .entry .entry-title a {
 	text-decoration: none;
+}
+
+.entry .entry-title span {
+	color: #666;
+	font-weight: normal;
 }
 
 .entry .entry-author {
@@ -282,6 +301,13 @@ html, body, input {
 .entry .comments .comment {
 	margin-top: 5px;
 	padding-top: 5px;
+}
+
+.entry .comments .comment.featured {
+	background-color: #FFFDD8;
+	padding: 10px;
+	position: relative;
+	left: -10px;
 }
 
 .entry .comments .comment .comment-author {
@@ -934,7 +960,7 @@ table#current-subscriptions a.subscriptions-page-feed-link {
 	margin-top: 0px;
 }
 
-#single #explanatory-note {
+#single #explanatory-note, #stream #explanatory-note {
 	margin-top: 50px;
 	margin-left: 20px;
 	width: 220px;
@@ -978,4 +1004,18 @@ table.bordered td {
 
 #quickpost-form .preview {
 	width: 650px;
+}
+
+.entry.stream-comment {
+	cursor: pointer;
+}
+
+.entry.stream-comment:hover .card {
+	border-left: 2px solid #4D90F0;
+}
+
+.stream-comment-content {
+	margin-top: 10px;
+	padding-left: 25px;
+	width: 650px
 }
