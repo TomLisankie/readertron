@@ -8,9 +8,14 @@
               <%= pretty_date(comment.created_at) %>
             </div>
             <h2 class="entry-title">
-              <span>On</span> <a class="entry-title-link" target="_blank" href="/reader/posts/<%= comment.post.id %>"><%= comment.post.title %>,</a>
+              <span>On</span> 
+              <% if comment.post.present? %>
+                <a class="entry-title-link" target="_blank" href="/reader/posts/<%= comment.post.id %>"><%= comment.post.title %>,</a>
+              <% else %>
+                a post that no longer exists,
+              <% end %>
               <strong><%= comment.user.name %></strong>
-              <span>writes:</span>
+              <span>wrote:</span>
             </h2>
             <div class="stream-comment-content">
               <%= mdown(comment.content) %>  
