@@ -21,10 +21,6 @@ module ReaderHelper
     "share-with-note-inactive"
   end
   
-  def clean(html)
-    raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({elements: Sanitize::Config::RELAXED[:elements] + ["style"], remove_contents: ["script", "style"]})))
-  end
-  
   def feed_favicon(feed_id)
     if File.exists?("#{Rails.root}/app/assets/images/favicons/#{feed_id}.png")
       "/assets/favicons/#{feed_id}.png"

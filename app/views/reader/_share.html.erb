@@ -67,13 +67,26 @@
 			</div>
 		</div>
 		
-		<% if unreadable %>
-		<div class="card-actions card-bottom <%= entry.unread_for_user?(current_user) ? "unread" : "" %>">
-			<div class="entry-actions">
-				<span class="read-state-not-kept-unread read-state link unselectable" title="Keep unread">Keep unread</span>
-				<wbr>
-			</div>
-		</div>
-		<% end %>
+    <% if unreadable %>
+      <div class="card-actions card-bottom <%= entry.unread_for_user?(current_user) ? "unread" : "" %>">
+        <div class="entry-actions">
+          <span class="read-state-not-kept-unread read-state link unselectable" title="Keep unread">Keep unread</span>
+          <wbr>
+          <span class="email email-inactive link" title="Email">Email</span>
+          <wbr>
+        </div>
+      </div>
+
+      <div class="card-email" style="display: none;">
+        <%= form_tag("/reader/email_post", :method => "post") do %>
+          <input type="text" name="recipient" placeholder="recipient@example.com"/>
+          <%= text_area_tag(:message) %>
+          <div class="after-actions">
+            <%= submit_tag("Send email") %>
+            <a href="#" class="cancel-email">Cancel</a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 	</div>
 </div>

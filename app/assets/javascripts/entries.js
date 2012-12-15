@@ -28,6 +28,21 @@ $(document).ready(function() {
 		$(this).closest(".entry").share_with_note();
 		return false;
 	});
+
+	$(".entry-actions .email").live("click", function() {
+		$(this).closest(".entry").toggle("span.email", "email-inactive", set_email_status);
+		return false;
+	});
+	
+	$(".cancel-email").live("click", function() {
+		$(this).closest(".entry").toggle("span.email", "email-inactive", set_email_status);
+		return false;
+	});
+	
+	$(".card-email input[type=submit]").live("click", function() {
+		$(this).closest(".entry").email();
+		return false;
+	});
 	
 	$(".edit-note-link").live("click", function() {
 		$(this).closest(".entry-note").find("form").show();
@@ -51,6 +66,8 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+
+  
 	
 	$(".delete-note-link").live("click", function() {
 		var okay = confirm("Are you sure?");
@@ -117,6 +134,19 @@ $.fn.share_with_note = function() {
 	});
 };
 
+$.fn.email = function() {
+	var message = this.find("textarea[name=message]").val();
+	var recipient = this.find("input[name=recipient]").val();
+	var post_id = this.attr("post_id");
+  this.find(".card-email input[type=submit]").val("Sending...").attr("disabled", "disabled");
+	var that = this;
+  $.post("/reader/email_post", {post_id: post_id, message: message, recipient: recipient}, function(ret) {
+    broadcast("Your email has been sent successfully");
+    that.find(".card-email").hide();
+    that.find(".card-email input[type=submit]").val("Send email").removeAttr("disabled");
+  });
+};
+
 $.fn.notch_unreads = function(n) {
 	$("title").notch(n);
 	var selectors = this.attr("unread_selectors").split(" ");
@@ -159,4 +189,16 @@ var set_shared_with_note_status = function(selector, to_be_shared_with_note) {
 		$(selector).find(".card-share-with-note").hide();
 		$.post("/reader/post_unshare", {post_id: $(selector).attr("post_id")});
 	};
+};
+
+var set_email_status = function(selector, to_be_emailed) {
+	var $span = $(selector).find("span.email");
+	if (to_be_emailed) {
+    $span.removeClass("email-inactive").addClass("email-active");
+    $(selector).find(".card-email").show();
+    $(selector).find(".card-email").find("input[type=text]").focus();
+  } else {
+    $span.removeClass("email-active").addClass("email-inactive");
+    $(selector).find(".card-email").hide();
+  };
 };

@@ -19,6 +19,10 @@ module ApplicationHelper
     text = text.gsub("<div>", "<p>").gsub("</div>", "</p>")
     raw(urlify_urls(text))
   end
+
+  def clean(html)
+    raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({elements: Sanitize::Config::RELAXED[:elements] + ["style"], remove_contents: ["script", "style"]})))
+  end
   
   def comment_date(date)
     if date >= 1.month.ago

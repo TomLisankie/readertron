@@ -251,21 +251,38 @@ html, body, input {
 	background-position: -96px -194px;
 }
 
+.entry .entry-actions .email {
+	background: transparent url(/assets/stars.png) no-repeat;
+	background-position: -112px -224px;
+}
+
+.entry .entry-actions .email .link {
+}
+
 .entry .entry-actions .share-with-note .link {
 	margin-bottom: 10px;
 }
 
-.entry .card-share-with-note .after-actions {
+.entry .card-share-with-note .after-actions, .entry .card-email .after-actions {
 	margin-left: 40px;
 }
 
-.entry .card-share-with-note textarea {
+.entry .card-share-with-note textarea, .entry .card-email textarea {
 	width: 90%;
 	height: 50px;
 	margin-left: 40px;
 	font-family: Monaco, courier;
 	padding: 5px;
 	font-size: 13px;
+}
+
+.entry .card-email input[type=text] {
+  margin: 5px 0px 5px 40px;
+  width: 200px;
+  font-size: 14px;
+	font-family: "Helvetica";
+	font-weight: bold;
+	padding: 3px;
 }
 
 .entry .entry-actions .read-state-not-kept-unread {

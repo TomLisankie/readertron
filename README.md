@@ -1,12 +1,11 @@
-0. A page with everybody's comments in revchron order. (This way people who didn't comment on a share can see the comments.) No notion of read/unread activity item kind of thing -- just show the comments.
-1. Search.
-2. Emails to everybody regarding shared content? Emails in using Mailgun.
+1. Debug Mailgun.
+2. Number of comments since you've last checked.
+3. Search.
 
 * Bookmarklet extractor shouldn't mutate the page it's on!
-
-- quickpost@readertron.com
-- No more caching for unread sequences
-- legal theory blog formatting
+* quickpost@readertron.com
+* No more caching for unread sequences
+* legal theory blog formatting
 
 ## Readertron
 

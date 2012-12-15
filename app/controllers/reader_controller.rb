@@ -166,6 +166,14 @@ class ReaderController < ApplicationController
     Report.create(report_type: "failed_mailgun", content: {email: params, exception: e})
   end
 
+  def email_post
+    post = Post.find(params[:post_id])
+    message = params[:message]
+    recipient = params[:recipient]
+    ShareMailer.post_email(post, current_user, message, recipient).deliver
+    render text: "OK"
+  end
+
   private
 
   def utf8clean(str)
