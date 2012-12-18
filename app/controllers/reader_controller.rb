@@ -157,9 +157,9 @@ class ReaderController < ApplicationController
   end
   
   def email_comment
-    user = User.find_by_email(params[:sender])
-    post = Post.find(params[:recipient][/comment-replies-(.*?)@/, 1])
-    content = params[:stripped_html]
+    user = User.find_by_email(params["sender"])
+    post = Post.find(params["recipient"][/comment-replies-(.*?)@/, 1])
+    content = params["stripped-text"]
     post.comments.create(user: user, content: content)
     render :text => "OK", :status => 200
   rescue Exception => e
