@@ -320,6 +320,10 @@ html, body, input {
 	padding-top: 5px;
 }
 
+.entry .comments .comment .comment-body .comment-content p:first-of-type {
+  display: inline;
+}
+
 .entry .comments .comment.featured {
 	background-color: #FFFDD8;
 	padding: 10px;
