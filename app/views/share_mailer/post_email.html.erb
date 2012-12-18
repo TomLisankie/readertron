@@ -30,7 +30,7 @@
         <h2>Comments</h2>
         <div class="comments">
           <% @post.comments.each do |comment| %>
-            <span class="comment-author"><strong><%= comment.user.name %></strong> <span class="comment-timestamp" style="color: #666;">(<%= comment_date(comment.updated_at) %>):</span></span> 
+            <span class="comment-author"><strong><%= comment.user.name %></strong> <span class="comment-timestamp" style="color: #666;"><%= comment_date(comment.updated_at) %>:</span></span> 
             <span class="comment-content"><%= mdown(comment.content) %></span>
             <br/><br/>
           <% end %>
