@@ -56,6 +56,7 @@ module Readertron
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    config.cache_store = :dalli_store, {expires_in: 5.hours, compression: true}
+    config.cache_store = :dalli_store, {expires_in: 5.hours, compress: true}
+    config.action_view.embed_authenticity_token_in_remote_forms = false
   end
 end

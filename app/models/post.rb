@@ -36,8 +36,46 @@ class Post < ActiveRecord::Base
   def self.unread_for_user(user)
     joins("JOIN unreads ON posts.id = unreads.post_id").where("unreads.user_id = #{user.id}")
   end
+
+  def self.unread_for_options(user, date_sort, page=0, feed_id=nil)
+    if page == 0
+      if feed_id.present?
+        unreads = feed_id == "shared" ? user.unreads.shared : user.unreads.for_feed(feed_id)
+      else
+        unreads = user.unreads
+      end
+      
+      unreads = case date_sort
+      when "chron"
+        unreads.chron
+      when "revchron"
+        unreads.revchron
+      when "revshared"
+        unreads.revshared
+      end
+
+      Rails.cache.write("#{user.id}_#{feed_id}_#{date_sort}", unreads.map(&:post_id))
+      if (unreads.first && unreads.first.shared?)
+        return unreads.first(10).map(&:post)
+      else
+        return cached(unreads.first(10).map(&:post_id))
+      end
+    else
+      post_ids = Rails.cache.read("#{user.id}_#{feed_id}_#{date_sort}")
+      if post_ids
+        if (unreads && unreads.first && unreads.first.shared?)
+          posts = Post.find(Array.wrap(post_ids[page * 10..(page * 10) + 9]))
+        else
+          posts = cached(Array.wrap(post_ids[page * 10..(page * 10) + 9]))
+        end
+      else
+        posts = []
+      end
+      return posts
+    end
+  end
   
-  def self.for_options(user, date_sort, items_filter, page=0, feed_id=nil)
+  def self.for_options(user, date_sort, page=0, feed_id=nil)
     if feed_id.present?
       posts = feed_id == "shared" ? shared.for_user(user) : for_feed(feed_id)
     else
@@ -52,24 +90,8 @@ class Post < ActiveRecord::Base
     when "revshared"
       posts.revshared
     end
-
-    if items_filter == "unread"
-      if page == 0
-        posts = posts.unread_for_user(user)
-        Rails.cache.write("#{user.id}_#{feed_id}_#{date_sort}", posts.map(&:id))
-        return posts.first(10)
-      else
-        post_ids = Rails.cache.read("#{user.id}_#{feed_id}_#{date_sort}")
-        if post_ids
-          posts = Post.find(Array.wrap(post_ids[page * 10..(page * 10) + 9]))
-        else
-          posts = []
-        end
-        return posts
-      end
-    else
-      return posts.offset(page.to_i * 10).limit(10)
-    end
+    
+    return posts.offset(page.to_i * 10).limit(10)
   end
   
   def self.shared
@@ -78,6 +100,10 @@ class Post < ActiveRecord::Base
   
   def self.unshared
     where("posts.shared = ?", false)
+  end
+
+  def self.cached(ids)
+    ids.map {|id| Rails.cache.fetch("post-#{id}") { Post.find(id).to_partial(:unread) } }
   end
   
   def refresh(attrs)
@@ -89,7 +115,7 @@ class Post < ActiveRecord::Base
   
   def generate_unreads
     feed.users.each do |subscriber|
-      subscriber.unreads.create(post: self)
+      subscriber.unreads.create(post: self, feed_id: self.feed_id, shared: self.shared?)
     end
   end
   
@@ -105,5 +131,12 @@ class Post < ActiveRecord::Base
     if Post.last
       feed.posts.where(published: Post.last.published, title: Post.last.title).empty?
     end
+  end
+
+  def to_partial(is_unread = true)
+    view = ActionView::Base.new(ActionController::Base.view_paths, {})
+    view.extend ApplicationHelper
+    view.extend ReaderHelper
+    view.render(partial: "reader/entry", locals: {entry: self, index: id, is_unread: is_unread})
   end
 end

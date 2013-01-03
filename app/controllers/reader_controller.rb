@@ -7,7 +7,7 @@ class ReaderController < ApplicationController
     redirect_to "/reader/posts/#{params[:post_id]}" if params[:post_id].present?
     @shared, @unshared = current_user.subscriptions(:include => :feeds).partition {|s| s.feed.shared?}
     
-    @entries = current_user.unreads(:include => :posts).unshared.order("published ASC").limit(10).map(&:post)
+    @entries = Post.cached(current_user.unreads.unshared.order("published ASC").limit(10).map(&:post_id))
     Rails.cache.write("#{current_user.id}__chron", current_user.unreads.map(&:post_id))
     
     @unread_counts, @shared_unread_count = current_user.unread_counts
@@ -28,10 +28,16 @@ class ReaderController < ApplicationController
   end
   
   def entries
-    @entries = Post.for_options(current_user, params[:date_sort], params[:items_filter], @page = params[:page].to_i, params[:feed_id])
+    if params[:items_filter] == 'unread'
+      @entries = Post.unread_for_options(current_user, params[:date_sort], @page = params[:page].to_i, params[:feed_id]) 
+    else
+      @entries = Post.for_options(current_user, params[:date_sort], @page = params[:page].to_i, params[:feed_id])
+    end
+
     if feed = Feed.find_by_id(@feed_id = params[:feed_id])
       @feed_name = (feed.title || feed.feed_url) 
     end
+
     render layout: false
   end
   
@@ -44,7 +50,7 @@ class ReaderController < ApplicationController
   def mark_as_unread
     post = Post.find(params[:post_id])
     unless (u = Unread.find_by_user_id_and_post_id(current_user.id, post.id))
-      u = Unread.create(post_id: post.id, user_id: current_user.id)
+      u = Unread.create(post_id: post.id, user_id: current_user.id, feed_id: post.feed_id, shared: post.shared?)
     end
     render json: {feed_id: post.feed.id}
   end

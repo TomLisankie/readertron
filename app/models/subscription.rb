@@ -17,7 +17,7 @@ class Subscription < ActiveRecord::Base
 
   def generate_unreads
     feed.posts.order("published DESC").first(10).each do |post|
-      user.unreads.create(post: post)
+      user.unreads.create(post: post, feed_id: post.feed_id, shared: post.shared?)
     end
   end
   

@@ -123,16 +123,20 @@ $.fn.zero = function() {
 };
 
 var next_post = function(offset) {
+  if (($(".entry.current").attr("post_id") == $(".entry:first").attr("post_id") && offset == -1) || ($(".entry.current").attr("post_id") == $(".entry:last").attr("post_id") && offset == 1)) {
+    return false;
+  }
 	if ($(".entry.current").length == 0) {
-		next_post_index = 0;
+		var next = $(".entry:first");
 	} else {
-		next_post_index = parseInt($(".entry.current").split_id()) + offset;
+    if (offset == 1) {
+      var next = $(".entry.current").next(".entry");
+    } else if (offset == -1) {
+      var next = $(".entry.current").prev(".entry");
+    }
 	};
-	if ($("#entry-" + next_post_index).length == 0) {
-		return false;
-	} else {
-		$("#entry-" + next_post_index).set_as_current_entry(true);
-	}
+  if (next)
+		$(next).set_as_current_entry(true);
 };
 
 var fetch_entries = function() {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202192908) do
+ActiveRecord::Schema.define(:version => 20130106173631) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20121202192908) do
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"
   add_index "posts", ["shared"], :name => "index_posts_on_shared"
   add_index "posts", ["url", "shared"], :name => "index_posts_on_url_and_shared", :unique => true
+  add_index "posts", ["url", "shared"], :name => "url", :unique => true
 
   create_table "reports", :force => true do |t|
     t.string   "report_type"
@@ -75,12 +76,16 @@ ActiveRecord::Schema.define(:version => 20121202192908) do
   create_table "unreads", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.datetime "published"
+    t.boolean  "shared",     :default => false
+    t.integer  "feed_id"
   end
 
+  add_index "unreads", ["feed_id"], :name => "index_unreads_on_feed_id"
   add_index "unreads", ["post_id"], :name => "index_unreads_on_post_id"
+  add_index "unreads", ["shared"], :name => "index_unreads_on_shared"
   add_index "unreads", ["user_id"], :name => "index_unreads_on_user_id"
 
   create_table "users", :force => true do |t|

@@ -1,4 +1,4 @@
-<div class="entry <%= entry.unread_for_user?(current_user) ? "unread" : "read" %>"
+<div class="entry <%= is_unread ? "unread" : "read" %>"
 	 style="height: auto;" id="entry-<%= index %>"
 	 post_id="<%= entry.id %>"
 	 feed_id="<%= entry.feed.id %>"
@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="card-share-with-note" style="display: none;">
-			<%= form_tag("/reader/share_with_note", :method => "post") do %>
+      <%= form_tag("/reader/share_with_note", :method => "post", :remote => true) do %>
 			  <%= text_area_tag(:note_content) %>
 			  <div class="after-actions">
 			    <%= submit_tag("Share With Note") %>
@@ -64,7 +64,7 @@
 		</div>
 
 		<div class="card-email" style="display: none;">
-			<%= form_tag("/reader/email_post", :method => "post") do %>
+      <%= form_tag("/reader/email_post", :method => "post", :remote => true) do %>
         <input type="text" name="recipient" placeholder="recipient@example.com"/>
 			  <%= text_area_tag(:message) %>
 			  <div class="after-actions">

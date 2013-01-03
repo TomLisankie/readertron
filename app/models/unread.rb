@@ -9,15 +9,27 @@ class Unread < ActiveRecord::Base
   after_create :cache_published
   
   def self.for_feed(feed_id)
-    joins("JOIN posts ON unreads.post_id = posts.id JOIN feeds ON posts.feed_id = feeds.id").where("feeds.id = #{feed_id}")
+    where(["feed_id = ?", feed_id])
   end
   
   def self.shared
-    joins("JOIN posts ON unreads.post_id = posts.id JOIN feeds ON posts.feed_id = feeds.id").where("feeds.shared = 't'")
+    where(shared: true)
   end
   
   def self.unshared
-    joins("JOIN posts ON unreads.post_id = posts.id JOIN feeds ON posts.feed_id = feeds.id").where("feeds.shared = 'f'")
+    where(shared: false)
+  end
+
+  def self.chron
+    order("published ASC")
+  end
+  
+  def self.revchron
+    order("published DESC")
+  end
+  
+  def self.revshared
+    order("created_at DESC")
   end
   
   def cache_published

@@ -62,7 +62,7 @@
 		<div id="entries">
 		<% if @entries.present? %>
 			<% @entries.each_with_index do |entry, index| %>
-				<%= render "entry", entry: entry, index: index %>
+				<%= entry %>
 			<% end %>
 		<% else %>
 			<div id="no-entries-msg">

@@ -1,9 +1,15 @@
 <% if @entries.present? %>
 	<% @entries.each_with_index do |entry, index| %>
-		<% locals = {entry: entry, index: (index + @page * 10)} %>
-		<% locals = (entry.feed == current_user.feed ? locals.merge({unreadable: false}) : locals) %>
 		
-		<%= render :partial => (entry.shared? ? "share" : "entry"), :locals => locals %>
+    <% #FIXME: subscriptions sidebar scrolling and snap_to behavior... %>
+    <% #FIXME: images not being embedded anymore? %>
+    <% if entry.is_a?(Post) %>
+      <% locals = {entry: entry, index: (index + @page * 10), is_unread: entry.unread_for_user?(current_user)} %>
+      <% locals = (entry.feed == current_user.feed ? locals.merge({unreadable: false}) : locals) %>
+      <%= render :partial => (entry.shared? ? "share" : "entry"), :locals => locals %>
+    <% else %>
+      <%= entry %>
+    <% end %>
 	<% end %>
 <% else %>
 	<div id="no-entries-msg">
