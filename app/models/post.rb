@@ -134,7 +134,7 @@ class Post < ActiveRecord::Base
   end
 
   def cache
-    Rails.cache.write("post-#{id}", to_partial) unless shared?
+    Rails.cache.write("post-#{id}", to_partial, expires_in: 2.weeks) unless shared?
   end
 
   def to_partial(is_unread = true)
