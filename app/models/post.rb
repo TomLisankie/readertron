@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :published
   validates_presence_of :content
   
-  after_create :generate_unreads
+  after_create :generate_unreads, :cache
   
   def self.for_user(user)
     joins("JOIN feeds ON feeds.id = posts.feed_id JOIN subscriptions ON feeds.id = subscriptions.feed_id")
@@ -131,6 +131,10 @@ class Post < ActiveRecord::Base
     if Post.last
       feed.posts.where(published: Post.last.published, title: Post.last.title).empty?
     end
+  end
+
+  def cache
+    Rails.cache.write("post-#{id}", to_partial) unless shared?
   end
 
   def to_partial(is_unread = true)
