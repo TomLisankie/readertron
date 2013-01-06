@@ -1,8 +1,6 @@
 <% if @entries.present? %>
 	<% @entries.each_with_index do |entry, index| %>
 		
-    <% #FIXME: subscriptions sidebar scrolling and snap_to behavior... %>
-    <% #FIXME: images not being embedded anymore? %>
     <% if entry.is_a?(Post) %>
       <% locals = {entry: entry, index: (index + @page * 10), is_unread: entry.unread_for_user?(current_user)} %>
       <% locals = (entry.feed == current_user.feed ? locals.merge({unreadable: false}) : locals) %>
