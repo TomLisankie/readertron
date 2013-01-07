@@ -42,7 +42,7 @@ class Post < ActiveRecord::Base
       if feed_id.present?
         unreads = feed_id == "shared" ? user.unreads.shared : user.unreads.for_feed(feed_id)
       else
-        unreads = user.unreads
+        unreads = user.unreads.unshared
       end
       
       unreads = case date_sort
