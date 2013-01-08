@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :published
   validates_presence_of :content
   
-  after_create :generate_unreads, :cache
+  after_create :generate_unreads, :cache, :absolutize_relative_image_paths
   
   def self.for_user(user)
     joins("JOIN feeds ON feeds.id = posts.feed_id JOIN subscriptions ON feeds.id = subscriptions.feed_id")
@@ -142,5 +142,28 @@ class Post < ActiveRecord::Base
     view.extend ApplicationHelper
     view.extend ReaderHelper
     view.render(partial: "reader/entry", locals: {entry: self, index: id, is_unread: is_unread})
+  end
+  
+  def absolutize_relative_image_paths!
+    new_content = "" + content
+    image_urls = content.scan(/<img.*?src=['"](.*?)['"]/).flatten
+    image_urls.each do |image_url|
+      parsed = begin URI.parse(image_url) rescue next end
+      if parsed.relative?
+        slashes_to_remove = image_url.scan(/\.\.\//).count
+        if slashes_to_remove.zero?
+          base_path = "http://" + URI.parse(url).host
+        else
+          base_path = url.split('/')[0..(-2 - slashes_to_remove)].join('/')
+        end
+        clean_image_url = image_url.gsub(/^[^\w+]+/, '')
+        new_image_url = [base_path, clean_image_url].join('/')
+        new_content = new_content.gsub(image_url, new_image_url)
+      end
+    end
+    if new_content != content
+      update_attributes!(content: new_content)
+      cache
+    end
   end
 end
