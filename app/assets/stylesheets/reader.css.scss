@@ -270,6 +270,7 @@ html, body, input {
 .entry .card-share-with-note textarea, .entry .card-email textarea {
 	width: 90%;
 	height: 50px;
+	min-height: 50px;
 	margin-left: 40px;
 	font-family: Monaco, courier;
 	padding: 5px;
@@ -355,6 +356,7 @@ html, body, input {
 .entry .comments textarea {
 	width: 90%;
 	height: 50px;
+	min-height: 50px;
 	margin-left: 40px;
 	font-family: Monaco, courier;
 	padding: 5px;
@@ -736,6 +738,7 @@ html, body, input {
 	font-size: 13px;
 	width: 650px;
 	height: 250px;
+	min-height: 250px;
 }
 
 .meta-page {
@@ -994,6 +997,7 @@ table#current-subscriptions a.subscriptions-page-feed-link {
 .entry-note form textarea {
 	width: 650px;
 	height: 50px;
+	min-height: 50px;
 	margin-left: 40px;
 	font-family: Monaco, courier;
 	padding: 5px;
