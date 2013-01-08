@@ -33,6 +33,10 @@ $(document).ready(function() {
 		$(document).bind('keydown', 'n', function(e) {
 			$(".entry.current").toggle("span.share-with-note", "share-with-note-inactive", set_shared_with_note_status); return false;
 		});
+
+		$(document).bind('keydown', 'Shift+s', function(e) {
+			$(".entry.current").toggle("span.share-with-note", "share-with-note-inactive", set_shared_with_note_status); return false;
+		});
 		
 		$(document).bind('keydown', 'g', function(e) {
 			g_mark = true;
