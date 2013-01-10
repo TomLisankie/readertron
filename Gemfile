@@ -27,6 +27,7 @@ group :development do
   gem 'ruby-debug19'
   gem 'sqlite3'
   gem 'faker'
+  gem 'letter_opener'
 end
 
 group :production do

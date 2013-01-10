@@ -111,6 +111,8 @@ class ReaderController < ApplicationController
     @post.update_attributes({original_post_id: @post.id})
     @origin = params[:origin]
     render layout: false
+  rescue Exception => e
+    ShareMailer.bookmarklet_failure_report(e, params).deliver
   end
   
   def mark_all_as_read

@@ -14,4 +14,10 @@ class ShareMailer < ActionMailer::Base
     @sender = sender
     mail(to: recipient, subject: "#{sender.name} has shared a Readertron post with you: \"#{post.title}\"", reply_to: sender.email)
   end
+  
+  def bookmarklet_failure_report(exception, parameters)
+    @exception = exception
+    @parameters = parameters
+    mail(to: "jsomers@gmail.com", subject: "Bookmarklet trouble")
+  end
 end
