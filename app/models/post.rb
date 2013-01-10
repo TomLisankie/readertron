@@ -148,18 +148,8 @@ class Post < ActiveRecord::Base
     new_content = "" + content
     image_urls = content.scan(/<img.*?src=['"](.*?)['"]/).flatten
     image_urls.each do |image_url|
-      parsed = begin URI.parse(image_url) rescue next end
-      if parsed.relative?
-        slashes_to_remove = image_url.scan(/\.\.\//).count
-        if slashes_to_remove.zero?
-          base_path = "http://" + URI.parse(url).host
-        else
-          base_path = url.split('/')[0..(-2 - slashes_to_remove)].join('/')
-        end
-        clean_image_url = image_url.gsub(/^[^\w+]+/, '')
-        new_image_url = [base_path, clean_image_url].join('/')
-        new_content = new_content.gsub(image_url, new_image_url)
-      end
+      begin absolute_image_url = URI.join(url, image_url).to_s rescue next end
+      new_content = new_content.gsub(image_url, absolute_image_url)
     end
     if new_content != content
       update_attributes!(content: new_content)
