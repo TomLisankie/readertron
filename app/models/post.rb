@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :published
   validates_presence_of :content
   
-  after_create :generate_unreads, :cache, :absolutize_relative_image_paths
+  after_create :generate_unreads, :cache, :absolutize_relative_image_paths!
   
   def self.for_user(user)
     joins("JOIN feeds ON feeds.id = posts.feed_id JOIN subscriptions ON feeds.id = subscriptions.feed_id")
