@@ -1,5 +1,4 @@
-* Rescue from bad bookmarklet requests and send me an email.
-0. Reroute relative image paths.
+* Look at 404s to see which images are still broken?
 1. @-mentions in shares and comments that would email people? All it does is on an `after_create` hook send an email to the user. Use the Twitter @mention thing for the UI?
 2. Number of comments since you've last checked.
 3. Search.
