@@ -8,7 +8,7 @@ class ReaderController < ApplicationController
     @shared, @unshared = current_user.subscriptions(:include => :feeds).partition {|s| s.feed.shared?}
     
     @entries = Post.cached(current_user.unreads.unshared.order("published ASC").limit(10).map(&:post_id))
-    Rails.cache.write("#{current_user.id}__chron", current_user.unreads.map(&:post_id))
+    Rails.cache.write("#{current_user.id}__chron", current_user.unreads.unshared.map(&:post_id))
     
     @unread_counts, @shared_unread_count = current_user.unread_counts
 
