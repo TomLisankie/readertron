@@ -1,3 +1,7 @@
+* Send an email every time someone makes a Readertron share. Use the "email to" template, but add debugging info about whether it came from the bookmarklet.
+* Pull in the old Reader posts using the Reader2k code?
+* Do the mailers asynchronously. Do other asynchronous things asynchronously. (On Heroku, or on AWS, how does the web server communicate with the workers, i.e., send them their tasks?)
+* textareas not as responsive with the auto-grow? Use whatever code Github's got?
 * Look at 404s to see which images are still broken?
 1. @-mentions in shares and comments that would email people? All it does is on an `after_create` hook send an email to the user. Use the Twitter @mention thing for the UI?
 2. Number of comments since you've last checked.
