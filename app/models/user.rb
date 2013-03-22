@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :share_token, :name, :instapaper_username, :instapaper_password
   
   has_many :subscriptions, dependent: :destroy
+  has_many :feeds, :through => :subscriptions
   has_many :unreads, dependent: :destroy
   has_many :comments, dependent: :destroy
   
