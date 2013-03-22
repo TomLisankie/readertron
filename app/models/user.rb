@@ -87,4 +87,9 @@ class User < ActiveRecord::Base
   def shared_unread_count_total
     feeds.shared.map {|f| unreads.for_feed(f.id).count(1) }.sum
   end
+  
+  def unread_counts_over_time
+    reports = Report.find_all_by_report_type("Daily site report")
+    reports.map { |r| r[:content][:users][name]}.compact.map {|h| h[:unread_count]}
+  end
 end
