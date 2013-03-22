@@ -1,0 +1,12 @@
+* git pull
+* Bundle, make sure libv8 etc. installs (bundle --without development)
+* Run the database migration (bundle exec rake db:migrate RAILS_ENV=production)
+* Recompile assets (bundle exec rake assets:precompile)
+* Reset the cache (kill memcached and bring it up with `/usr/bin/memcached -d -m 64 -p 11211 -u memcache -l 127.0.0.1`)
+* Seed the cache (Unread.where("user_id != 4").select {|u| u.post.present?}.each {|u| puts "*" * 100; Rails.cache.write("post-#{u.post_id}", u.post.to_partial); puts "*" * 100})
+* Restart server
+	- sudo /opt/nginx/sbin/nginx -s reload
+	- unicorn:
+		- ps aux | grep unicorn
+		- kill -9 [pid]
+		- bundle exec unicorn -c config/unicorn.rb -D -E production
