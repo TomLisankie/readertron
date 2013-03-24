@@ -21,7 +21,10 @@ module ApplicationHelper
   end
 
   def clean(html)
-    raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({elements: Sanitize::Config::RELAXED[:elements] + ["style"], remove_contents: ["script", "style"]})))
+    raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({
+                          elements: Sanitize::Config::RELAXED[:elements] + ["style"],
+                          remove_contents: ["script", "style"]
+                        })).gsub(/<\s*?br\s*?\/?\s*?>/, "<p></p>").gsub("\n\n", "<p></p>"))
   end
   
   def comment_date(date)
