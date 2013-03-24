@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.unread_for_options(user, date_sort, page=0, feed_id=nil)
-    share_town = (feed_id == "shared" || (feed_id && Feed.find(feed_id).shared?))
+    share_town = (feed_id == "shared" || (feed_id.present? && Feed.find(feed_id).shared?))
     
     if page == 0
       if feed_id.present?
