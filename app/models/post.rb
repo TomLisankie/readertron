@@ -38,6 +38,8 @@ class Post < ActiveRecord::Base
   end
 
   def self.unread_for_options(user, date_sort, page=0, feed_id=nil)
+    share_town = (feed_id == "shared" || (feed_id && Feed.find(feed_id).shared?))
+    
     if page == 0
       if feed_id.present?
         unreads = feed_id == "shared" ? user.unreads.shared : user.unreads.for_feed(feed_id)
@@ -63,7 +65,7 @@ class Post < ActiveRecord::Base
     else
       post_ids = Rails.cache.read("#{user.id}_#{feed_id}_#{date_sort}")
       if post_ids
-        if (unreads && unreads.first && unreads.first.shared?)
+        if share_town
           posts = Post.find(Array.wrap(post_ids[page * 10..(page * 10) + 9]))
         else
           posts = cached(Array.wrap(post_ids[page * 10..(page * 10) + 9]))
