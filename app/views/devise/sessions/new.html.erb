@@ -11,8 +11,7 @@
 		<span>Sign in to Readertron</span>
       </button>
 
-	  <% if devise_mapping.rememberable? -%>
 	   <div id="remember-me"><%= f.check_box :remember_me, checked: 'checked' %> <%= f.label :remember_me %></div>
-	  <% end -%>
+	   <div id="forgot-password"><a href="/users/password/new">Forgot your password?</a></div>
 	<% end %>
 </div>
