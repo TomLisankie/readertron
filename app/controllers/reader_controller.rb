@@ -152,6 +152,18 @@ class ReaderController < ApplicationController
     p.update_attributes({original_post_id: p.id})
     render text: "OK"
   end
+  
+  def edit_quickpost
+    entry = Post.find(params[:post_id])
+    entry.update_attributes!({content: params[:content]})
+    render text: "OK"
+  end
+  
+  def delete_share
+    entry = Post.find(params[:post_id])
+    entry.destroy
+    render text: "OK"
+  end
 
   def stream
 	  @comments = Comment.paginate(page: params[:page], per_page: 10).order("created_at DESC")

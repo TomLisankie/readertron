@@ -723,7 +723,7 @@ html, body, input {
 	margin-top: 50px;
 }
 
-#quickpost-form input[type=text] {
+#quickpost-form input[type=text], #quickpost-edit-form input[type=text] {
 	font-size: 18px;
 	width: 650px;
 	font-family: "Helvetica";
@@ -731,7 +731,7 @@ html, body, input {
 	padding: 3px;
 }
 
-#quickpost-form textarea {
+#quickpost-form textarea, #quickpost-edit-form textarea {
 	font-family: Monaco, courier;
 	margin-top: 10px;
 	padding: 5px;

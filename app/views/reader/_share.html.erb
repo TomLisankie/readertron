@@ -15,6 +15,12 @@
 					<%= render partial: "entry_note", locals: {entry: entry} %>
 					<div class="entry-date">
 						<a href="/reader/posts/<%= entry.id %>" target="_blank"><%= pretty_date(entry.published) %></a>
+						<% if entry.url.starts_with?("#quickpost-") && entry.sharer == current_user %>
+							<strong><a href="#" class="edit-quickpost">Edit</a></strong>
+						<% end %>
+						<% if entry.sharer == current_user %>
+							<strong><a href="#" class="delete-share">Delete Share</a></strong>
+						<% end %>
 					</div>
 					<h2 class="entry-title">
 						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= entry.title %></a>
@@ -35,7 +41,14 @@
 							<div class="item-body">
 								<div>
 									<% if entry.url.starts_with?("#quickpost-") %>
-										<%= markdown(entry.content) %>
+										<div class="rendered-content"><%= markdown(entry.content) %></div>
+										<% if entry.sharer == current_user %>
+											<div id="quickpost-edit-form" style="display: none;">
+										  	  	<%= text_area_tag(:content, entry.content) %>
+										  	  	<br/>
+												<%= submit_tag("Submit") %> <a href="#" class="cancel-edit-quickpost">Cancel</a>
+											</div>
+										<% end %>
 									<% else %>
 										<%= clean(urlify_urls(entry.content)) %>
 									<% end %>

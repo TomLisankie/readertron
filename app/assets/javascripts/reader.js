@@ -51,7 +51,7 @@ $(document).ready(function() {
 		allowPageScroll: false
 	});
 
-	$(".item-body a").live("click", function() {
+	$(".item-body a:not(.cancel-edit-quickpost)").live("click", function() {
 		window.open($(this).attr("href"), '_blank');
 		return false;
 	});

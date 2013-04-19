@@ -77,6 +77,41 @@ $(document).ready(function() {
 				$(that).closest(".entry-note").remove();
 			})
 		}
+		return false;
+	});
+	
+	$(".edit-quickpost").live("click", function() {
+		$(this).closest(".entry").find(".item-body .rendered-content").hide();
+		$(this).closest(".entry").find(".item-body #quickpost-edit-form").show();
+		return false;
+	});
+	
+	$(".cancel-edit-quickpost").live("click", function() {
+		$(this).closest(".entry").find(".item-body .rendered-content").show();
+		$(this).closest(".entry").find(".item-body #quickpost-edit-form").hide();
+		return false;
+	});
+	
+	$("#quickpost-edit-form input[type=submit]").live("click", function() {
+		var that = this;
+		$.post("/reader/edit_quickpost", {
+			post_id: $(this).closest(".entry").attr("post_id"), 
+			content: $(this).closest("#quickpost-edit-form").find("textarea").val()
+		}, function(ret) {
+			location.reload();
+		});
+		return false;
+	});
+	
+	$(".delete-share").live("click", function() {
+		var okay = confirm("Are you sure?");
+		if (okay) {
+			var that = this;
+			$.post("/reader/delete_share", {post_id: $(this).closest(".entry").attr("post_id")}, function(ret) {
+				location.reload();
+			})
+		}
+		return false;
 	});
 	
 	if ($("#entries").length > 0) {
