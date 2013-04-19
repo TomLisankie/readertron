@@ -28,6 +28,7 @@ group :development do
   gem 'sqlite3'
   gem 'faker'
   gem 'letter_opener'
+  gem 'pry'
 end
 
 group :production do
