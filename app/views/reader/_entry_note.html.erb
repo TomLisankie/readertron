@@ -2,7 +2,7 @@
 <div class="entry-note">
 	<% if entry.feed.title == current_user.name %>
 		<div class="note-controls">
-			<a href="#" class="edit-note-link">Edit</a> | <a href="#" class="delete-note-link">Delete</a>
+			<a href="#" class="edit-note-link">edit this note</a> | <a href="#" class="delete-note-link">delete</a>
 		</div>
 		<%= form_tag("/reader/edit_note", :method => "post", :style => "display: none;") do %>
 		  <%= text_area_tag(:entry_note, entry.note) %>
