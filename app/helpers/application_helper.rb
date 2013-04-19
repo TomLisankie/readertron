@@ -10,7 +10,7 @@ module ApplicationHelper
 
   def markdown(text)
     renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    clean(renderer.render(urlify_urls(text)))
+    clean(urlify_urls(renderer.render(text)))
   end
   
   def mdown(text)
