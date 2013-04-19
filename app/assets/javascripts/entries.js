@@ -48,12 +48,14 @@ $(document).ready(function() {
 		$(this).closest(".entry-note").find("form").show();
 		$(this).closest(".entry-note").find(".note-content").hide();
 		$(this).closest(".note-controls").hide();
+		return false;
 	});
 	
 	$(".cancel-note-edit").live("click", function() {
 		$(this).closest(".entry-note").find("form").hide();
 		$(this).closest(".entry-note").find(".note-content").show();
 		$(this).closest(".entry-note").find(".note-controls").show();
+		return false;
 	});
 	
 	$(".entry-note input[type=submit]").live("click", function() {
@@ -66,8 +68,6 @@ $(document).ready(function() {
 		});
 		return false;
 	});
-
-  
 	
 	$(".delete-note-link").live("click", function() {
 		var okay = confirm("Are you sure?");
