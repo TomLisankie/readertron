@@ -106,6 +106,10 @@ $(document).ready(function() {
             $(this).height($(this).height()+1);
         };
     });
+	
+	window.onbeforeunload = function (e) {
+	  window.scrollTo(0, 0)
+	};
 });
 
 var placeholderStack = [];
