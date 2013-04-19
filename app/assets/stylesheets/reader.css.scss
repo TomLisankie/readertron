@@ -211,6 +211,12 @@ html, body, input {
 	padding-top: 6px;
 }
 
+.entry-body:after {
+	content: "";
+	display: table;
+	clear: both;
+};
+
 .entry .entry-actions {
 	padding: 6px 7px;
 	color: #444;
