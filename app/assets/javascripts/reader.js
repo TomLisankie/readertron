@@ -109,6 +109,16 @@ $(document).ready(function() {
 	
 	window.onbeforeunload = function (e) {
 	  window.scrollTo(0, 0)
+	  
+	  // For IE<8 and Firefox prior to version 4
+	  if (e && $("#quickpost-form").length) {
+	    e.returnValue = 'You still have unsaved changes!';
+	  };
+
+	  // For Chrome, Safari, IE8+ and Opera 12+
+	  if ($("#quickpost-form").length)
+	  	return 'You still have unsaved changes!';
+	  
 	};
 });
 
