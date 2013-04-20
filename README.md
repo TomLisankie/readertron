@@ -1,4 +1,9 @@
-* Send an email every time someone makes a Readertron share. Use the "email to" template, but add debugging info about whether it came from the bookmarklet.
+* Send an email every time someone makes a Readertron share:
+	- Send to all subscribers.
+	- Allow people to change "email" settings on individual subscriptions. (I want to follow James, but not receive emails when he posts.)
+	- Replies to those emails post comments on the post.
+	- Comment posts should include more context of the post and also the last few comments, so that the whole discussion can happen via email.
+
 * Pull in the old Reader posts using the Reader2k code?
 * Do the mailers asynchronously. Do other asynchronous things asynchronously. (On Heroku, or on AWS, how does the web server communicate with the workers, i.e., send them their tasks?)
 * textareas not as responsive with the auto-grow? Use whatever code Github's got?
@@ -9,10 +14,7 @@
 4. iPHONE APPPPP!!!!!
 5. Client-side templating?
 
-* Bookmarklet extractor shouldn't mutate the page it's on!
 * quickpost@readertron.com
-* No more caching for unread sequences
-* legal theory blog formatting
 
 ## Readertron
 
