@@ -27,6 +27,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'libv8', '~> 3.11.8'
 
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :development do
   gem 'ruby-debug-base19'
