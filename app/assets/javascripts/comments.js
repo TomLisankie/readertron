@@ -19,11 +19,14 @@ $(document).ready(function() {
 	});
 
 	$(".comments .comment-delete-link").live("click", function() {
-		var $comment = $(this).closest(".comment");
-		$.post("/reader/delete_comment", {comment_id: $comment.attr("comment_id")}, function(ret) {
-			$comment.closest(".comments").find(".comments-count").notch(-1, true);
-			$comment.remove();
-		});
+		var okay = confirm("Are you sure?");
+		if (okay) {
+			var $comment = $(this).closest(".comment");
+			$.post("/reader/delete_comment", {comment_id: $comment.attr("comment_id")}, function(ret) {
+				$comment.closest(".comments").find(".comments-count").notch(-1, true);
+				$comment.remove();
+			});
+		}
 		return false;
 	});
 
