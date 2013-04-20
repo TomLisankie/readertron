@@ -20,6 +20,10 @@ module ApplicationHelper
     raw(urlify_urls(text))
   end
 
+  def clean_youtube(html)
+    sanitize(html, tags: %w(object embed))
+  end
+
   def clean(html)
     raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({
                           elements: Sanitize::Config::RELAXED[:elements] + ["style"],

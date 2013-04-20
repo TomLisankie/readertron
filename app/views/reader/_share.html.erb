@@ -50,7 +50,11 @@
 											</div>
 										<% end %>
 									<% else %>
-										<%= clean(urlify_urls(entry.content)) %>
+										<% if entry.url.include?("youtube.com") %>
+											<%= clean_youtube(entry.content) %>
+										<% else %>
+											<%= clean(urlify_urls(entry.content)) %>
+										<% end %>
 									<% end %>
 								</div>
 							</div>
