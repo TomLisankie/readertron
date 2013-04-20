@@ -9,8 +9,8 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    clean(urlify_urls(renderer.render(text)))
+    renderer = Redcarpet::Markdown.new(HTMLwithPygments, autolink: true, fenced_code_blocks: true)
+    sanitize(renderer.render(text))
   end
   
   def mdown(text)

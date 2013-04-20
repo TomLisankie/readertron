@@ -96,10 +96,14 @@ GEM
     nokogiri (1.4.7)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pygments.rb (0.4.2)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.4.3)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -177,6 +181,7 @@ GEM
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     will_paginate (3.0.4)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -193,6 +198,7 @@ DEPENDENCIES
   libv8 (~> 3.11.8)
   mysql2
   pry
+  pygments.rb
   rails (= 3.2.11)
   redcarpet
   rinku

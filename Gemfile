@@ -14,6 +14,7 @@ gem 'dalli'
 
 gem 'sanitize'
 gem 'redcarpet'
+gem 'pygments.rb'
 
 gem 'whenever'
 
