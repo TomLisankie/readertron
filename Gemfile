@@ -18,6 +18,9 @@ gem 'pygments.rb'
 
 gem 'whenever'
 
+gem 'premailer-rails'
+gem 'nokogiri'
+
 gem 'rinku'
 gem 'will_paginate', '~> 3.0'
 

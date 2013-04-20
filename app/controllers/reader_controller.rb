@@ -58,7 +58,8 @@ class ReaderController < ApplicationController
   def post_share
     post = Post.find(params[:post_id])
     unless (share = current_user.feed.posts.find_by_original_post_id(params[:post_id]))
-      current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, created_at: Time.now))
+      share = current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, created_at: Time.now))
+      share.send_share_emails
     end
     render text: "OK"
   end
@@ -72,7 +73,8 @@ class ReaderController < ApplicationController
   def share_with_note
    post = Post.find(params[:post_id])
     unless (share = current_user.feed.posts.find_by_original_post_id(params[:post_id]))
-      current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, note: params[:note_content], created_at: Time.now))
+      share = current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, note: params[:note_content], created_at: Time.now))
+      share.send_share_emails
     end
     render text: "OK"
   end
@@ -109,6 +111,7 @@ class ReaderController < ApplicationController
       shared: true
     )
     @post.update_attributes({original_post_id: @post.id})
+    @post.send_share_emails
     @origin = params[:origin]
     render layout: false
   rescue Exception => e
@@ -150,6 +153,8 @@ class ReaderController < ApplicationController
       author: "#{current_user.name} (Quickpost)"
     )
     p.update_attributes({original_post_id: p.id})
+    
+    p.send_share_emails
     render text: "OK"
   end
   

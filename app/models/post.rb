@@ -158,4 +158,12 @@ class Post < ActiveRecord::Base
       cache
     end
   end
+  
+  def send_share_emails
+    return unless shared?
+    
+     feed.users.each do |subscriber|
+       ShareMailer.share_email(subscriber, self).deliver
+     end
+  end
 end

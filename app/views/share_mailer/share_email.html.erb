@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <%= stylesheet_link_tag "application", :media => "all" %>
+  </head>
+  <body style="font-size: 100%">
+      <h1><%= @share.title %></h1>
+      <% if @share.note.present? %>
+        <div class="note" style="padding: 5px; background-color: #D6EEF8; margin-bottom: 10px;">
+          <%= markdown("<strong>#{@share.feed.title}:</strong> #{@share.note}") %>
+        </div>
+      <% end %>
+
+      <div class="post">
+        <% if @share.url.starts_with?("#quickpost-") %>
+          <%= markdown(@share.content) %>
+        <% else %>
+          <%= clean(urlify_urls(@share.content)) %>
+        <% end %>
+      </div>
+
+      <p>(Reply to this email to comment. See more on the <a href="http://readertron.com/reader/posts/<%= @share.id %>">post's page</a>.)</p>
+
+	<p>- Readertron</p>
+  </body>
+</html>

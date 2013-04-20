@@ -36,19 +36,24 @@ Readertron::Application.configure do
   config.assets.debug = true
   
   # Mailer
-  # config.action_mailer.perform_deliveries = false
-  # config.action_mailer.raise_delivery_errors = true
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.perform_deliveries = true
+
+  # Settings for testing with Letter Opener:
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { :host => 'localhost' }
+
+  # Settings for testing with Gmail:
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.default_url_options = { :host => 'localhost' }
   # config.action_mailer.smtp_settings = {
   #   :address              => "smtp.gmail.com",
   #   :port                 => 587,
-  #   :domain               => 'baci.lindsaar.net',
-  #   :user_name            => 'jsomers',
-  #   :password             => 'ENV["ONE_TIME_GMAIL_PASSWORD"]',
-  #   :authentication       => 'plain',
-  #   :enable_starttls_auto => true  }
+  #   :user_name            => "jsomers@gmail.com",
+  #   :password             => ENV["ONE_TIME_GMAIL_PASSWORD"],
+  #   :authentication       => "plain",
+  #   :enable_starttls_auto => true
+  # }
   
   config.after_initialize do
     Domain.url = 'http://localhost:3000'

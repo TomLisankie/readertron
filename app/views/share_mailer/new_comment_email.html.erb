@@ -2,14 +2,44 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	  <%= stylesheet_link_tag "application", :media => "all" %>
   </head>
-  <body>
-	<p><strong><%= @comment.user.name %></strong> wrote:</p>
-    <blockquote>
-      <%= mdown(@comment.content) %>
-    </blockquote>
-    <p>(See the rest of the discussion on the <a href="http://readertron.com/reader/posts/<%= @comment.post.id %>">post's page</a>.)</p>
+  <body style="font-size: 100%">
+  	<p><strong><%= @comment.user.name %></strong> wrote:</p>
+      <blockquote>
+        <%= markdown(@comment.content) %>
+      </blockquote>
+	  
+	  <% previous_comments = @post.comments - [@comment] %>
+	  <% if previous_comments.present? %>
+	      <h2>Previous comments:</h2>
+	      <div class="comments">
+	        <% previous_comments.each do |comment| %>
+	          <span class="comment-author"><strong><%= comment.user.name %></strong> <span class="comment-timestamp" style="color: #666;"><%= comment_date(comment.updated_at) %>:</span></span> 
+	          <span class="comment-content"><%= mdown(comment.content) %></span>
+	          <br/><br/>
+	        <% end %>
+	      </div>
+	  <% end %>
+	  
+      <h2><%= @post.title %></h2>
+      <% if @post.note.present? %>
+        <div class="note" style="padding: 5px; background-color: #D6EEF8; margin-bottom: 10px;">
+          <%= markdown("<strong>#{@post.feed.title}:</strong> #{@post.note}") %>
+        </div>
+      <% end %>
+
+      <div class="post">
+        <% if @post.url.starts_with?("#quickpost-") %>
+          <%= markdown(@post.content) %>
+        <% else %>
+          <%= clean(urlify_urls(@post.content)) %>
+        <% end %>
+      </div>
+
+      <p>(Reply to this email to comment. See more on the <a href="http://readertron.com/reader/posts/<%= @post.id %>">post's page</a>.)</p>
 
 	<p>- Readertron</p>
+	
   </body>
 </html>
