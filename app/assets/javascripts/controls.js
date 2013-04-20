@@ -105,27 +105,32 @@ $(document).ready(function() {
 	$("#quickpost-button").mouseover(function() {
 		$(this).addClass("hover");
 	});
-
-	$("#quickpost-form a.show-preview").live("click", function() {
-		$("#quickpost-form .preview-pane").show();
+	
+	$("#quickpost-form textarea").live('focus', function() {
+		$(this).closest(".write-content").addClass("focused");
+	});
+	
+	$("#quickpost-form textarea").live('blur', function() {
+		$(this).closest(".write-content").removeClass("focused");
+	});
+	
+	$("#quickpost-form .preview-tab").live('click', function() {
+		$(this).closest(".previewable-comment-form").removeClass("write-selected").addClass("preview-selected");
+		$(this).addClass("selected")
+		$(this).closest(".tabnav-tabs").find(".write-tab").removeClass("selected");
+		
+		$(this).closest(".discussion-bubble-inner").find(".comment-body").html($("#entries-loader").clone().show());
+		$(this).closest(".discussion-bubble-inner").find(".comment-body").load("/reader/markdownify", 
+			{content: $(this).closest(".discussion-bubble-inner").find("textarea").val()}
+		);
 		return false;
 	});
-
-	$("#quickpost-form a.hide-preview").live("click", function() {
-		$("#quickpost-form .preview-pane").hide();
+	
+	$("#quickpost-form .write-tab").live('click', function() {
+		$(this).closest(".previewable-comment-form").removeClass("preview-selected").addClass("write-selected");
+		$(this).addClass("selected")
+		$(this).closest(".tabnav-tabs").find(".preview-tab").removeClass("selected");
 		return false;
-	});
-	
-	var converter = new Showdown.converter();
-	
-	$("#quickpost-form input[name='title']").live("keyup", function() {
-		$("#quickpost-form .title-preview").html($(this).val());
-	});
-	
-	$("#quickpost-form #content").live("keyup", function() {
-		var txt = $("#quickpost-form #content").val();
-		var html = converter.makeHtml(txt);
-		$("#quickpost-form .preview").html(html)
 	});
 	
 	$("#quickpost-button").mouseout(function() {
@@ -135,6 +140,7 @@ $(document).ready(function() {
 	$("#quickpost-button").live("click", function() {
 		scrollFetchFlag = false;
 		$("#entries").html($("#quickpost-form-template").clone().attr("id", "quickpost-form").show());
+		$("#quickpost-form input#title").focus();
 	});
 	
 	$("#cancel-quickpost").live("click", function() {
@@ -142,8 +148,8 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$("#quickpost-form input[type=submit]").live("click", function() {
-		$.post("/reader/quickpost", {title: $(this).closest("#quickpost-form").find("input[name=title]").val(), content: $(this).closest("#quickpost-form").find("textarea[name=content]").val()}, function(ret) {
+	$("#quickpost-form button[type=submit]").live("click", function() {
+		$.post("/reader/quickpost", {title: $(this).closest("#quickpost-form").find("input[name=title]").val(), content: $(this).closest("#quickpost-form").find("textarea").val()}, function(ret) {
 			fetch_entries();
 			broadcast("Your post has been created and shared successfully!");
 		});

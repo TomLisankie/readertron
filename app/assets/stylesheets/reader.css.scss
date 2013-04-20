@@ -441,6 +441,7 @@ html, body, input {
 	padding-bottom: 5px;
 	padding-top: 10px;
 	border-bottom: 1px solid #EBEBEB;
+	z-index: 9999;
 }
 
 .jfk-button {
@@ -723,28 +724,6 @@ html, body, input {
 	background-image: -o-linear-gradient(top,#DD4B39,#B0281A);
 	background-image: linear-gradient(top,#DD4B39,#B0281A);
 	border: 1px solid #992A1B;
-}
-
-#quickpost-form {
-	margin-top: 50px;
-}
-
-#quickpost-form input[type=text], #quickpost-edit-form input[type=text] {
-	font-size: 18px;
-	width: 650px;
-	font-family: "Helvetica";
-	font-weight: bold;
-	padding: 3px;
-}
-
-#quickpost-form textarea, #quickpost-edit-form textarea {
-	font-family: Monaco, courier;
-	margin-top: 10px;
-	padding: 5px;
-	font-size: 13px;
-	width: 650px;
-	height: 250px;
-	min-height: 250px;
 }
 
 .meta-page {
@@ -1306,4 +1285,320 @@ a.delete-share {
 }
 .type-csharp .highlight .sc {
   color: #A31515
+}
+
+// Github editor:
+
+#quickpost-form {
+	margin-top: 50px;
+	width: 678px;
+}
+
+#quickpost-form input[type=text], #quickpost-edit-form input[type=text] {
+	font-size: 18px;
+	width: 662px;
+	font-family: "Helvetica";
+	font-weight: bold;
+	padding: 3px;
+	margin-left: 3px;
+	margin-bottom: 10px;
+}
+
+#quickpost-form textarea, #quickpost-edit-form textarea {
+	width: 650px;
+	height: 250px;
+	min-height: 250px;
+}
+
+.bubble {
+	padding: 3px;
+	background: #eee;
+	border-radius: 3px;
+}
+
+.discussion-bubble-inner {
+	min-height: 60px;
+	border: 1px solid #CACACA;
+	background-color: #fff;
+}
+
+.bubble .discussion-bubble-inner {
+	font: 13px Helvetica, arial, freesans, clean, sans-serif;
+	line-height: 1.4;
+}
+
+.previewable-comment-form {
+	position: relative;
+}
+
+.tabnav {
+	margin: 10px 0;
+	border-bottom: 1px solid #ddd;
+	height: 35px;
+}
+
+.previewable-comment-form .tabnav {
+	position: relative;
+}
+
+.previewable-comment-form .tabnav ul.tabnav-tabs {
+	padding-left: 10px;
+}
+
+.tabnav .tabnav-tabs {
+	display: inline-block;
+	position: relative;
+	top: -13px;
+}
+
+.tabnav .tabnav-tabs li { 
+	display: inline-block;
+}
+
+.tabnav-tab.selected {
+	border-color: #ddd;
+	border-radius: 3px 3px 0 0;
+	background-color: #fff;
+	color: #333;
+}
+
+.tabnav-tab {
+	display: inline-block;
+	margin-bottom: -1px;
+	padding: 8px 12px;
+	border: 1px solid transparent;
+	border-bottom: 0;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+a.tabnav-tab, a.tabnav-tab:visited {
+	color: #666;
+}
+
+.tabnav-right {
+	position: relative;
+	display: block;
+	float: right;
+}
+
+.previewable-comment-form .tabnav-widget.text {
+	margin-right: 11px;
+}
+
+.previewable-comment-form .tabnav-widget.text a {
+	color: #4183c4;
+	text-decoration: none;
+}
+
+.previewable-comment-form .tabnav-widget.text a:hover {
+	text-decoration: underline;
+};
+
+.tabnav-widget.text {
+	margin-top: 12px;
+	font-size: 11px;
+	color: #666;
+}
+
+.tabnav-widget {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 4px;
+}
+
+.previewable-comment-form.write-selected .write-content, .previewable-comment-form.preview-selected .preview-content {
+	display: block;
+}
+
+.previewable-comment-form .write-content, .previewable-comment-form .preview-content {
+	display: none;
+	padding: 0 10px 10px;
+}
+
+.write-content {
+	position: relative;
+}
+
+.previewable-comment-form .upload-enabled textarea {
+	border-bottom: 1px dashed #ddd;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.previewable-comment-form .input-with-fullscreen-icon {
+	padding-right: 24px;
+	margin-right: -24px;
+}
+
+.previewable-comment-form textarea {
+	display: block;
+	width: 100%;
+	min-height: 100px;
+	max-height: 300px;
+	padding: 10px;
+	resize: vertical;
+}
+
+.bubble textarea {
+	min-height: 34px;
+	padding: 7px 8px;
+	color: #333;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-position: right center;
+	outline: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	transition: all 0.15s ease-in;
+	-webkit-transition: all 0.15s ease-in 0;
+	vertical-align: middle;
+	font: 13px Helvetica, arial, freesans, clean, sans-serif;
+	line-height: 1.4;
+}
+
+.bubble textarea:focus {
+	border-color: #51a7e8;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5);
+};
+
+.previewable-comment-form .drag-and-drop {
+	margin: 0;
+	padding: 7px 10px;
+	color: #aaa;
+	height: 16px;
+	line-height: 16px;
+	background-color: #fafafa;
+	border: 1px solid #ccc;
+	border-top: 0;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	transition: all 0.15s ease-in;
+	-webkit-transition: all 0.15s ease-in 0;
+}
+
+.previewable-comment-form .is-default .drag-and-drop .default {
+	display: inline-block;
+}
+
+.previewable-comment-form .drag-and-drop {
+	color: #aaa;
+	line-height: 16px;
+}
+
+.previewable-comment-form .drag-and-drop a {
+	color: #4183c4;
+	text-decoration: none;
+}
+
+.previewable-comment-form .focused .drag-and-drop {
+	border-color: #51a7e8;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5);
+};
+
+form.preview-selected .preview-content {
+	display: block;
+}
+
+.previewable-comment-form .preview-content {
+	padding: 0 10px 10px;
+}
+
+.previewable-comment-form .comment {
+	border: 1px solid #CACACA;
+}
+
+.comment-header {
+	height: 33px;
+	padding: 0 10px 0 6px;
+	border-bottom: 1px solid #ccc;
+	background-color: #e1e1e1;
+	background-image: -moz-linear-gradient(#f8f8f8, #e1e1e1);
+	background-image: -webkit-linear-gradient(#f8f8f8, #e1e1e1);
+	background-image: linear-gradient(#f8f8f8, #e1e1e1);
+	background-repeat: repeat-x;
+	font-size: 12px;
+}
+
+.comment-header .comment-header-author {
+	max-width: 600px;
+	line-height: 33px;
+	font-weight: bold;
+	color: #222;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.7);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.comment-header .comment-header-action-text {
+	color: #666;
+	font-weight: normal;
+}
+
+.comment-header .comment-header-right {
+	float: right;
+}
+
+.comment-header a {
+	text-decoration: none;
+}
+
+.comment-header .comment-header-date {
+	display: inline-block;
+	margin: 0;
+	height: 33px;
+	font-size: 11px;
+	line-height: 33px;
+	font-style: normal;
+	color: #777;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.7);
+	line-height: 33px;
+}
+
+.comment-content {
+	padding: 0;
+	color: #333;
+	font-size: 12px;
+	background: #fbfbfb;
+}
+
+.comment-content .comment-body {
+	padding-left: 10px;
+	font-size: 13px;
+	overflow: auto;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.comment-content .ajax-loader-img {
+	margin-top: 15px;
+	margin-bottom: -20px;
+}
+
+.comment-content .comment-body a, .comment-content .comment-body a:visited {
+	color: #4183c4;
+	text-decoration: none;
+}
+
+.comment-content .comment-body a:hover {
+	text-decoration: underline;
+};
+
+.markdown-body {
+	font-size: 14px;
+	line-height: 1.6;
+	overflow: hidden;
+}
+
+.markdown-body>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body p, .markdown-body blockquote, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body table, .markdown-body pre {
+	margin: 15px 0;
 }

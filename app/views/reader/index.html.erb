@@ -10,21 +10,7 @@
 	</div>
 </div>
 
-<div id="quickpost-form-template" style="display: none;">
-	<%= form_tag("/reader/quickpost", :method => "post") do %>
-	  <%= text_field_tag(:title, nil, {placeholder: "Title for your quick post"}) %>
-	  <br/>
-	  <%= text_area_tag(:content) %>
-	  <br/>
-	  <%= submit_tag("Submit") %> <a href="#" id="cancel-quickpost">Cancel</a> | <a href="#" class="show-preview">Preview</a>
-	<% end %>
-	<div class="preview-pane" style="display: none;">
-	  <h3 class="title-preview"></h3>
-	  <div class="preview">
-	  </div>
-	  <a href="#" class="hide-preview">Hide Preview</a>
-	</div>
-</div>
+<%= render "quickpost_form" %>
 
 <div id="panes">
 	<div id="left-pane">
@@ -77,6 +63,6 @@
 		You have no more items!
 	</div>
 	<div id="entries-loader" style="display: none;">
-		<img src="/assets/ajax-loader.gif"/>
+		<img class="ajax-loader-img" src="/assets/ajax-loader.gif"/>
 	</div>
 </div>

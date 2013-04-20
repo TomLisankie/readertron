@@ -198,6 +198,10 @@ class ReaderController < ApplicationController
     ShareMailer.post_email(post, current_user, message, recipient).deliver
     render text: "OK"
   end
+  
+  def markdownify
+    @content = params[:content]
+  end
 
   private
 
