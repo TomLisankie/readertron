@@ -83,7 +83,7 @@ $(document).ready(function() {
 	});
 	
 	//  changes mouse cursor when highlighting lower right of box
-    $(".entry textarea, #quickpost-form textarea").live("mousemove", function(e) {
+    $(".comment-add-form textarea").live("mousemove", function(e) {
         var myPos = $(this).offset();
         myPos.bottom = $(this).offset().top + $(this).outerHeight();
         myPos.right = $(this).offset().left + $(this).outerWidth();
