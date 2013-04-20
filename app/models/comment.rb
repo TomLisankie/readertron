@@ -13,4 +13,5 @@ class Comment < ActiveRecord::Base
       ShareMailer.new_comment_email(u, self).deliver
     end
   end
+  handle_asynchronously :notify_relevant_users
 end

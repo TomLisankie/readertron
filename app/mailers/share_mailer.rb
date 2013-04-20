@@ -9,11 +9,11 @@ class ShareMailer < ActionMailer::Base
     mail(to: user.email, subject: "Readertron: #{comment.user.name} commented on \"#{comment.post.title}\"", reply_to: "comment-replies-#{comment.post.id}@readertron.mailgun.org")
   end
 
-  def post_email(post, sender, message, recipient)
-    @post = post
+  def post_email(post_id, sender_id, message, recipient)
+    @post = Post.find(post_id)
     @message = message
-    @sender = sender
-    mail(to: recipient, subject: "Readertron: #{sender.name} has shared a post with you: \"#{post.title}\"", reply_to: sender.email)
+    @sender = User.find(sender_id)
+    mail(to: recipient, subject: "Readertron: #{@sender.name} has shared a post with you: \"#{@post.title}\"", reply_to: @sender.email)
   end
   
   def bookmarklet_failure_report(exception, parameters)

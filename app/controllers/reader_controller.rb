@@ -59,7 +59,7 @@ class ReaderController < ApplicationController
     post = Post.find(params[:post_id])
     unless (share = current_user.feed.posts.find_by_original_post_id(params[:post_id]))
       share = current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, created_at: Time.now))
-      share.send_share_emails
+      Post.delay.send_share_emails(share.id)
     end
     render text: "OK"
   end
@@ -74,7 +74,7 @@ class ReaderController < ApplicationController
    post = Post.find(params[:post_id])
     unless (share = current_user.feed.posts.find_by_original_post_id(params[:post_id]))
       share = current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, note: params[:note_content], created_at: Time.now))
-      share.send_share_emails
+      Post.delay.send_share_emails(share.id)
     end
     render text: "OK"
   end
@@ -111,7 +111,7 @@ class ReaderController < ApplicationController
       shared: true
     )
     @post.update_attributes({original_post_id: @post.id})
-    @post.send_share_emails
+    Post.delay.send_share_emails(@post.id)
     @origin = params[:origin]
     render layout: false
   rescue Exception => e
@@ -154,7 +154,7 @@ class ReaderController < ApplicationController
     )
     p.update_attributes({original_post_id: p.id})
     
-    p.send_share_emails
+    Post.delay.send_share_emails(p.id)
     render text: "OK"
   end
   
@@ -195,7 +195,7 @@ class ReaderController < ApplicationController
     post = Post.find(params[:post_id])
     message = params[:message]
     recipient = params[:recipient]
-    ShareMailer.post_email(post, current_user, message, recipient).deliver
+    ShareMailer.delay.post_email(post.id, current_user.id, message, recipient)
     render text: "OK"
   end
   

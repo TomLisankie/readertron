@@ -30,7 +30,7 @@ $(document).ready(function() {
 	$(".comments .comment-actions .comment-edit-link").live("click", function() {
 		var $comment = $(this).closest(".comment");
 		$comment.find(".comment-actions").hide();
-		$comment.find(".comment-content").hide();
+		$comment.find(".the-comment-content").hide();
 		$comment.find(".comment-timestamp").hide();
 		$comment.find(".comment-body form").show();
 		$comment.find(".comment-body form textarea").focus();
@@ -40,7 +40,7 @@ $(document).ready(function() {
 	$(".comments .after-actions .cancel-comment-edit").live("click", function() {
 		var $comment = $(this).closest(".comment");
 		$comment.find(".comment-actions").show();
-		$comment.find(".comment-content").show();
+		$comment.find(".the-comment-content").show();
 		$comment.find(".comment-timestamp").show();
 		$comment.find(".comment-body form").hide();
 		return false;

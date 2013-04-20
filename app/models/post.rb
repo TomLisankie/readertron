@@ -108,6 +108,10 @@ class Post < ActiveRecord::Base
     ids.map {|id| Rails.cache.fetch("post-#{id}") { Post.find(id).to_partial(:unread) } }
   end
   
+  def self.send_share_emails(id)
+    find(id).send_share_emails
+  end
+  
   def refresh(attrs)
     update_attributes(attrs)
     shared_posts = Post.find_all_by_original_post_id(id).each do |share|
