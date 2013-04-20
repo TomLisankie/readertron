@@ -139,6 +139,7 @@ $(document).ready(function() {
 	
 	$("#quickpost-button").live("click", function() {
 		scrollFetchFlag = false;
+		window.scroll(0, 0);
 		$("#entries").html($("#quickpost-form-template").clone().attr("id", "quickpost-form").show());
 		$("#quickpost-form input#title").focus();
 	});
