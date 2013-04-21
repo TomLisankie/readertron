@@ -1,11 +1,5 @@
-* Send an email every time someone makes a Readertron share:
-	- Send to all subscribers.
-	- Allow people to change "email" settings on individual subscriptions. (I want to follow James, but not receive emails when he posts.)
-	- Replies to those emails post comments on the post.
-	- Comment posts should include more context of the post and also the last few comments, so that the whole discussion can happen via email.
-
+* Although the markdown renderer can autolink, I need to be able to add target=_blank to those links!
 * Pull in the old Reader posts using the Reader2k code?
-* Do the mailers asynchronously. Do other asynchronous things asynchronously. (On Heroku, or on AWS, how does the web server communicate with the workers, i.e., send them their tasks?)
 * textareas not as responsive with the auto-grow? Use whatever code Github's got?
 * Look at 404s to see which images are still broken?
 1. @-mentions in shares and comments that would email people? All it does is on an `after_create` hook send an email to the user. Use the Twitter @mention thing for the UI?
