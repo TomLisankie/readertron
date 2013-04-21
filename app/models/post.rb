@@ -165,9 +165,8 @@ class Post < ActiveRecord::Base
   
   def send_share_emails
     return unless shared?
-    
-     feed.users.each do |subscriber|
-       ShareMailer.share_email(subscriber, self).deliver
-     end
+    feed.users.each do |subscriber|
+      ShareMailer.share_email(subscriber, self).deliver
+    end
   end
 end
