@@ -58,5 +58,7 @@ module Readertron
     
     config.cache_store = :dalli_store, {expires_in: 5.hours, compress: true}
     config.action_view.embed_authenticity_token_in_remote_forms = false
+    
+    config.action_view.sanitized_allowed_attributes = ['target']
   end
 end

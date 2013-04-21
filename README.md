@@ -1,4 +1,3 @@
-* Although the markdown renderer can autolink, I need to be able to add target=_blank to those links!
 * Pull in the old Reader posts using the Reader2k code?
 * textareas not as responsive with the auto-grow? Use whatever code Github's got?
 * Look at 404s to see which images are still broken?

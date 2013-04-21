@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    renderer = Redcarpet::Markdown.new(HTMLwithPygments, autolink: true, fenced_code_blocks: true)
+    renderer = Redcarpet::Markdown.new(HTMLwithPygmentsAndTargetBlankAutolinks, autolink: true, fenced_code_blocks: true)
     sanitize(renderer.render(text))
   end
   
