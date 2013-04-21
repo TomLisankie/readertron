@@ -80,6 +80,6 @@ Readertron::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   config.after_initialize do
-    Domain.url = "http://www.readertron.com"
+    Domain.url = "//www.readertron.com"
   end
 end

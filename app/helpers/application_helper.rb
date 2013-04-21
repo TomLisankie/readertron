@@ -23,6 +23,10 @@ module ApplicationHelper
   def clean_youtube(html)
     sanitize(html, tags: %w(object embed))
   end
+  
+  def clean_google_doc(html)
+    sanitize(html, tags: %w(iframe))
+  end
 
   def clean(html)
     raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({

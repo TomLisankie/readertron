@@ -121,6 +121,10 @@ try {
 	if (window.location.host.indexOf("youtube") != -1) {
 		var video_url = $("link[itemprop='embedURL']").attr('href');
 		var text = '<object width="640" height="390"> <param name="movie" value="' + video_url + '"></param> <param name="allowScriptAccess" value="always"></param> <embed src="' + video_url + '" type="application/x-shockwave-flash" allowscriptaccess="always" width="640" height="390"></embed> </object>'
+	} else if (window.location.host.indexOf("docs.google") != -1) {
+		var meta = document.getElementsByTagName("meta")[6];
+		var doc_url = meta.getAttribute("content");
+		var text = '<iframe src="' + doc_url + '" width="923" height="900"></iframe>'
 	} else {
 		var text = window.getSelection();
 		var objRange = text.getRangeAt(0);

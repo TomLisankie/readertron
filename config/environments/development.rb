@@ -56,6 +56,6 @@ Readertron::Application.configure do
   # }
   
   config.after_initialize do
-    Domain.url = 'http://localhost:3000'
+    Domain.url = '//readertron.dev'
   end
 end
