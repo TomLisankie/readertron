@@ -10,14 +10,14 @@
             <h2 class="entry-title">
               <span>On</span> 
               <% if comment.post.present? %>
-                <a class="entry-title-link" target="_blank" href="/reader/posts/<%= comment.post.id %>"><%= comment.post.title %>,</a>
+                <a class="entry-title-link" target="_blank" href="/reader/posts/<%= comment.post.id %>"><%= comment.post.title %></a>
+				shared by <strong><%= comment.post.sharer.name %></strong>:
               <% else %>
-                a post that no longer exists,
+                a post that no longer exists:
               <% end %>
-              <strong><%= comment.user.name %></strong>
-              <span>wrote:</span>
             </h2>
             <div class="stream-comment-content">
+              <strong><%= comment.user.name %></strong>:
               <%= mdown(comment.content) %>  
             </div>
           </div>
