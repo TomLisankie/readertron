@@ -9,9 +9,8 @@ class Comment < ActiveRecord::Base
   
   def notify_relevant_users
     relevant_users = [post.sharer] | post.comments.map(&:user)
-    (relevant_users - [user]).each do |u|
-      ShareMailer.new_comment_email(u, self).deliver
-    end
+    recipients = relevant_users - [user]
+    ShareMailer.new_comment_email(recipients.map(&:email), self).deliver
   end
   handle_asynchronously :notify_relevant_users
 end

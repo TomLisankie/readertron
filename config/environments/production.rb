@@ -54,15 +54,17 @@ Readertron::Application.configure do
   # Mailer
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.default_url_options = { :host => 'readertron.com' }
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address              => "secure.emailsrvr.com",
-      :port                 => 587,
-      :user_name            => 'notifications@readertron.com',
-      :password             => 'H0fst4dter!',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true  }
+  config.action_mailer.default_url_options = { :host => 'readertron.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => "jsomers@gmail.com",
+    :password => ENV['SENDGRID_PASSWORD'],
+    :domain => "readertron.com",
+    :address => "smtp.sendgrid.net",
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
   
 
   # Enable threaded mode
