@@ -1,3 +1,8 @@
+* Better, simpler flow for adding new feeds.
+* A public feed/blog for users
+* Easily printing the embedded PDFs
+* Mobile site
+* Fix this annoying typing situation: https://dl.dropbox.com/u/4427/screenshots/2013-04-22_2312.png.
 * Pull in the old Reader posts using the Reader2k code?
 * textareas not as responsive with the auto-grow? Use whatever code Github's got?
 * Look at 404s to see which images are still broken?
