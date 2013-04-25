@@ -2,6 +2,8 @@
 - the embedded doc sometimes has a toolbar and sometimes doesn't.
 - the preview link styles aren't always good and consistent.
 
+- refactor comment code.
+
 
 * Better, simpler flow for adding new feeds.
 * A public feed/blog for users
