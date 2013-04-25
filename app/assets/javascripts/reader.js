@@ -1,6 +1,14 @@
 $(document).ready(function() {
 	$("#alert").fadeOut(3000);
 	
+	$.facebox.settings.closeImage = '/assets/closelabel.png'
+	$.facebox.settings.loadingImage = '/assets/loading.gif'
+	
+	$('a[rel*=facebox]').live('click', function() {
+		$.facebox({div: "#markdown-help"});
+		return false;
+	});
+	
 	$("#start-readertron").click(function() {
 		window.location = "/";
 	});

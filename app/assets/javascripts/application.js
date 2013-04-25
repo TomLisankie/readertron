@@ -17,4 +17,5 @@
 //= require jquery.slimScroll
 //= require jquery.ui.draggable.min
 //= require showdown
+//= require facebox
 //= require_tree .
