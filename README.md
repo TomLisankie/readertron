@@ -1,3 +1,9 @@
+- facebox for showing the markdown stuff.
+- the embedded doc snaps to the middle of the page.
+- the embedded doc sometimes has a toolbar and sometimes doesn't.
+- the preview link styles aren't always good and consistent.
+
+
 * Better, simpler flow for adding new feeds.
 * A public feed/blog for users
 * Easily printing the embedded PDFs

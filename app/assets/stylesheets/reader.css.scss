@@ -359,18 +359,9 @@ html, body, input {
 	white-space: nowrap;	
 }
 
-.entry .comments textarea {
-	width: 90%;
-	height: 50px;
-	min-height: 50px;
-	margin-left: 40px;
-	font-family: Monaco, courier;
-	padding: 5px;
-	font-size: 13px;
-}
-
 .entry .comments .after-actions {
-	margin-left: 40px;
+	margin-left: 12px;
+	margin-top: 10px;
 }
 
 #loading-area-container, #broadcast-message-container, #alert-container, #notice-container {
@@ -1373,7 +1364,7 @@ a.delete-share {
 }
 
 a.tabnav-tab, a.tabnav-tab:visited {
-	color: #666;
+	color: #666 !important;
 }
 
 .tabnav-right {
@@ -1441,7 +1432,7 @@ a.tabnav-tab, a.tabnav-tab:visited {
 }
 
 .bubble textarea {
-	min-height: 34px;
+	min-height: 100px;
 	padding: 7px 8px;
 	color: #333;
 	background-color: #fff;
@@ -1567,7 +1558,7 @@ form.preview-selected .preview-content {
 }
 
 .comment-content .comment-body {
-	padding-left: 10px;
+	padding: 10px;
 	font-size: 13px;
 	overflow: auto;
 	width: 100%;
@@ -1605,4 +1596,17 @@ form.preview-selected .preview-content {
 
 #single #right-pane {
 	padding-bottom: 400px;
+}
+
+.markdown-body>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.comment p.drag-and-drop, .comment-add-form p.drag-and-drop {
+	position: relative;
+	top: -2px;
+}
+
+.js-comment {
+	padding-top: 0px !important;
 }

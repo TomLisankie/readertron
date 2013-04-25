@@ -201,6 +201,7 @@ class ReaderController < ApplicationController
   
   def markdownify
     @content = params[:content]
+    render layout: false
   end
 
   private

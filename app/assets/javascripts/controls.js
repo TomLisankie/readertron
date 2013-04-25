@@ -106,15 +106,15 @@ $(document).ready(function() {
 		$(this).addClass("hover");
 	});
 	
-	$("#quickpost-form textarea").live('focus', function() {
+	$(".github_textarea textarea").live('focus', function() {
 		$(this).closest(".write-content").addClass("focused");
 	});
 	
-	$("#quickpost-form textarea").live('blur', function() {
+	$(".github_textarea textarea").live('blur', function() {
 		$(this).closest(".write-content").removeClass("focused");
 	});
 	
-	$("#quickpost-form .preview-tab").live('click', function() {
+	$(".github_textarea .preview-tab").live('click', function() {
 		$(this).closest(".previewable-comment-form").removeClass("write-selected").addClass("preview-selected");
 		$(this).addClass("selected")
 		$(this).closest(".tabnav-tabs").find(".write-tab").removeClass("selected");
@@ -126,7 +126,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$("#quickpost-form .write-tab").live('click', function() {
+	$(".github_textarea .write-tab").live('click', function() {
 		$(this).closest(".previewable-comment-form").removeClass("preview-selected").addClass("write-selected");
 		$(this).addClass("selected")
 		$(this).closest(".tabnav-tabs").find(".preview-tab").removeClass("selected");

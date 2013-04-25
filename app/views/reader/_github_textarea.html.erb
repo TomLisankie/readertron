@@ -1,0 +1,45 @@
+<div class="discussion-bubble-content bubble github_textarea">
+	<div class="discussion-bubble-inner">
+		<div class="js-previewable-comment-form previewable-comment-form write-selected">
+		  <div class="comment-form-head tabnav">
+		    <ul class="tabnav-tabs">
+		      <li><a href="#" class="tabnav-tab write-tab js-write-tab selected">Write</a></li>
+		      <li><a href="#" class="tabnav-tab preview-tab js-preview-tab">Preview</a></li>
+		    </ul>
+		    <span class="tabnav-right">
+		      <span class="tabnav-widget text">Parsed with <a href="http://github.github.com/github-flavored-markdown/" class="gfm-help" target="_blank">GitHub Flavored Markdown</a></span>
+		    </span>
+		  </div>
+		  <div class="write-content js-write-bucket js-uploadable-container upload-enabled is-default" data-model="asset">
+			  <%= textarea %>
+			<p class="drag-and-drop">
+			    <span class="default">
+					This is how you add *<em>italics</em>*, and **<strong>bold</strong>**, and [<a href="http://jsomers.net">links</a>](http://jsomers.net)
+			    </span>
+			</p>
+		  </div>
+		  <div class="preview-content js-preview-bucket">
+			  <div class="js-comment comment">
+				  <div class="comment-header normal-comment-header">
+				    <span class="comment-header-author"><%= current_user.name %></a>
+					<span class="comment-header-action-text">
+					    wrote
+					</span>
+
+				    <span class="comment-header-right">
+				      <span class="comment-header-date">just now</a>
+				    </span>
+				</div> <!-- /.comment-header -->
+
+				<div class="comment-content">
+					<div class="edit-comment-hide">
+						<div class="js-comment-body comment-body markdown-body">
+							<p>Nothing to preview</p>
+						</div>
+					</div>
+				</div> <!-- /.comment-content -->
+			</div> <!-- /.comment -->
+		</div>
+	</div>
+  </div>
+</div>
