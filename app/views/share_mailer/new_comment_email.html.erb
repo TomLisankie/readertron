@@ -16,7 +16,7 @@
 	      <div class="comments">
 	        <% previous_comments.sort_by(&:created_at).reverse.each do |comment| %>
 	          <span class="comment-author"><strong><%= comment.user.name %></strong> <span class="comment-timestamp" style="color: #666;"><%= comment_date(comment.updated_at) %>:</span></span> 
-	          <span class="the-comment-content"><%= mdown(comment.content) %></span>
+	          <span class="the-comment-content"><%= markdown(comment.content) %></span>
 	          <br/><br/>
 	        <% end %>
 	      </div>
