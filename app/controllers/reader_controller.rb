@@ -13,6 +13,7 @@ class ReaderController < ApplicationController
     @unread_counts, @shared_unread_count = current_user.unread_counts
 
     @title = "(#{@unread_count = @unread_counts.values.sum})"
+    @comment_unseen_count = current_user.comment_unseen_count
     @shared_unread_count = current_user.shared_unread_count_total
     @regular_unread_count = @unread_count - @shared_unread_count
   end
@@ -171,6 +172,7 @@ class ReaderController < ApplicationController
   end
 
   def stream
+    current_user.update_attribute(:last_checked_comment_stream_at, Time.now)
 	  @comments = Comment.paginate(page: params[:page], per_page: 10).order("created_at DESC")
   end
   

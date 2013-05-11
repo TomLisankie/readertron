@@ -92,4 +92,8 @@ class User < ActiveRecord::Base
     reports = Report.find_all_by_report_type("Daily site report")
     reports.map { |r| r[:content][:users][name]}.compact.map {|h| h[:unread_count]}
   end
+  
+  def comment_unseen_count
+    Comment.where(["created_at > ?", last_checked_comment_stream_at]).count
+  end
 end
