@@ -207,7 +207,6 @@ class ReaderController < ApplicationController
   private
 
   def utf8clean(str)
-    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-    ic.iconv(str + ' ')[0..-2]
+    URI.unescape(str.force_encoding(Encoding::UTF_8))
   end
 end

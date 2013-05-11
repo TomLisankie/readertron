@@ -73,3 +73,9 @@ Readertron::Application.configure do
     Domain.url = '//readertron.dev'
   end
 end
+
+# Always run remote debugger in development mode.
+require 'ruby-debug'
+Debugger.start_remote
+Debugger.settings[:autoeval] = true
+puts "=> Debugger enabled"
