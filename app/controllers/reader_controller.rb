@@ -58,7 +58,7 @@ class ReaderController < ApplicationController
   def post_share
     post = Post.find(params[:post_id])
     unless (share = current_user.feed.posts.find_by_original_post_id(params[:post_id]))
-      share = current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, created_at: Time.now))
+      share = current_user.feed.posts.create!(post.attributes.merge(shared: true, original_post_id: post.id, created_at: Time.now))
       Post.delay.send_share_emails(share.id)
     end
     render text: "OK"
@@ -73,7 +73,7 @@ class ReaderController < ApplicationController
   def share_with_note
    post = Post.find(params[:post_id])
     unless (share = current_user.feed.posts.find_by_original_post_id(params[:post_id]))
-      share = current_user.feed.posts.create(post.attributes.merge(shared: true, original_post_id: post.id, note: params[:note_content], created_at: Time.now))
+      share = current_user.feed.posts.create!(post.attributes.merge(shared: true, original_post_id: post.id, note: params[:note_content], created_at: Time.now))
       Post.delay.send_share_emails(share.id)
     end
     render text: "OK"
@@ -110,7 +110,7 @@ class ReaderController < ApplicationController
       published: Time.now,
       shared: true
     )
-    @post.update_attributes({original_post_id: @post.id})
+    @post.update_attributes!({original_post_id: @post.id})
     Post.delay.send_share_emails(@post.id)
     @origin = params[:origin]
     render layout: false
@@ -152,7 +152,7 @@ class ReaderController < ApplicationController
       shared: true,
       author: "#{current_user.name} (Quickpost)"
     )
-    p.update_attributes({original_post_id: p.id})
+    p.update_attributes!({original_post_id: p.id})
     
     Post.delay.send_share_emails(p.id)
     render text: "OK"
