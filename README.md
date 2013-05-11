@@ -1,4 +1,3 @@
-- could you put a "send to instapaper" *button* in readertron? would help in areas with infrequent mobile Internet 
 - fix "mark all as read"
 - "you may have missed" emails
 

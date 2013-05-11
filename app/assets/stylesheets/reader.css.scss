@@ -280,6 +280,16 @@ html, body, input {
 .entry .entry-actions .email .link {
 }
 
+.entry .entry-actions .instapaper {
+	background: transparent url(/assets/stars.png) no-repeat;
+	background-position: -160px -320px;
+}
+
+.entry .entry-actions .instapaper.shared {
+	background: transparent url(/assets/stars.png) no-repeat;
+	background-position: -144px -288px;
+}
+
 .entry .entry-actions .share-with-note .link {
 	margin-bottom: 10px;
 }

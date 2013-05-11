@@ -80,6 +80,11 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$(".instapaper.link").live("click", function() {
+		$(this).addClass("shared");
+		fire_instapaper();
+	});
+	
 	$(".edit-quickpost").live("click", function() {
 		$(this).closest(".entry").find(".item-body .rendered-content").hide();
 		$(this).closest(".entry").find(".item-body #quickpost-edit-form").show();
