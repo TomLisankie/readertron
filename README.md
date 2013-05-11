@@ -1,6 +1,12 @@
+- delayed job is fucked because of YAML on comment share. what I should do is make it so it only uses an ID!
+- em dashes and apostrophes fucked on my snow fall share? (and on my latest ricky jay profile share)
+- could you put a "send to instapaper" *button* in readertron? would help in areas with infrequent mobile Internet 
+- fix "mark all as read"
+- "you may have missed" emails
+
 - don't allow unload if a comment box is open, too.
-- markdown formatting in actual show views should be very similar, if not identical, to preview.
 - blockquote formatting in preview...
+- markdown formatting in actual show views should be very similar, if not identical, to preview.
 - use scribd for pdfs
 - the embedded doc snaps to the middle of the page.
 - the embedded doc sometimes has a toolbar and sometimes doesn't.
