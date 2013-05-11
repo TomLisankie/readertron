@@ -75,7 +75,7 @@ Readertron::Application.configure do
 end
 
 # Always run remote debugger in development mode.
-require 'ruby-debug'
-Debugger.start_remote
-Debugger.settings[:autoeval] = true
-puts "=> Debugger enabled"
+# require 'ruby-debug'
+# Debugger.start_remote
+# Debugger.settings[:autoeval] = true
+# puts "=> Debugger enabled"
