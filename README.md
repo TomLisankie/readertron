@@ -1,5 +1,3 @@
-- delayed job is fucked because of YAML on comment share. what I should do is make it so it only uses an ID!
-- em dashes and apostrophes fucked on my snow fall share? (and on my latest ricky jay profile share)
 - could you put a "send to instapaper" *button* in readertron? would help in areas with infrequent mobile Internet 
 - fix "mark all as read"
 - "you may have missed" emails
