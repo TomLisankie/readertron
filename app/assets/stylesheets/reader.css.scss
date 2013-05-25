@@ -1047,7 +1047,15 @@ table.bordered td {
 	cursor: pointer;
 }
 
-.entry.stream-comment:hover .card {
+.entry.stream-comment a {
+	color: #444;
+}
+
+.entry.stream-comment.unseen a {
+	color: #15C;
+}
+
+.entry.stream-comment.unseen .card {
 	border-left: 2px solid #4D90F0;
 }
 

@@ -174,10 +174,9 @@ class ReaderController < ApplicationController
   end
 
   def stream
-	  @comments = Comment.paginate(page: params[:page], per_page: 10).order("created_at DESC")
+	  @comments = Comment.where(["user_id != ?", current_user.id]).paginate(page: params[:page], per_page: 10).order("created_at DESC")
     @title = "- Comments"
     @title += " (#{current_user.comment_unseen_count})" if current_user.comment_unseen_count > 0
-    current_user.update_attribute(:last_checked_comment_stream_at, Time.now)
   end
   
   def bookmarklet

@@ -1,5 +1,5 @@
 <% comments.each do |comment| %>
-  <div class="entry stream-comment" comment_id="<%= comment.id %>">
+  <div class="entry stream-comment <%= 'unseen' if comment.created_at > current_user.last_checked_comment_stream_at %>" comment_id="<%= comment.id %>">
     <div class="card card-common">
       <div class="card-content">
         <div class="entry-container">

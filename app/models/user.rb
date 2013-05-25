@@ -122,7 +122,7 @@ class User < ActiveRecord::Base
   end
   
   def comment_unseen_count
-    Comment.where(["created_at > ?", last_checked_comment_stream_at]).count
+    Comment.where(["created_at > ? AND user_id != ?", last_checked_comment_stream_at, self.id]).count
   end
   
   def shares_in_period(period)

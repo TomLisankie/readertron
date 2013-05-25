@@ -1,3 +1,4 @@
+* re
 * git pull
 * Bundle, make sure libv8 etc. installs (bundle --without development)
 * Run the database migration (bundle exec rake db:migrate RAILS_ENV=production)
@@ -13,5 +14,5 @@
 		- ps aux | grep unicorn
 		- kill -9 [pid]
 		- bundle exec unicorn -c config/unicorn.rb -D -E production
-* Fix cron jobs
-	- whenever --help
+* Write cron jobs
+	- whenever -w
