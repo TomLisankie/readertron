@@ -336,6 +336,7 @@ html, body, input {
 .entry .comments {
 	border-top: 1px solid #DDD;
 	padding: 10px;
+	width: 650px;
 }
 
 .entry .comments .comments-top {
@@ -359,6 +360,7 @@ html, body, input {
 .entry .comments .comment.featured {
 	background-color: #FFFDD8;
 	padding: 10px;
+	padding-right: 30px;
 	position: relative;
 	left: -10px;
 }
