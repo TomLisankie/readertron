@@ -36,7 +36,7 @@ module ApplicationHelper
   end
   
   def truncated_post_content(post)
-    truncate(post.content, :length => 500, :omission => "... <a href='#{post.url}'>(continued)</a>")
+    truncate(post.content, :length => 500, :omission => "... <a href='#{post.share_url}'>(continued)</a>")
   end
   
   def truncated_comment_content(comment)

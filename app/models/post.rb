@@ -154,7 +154,7 @@ class Post < ActiveRecord::Base
     Rails.cache.write("post-#{id}", to_partial, expires_in: 2.weeks) unless shared?
   end
   
-  def url
+  def share_url
     "http:#{Domain.url}#{path}"
   end
   

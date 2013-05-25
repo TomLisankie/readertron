@@ -7,7 +7,7 @@
 
 <ul>
 	<% most_discussed = Post.most_discussed_in_period(@period, 1).first %>
-	<li>Most Discussed Share: <strong><%= most_discussed.sharer.name %></strong> for "<%= link_to(most_discussed.title, most_discussed.url) %>"</li>
+	<li>Most Discussed Share: <strong><%= most_discussed.sharer.name %></strong> for "<%= link_to(most_discussed.title, most_discussed.share_url) %>"</li>
 	<li>Most Shares: <strong><%= (m = User.has_most_shares_in_period(@period)).name %></strong> (<%= m.shares_in_period(@period) %>)</li>
 	<li>Most Words Written: <strong><%= (u = User.has_most_words_in_period(@period)).name %></strong> (<%= number_with_delimiter(u.words_written_in_period(@period)) %> words)</li>
 </ul>
@@ -15,7 +15,7 @@
 <h2>Some great posts you may have missed:</h2>
 
 <% @threads.each do |post| %>
-    <h3><%= link_to(post.title, post.url) %></h3>
+    <h3><%= link_to(post.title, post.share_url) %></h3>
 	<% unless post.url.include?("youtube.com") || post.url.include?("docs.google.com") %>
 		<div style="margin-bottom: 10px;">
 			<% if post.url.starts_with?("#quickpost-") %>
