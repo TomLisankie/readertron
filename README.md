@@ -4,7 +4,7 @@
 - invite a few new key people (Aylward and Menke and Goldstein and Josh Freedman), and reach out to non-participants.
 - fix "mark all as read"
 - linking with "command-K" feature
-
+- prevent duplicate share emails
 - "like" button?
 
 - don't allow unload if a comment box is open, too.
