@@ -20,11 +20,13 @@ class ReaderController < ApplicationController
   
   def posts
     @entry = Post.find(params[:id])
+    @title = "- #{@entry.title}"
     render "single"
   end
   
   def mine
     @shares = current_user.feed.posts.revshared.limit(10)
+    @title = "- My Shared Items"
     render "mine"
   end
   
@@ -172,8 +174,10 @@ class ReaderController < ApplicationController
   end
 
   def stream
-    current_user.update_attribute(:last_checked_comment_stream_at, Time.now)
 	  @comments = Comment.paginate(page: params[:page], per_page: 10).order("created_at DESC")
+    @title = "- Comments"
+    @title += " (#{current_user.comment_unseen_count})" if current_user.comment_unseen_count > 0
+    current_user.update_attribute(:last_checked_comment_stream_at, Time.now)
   end
   
   def bookmarklet

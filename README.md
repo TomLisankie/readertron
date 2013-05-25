@@ -2,7 +2,6 @@
 - use https://dl.dropbox.com/u/4427/screenshots/2013-05-15_2211.png for comment style
 - don't count (or show) your own comments in the "Comments" pane.
 - simple graphs on the admin page.
-- better page titles on single post pages, etc.
 - invite a few new key people (Aylward and Menke and Goldstein and Josh Freedman), and reach out to non-participants.
 - fix "mark all as read"
 - comment stream should show as "unread" the comments that were created > last_checked
