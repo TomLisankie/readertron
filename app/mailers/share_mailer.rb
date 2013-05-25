@@ -40,4 +40,14 @@ class ShareMailer < ActionMailer::Base
     sendgrid_recipients recipients
     mail(to: "notifications@readertron.com", subject: subject, reply_to: "comment-replies-#{@share.id}@readertron.mailgun.org")
   end
+  
+  def weekly_digest(recipient_id)
+    @period = 2.weeks
+    @recipient = User.find(recipient_id)
+    @threads = @recipient.missed_threads_in_period(@period)
+    
+    subject = "Readertron Weekly Digest, Week of #{Date.today.to_s(:long_ordinal)}"
+    sendgrid_category subject
+    mail(to: @recipient.email, subject: subject, reply_to: "jsomers@gmail.com")
+  end
 end

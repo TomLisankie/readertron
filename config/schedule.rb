@@ -15,4 +15,8 @@ every 1.day do
   runner "Report.daily"
 end
 
+every :sunday, :at => '3pm' do
+  runner "User.send_weekly_digests"
+end
+
 # Learn more: http://github.com/javan/whenever

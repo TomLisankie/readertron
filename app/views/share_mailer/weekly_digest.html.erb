@@ -1,0 +1,40 @@
+<style type="text/css">
+	.the-comment-content p:first-of-type {
+		display: inline;
+	}
+</style>
+<h2>Who are this week's Readertron thought leaders?</h2>
+
+<ul>
+	<% most_discussed = Post.most_discussed_in_period(@period, 1).first %>
+	<li>Most Discussed Share: <strong><%= most_discussed.sharer.name %></strong> for "<%= link_to(most_discussed.title, most_discussed.url) %>"</li>
+	<li>Most Shares: <strong><%= (m = User.has_most_shares_in_period(@period)).name %></strong> (<%= m.shares_in_period(@period) %>)</li>
+	<li>Most Words Written: <strong><%= (u = User.has_most_words_in_period(@period)).name %></strong> (<%= number_with_delimiter(u.words_written_in_period(@period)) %> words)</li>
+</ul>
+
+<h2>Some great posts you may have missed:</h2>
+
+<% @threads.each do |post| %>
+    <h3><%= link_to(post.title, post.url) %></h3>
+	<% unless post.url.include?("youtube.com") || post.url.include?("docs.google.com") %>
+		<div style="margin-bottom: 10px;">
+			<% if post.url.starts_with?("#quickpost-") %>
+				<%= markdown(truncated_post_content(post)) %>
+			<% else %>
+				<%= clean(urlify_urls(truncated_post_content(post))) %>
+			<% end %>
+		</div>
+	<% end %>
+    <div class="comments">
+	    <% if post.note.present? %>
+	        <span class="comment-author"><strong><%= post.feed.title %>:</strong></span>
+	        <span class="the-comment-content"><%= markdown(truncate(post.note, :length => 500, :omission => "... <a href='#{post.url}'>(continued)</a>")) %></span>
+	    <% end %>
+      <% post.comments.sort_by(&:created_at).each do |comment| %>
+	  	<br/><br/>
+        <span class="comment-author"><strong><%= comment.user.name %>:</strong></span>
+        <span class="the-comment-content"><%= markdown(truncated_comment_content(comment)) %></span>
+      <% end %>
+    </div>
+	<hr/>
+<% end %>

@@ -13,3 +13,5 @@
 		- ps aux | grep unicorn
 		- kill -9 [pid]
 		- bundle exec unicorn -c config/unicorn.rb -D -E production
+* Fix cron jobs
+	- whenever --help

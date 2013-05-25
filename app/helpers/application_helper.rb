@@ -35,6 +35,14 @@ module ApplicationHelper
                         })).gsub(/<\s*?br\s*?\/?\s*?>/, "<p></p>").gsub("\n\n", "<p></p>"))
   end
   
+  def truncated_post_content(post)
+    truncate(post.content, :length => 500, :omission => "... <a href='#{post.url}'>(continued)</a>")
+  end
+  
+  def truncated_comment_content(comment)
+    truncate(comment.content, :length => 500, :omission => "... <a href='#{comment.url}'>(continued)</a>")
+  end
+  
   def comment_date(date)
     if date >= 1.month.ago
       date.strftime("(#{time_ago_in_words(date)} ago)")
