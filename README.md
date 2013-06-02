@@ -1,9 +1,13 @@
+- line breaks in content are annoying and too aggressive.
+- if you click a readertron link from these emails you should be logged in. 
+- in fact comments pane should only show you comments you haven't seen (i.e., for threads you're not a participant on)
+- invite a few new key people (Aylward and Menke and Goldstein and Josh Freedman), and reach out to non-participants.
 - fix annoying click scroll-to-top as on http://readertron.com/reader/posts/390710#comment-638
 - use https://dl.dropbox.com/u/4427/screenshots/2013-05-15_2211.png for comment style
+- apple-K for links.
 - simple graphs on the admin page.
-- invite a few new key people (Aylward and Menke and Goldstein and Josh Freedman), and reach out to non-participants.
 - fix "mark all as read"
-- linking with "command-K" feature
+- mark as read from the single page
 - prevent duplicate share emails
 - "like" button?
 

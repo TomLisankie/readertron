@@ -5,7 +5,7 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
   </head>
   <body style="font-size: 100%">
-      <h1><a href="<%= @share.share_url %>"><%= @share.title %></a></h1>
+      <h1><a href="<%= @share.url %>"><%= @share.title %></a></h1>
       <% if @share.note.present? %>
         <div class="note" style="padding: 5px; background-color: #D6EEF8; margin-bottom: 10px;">
           <%= markdown("<strong>#{@share.feed.title}:</strong> #{@share.note}") %>

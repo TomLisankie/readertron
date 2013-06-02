@@ -42,7 +42,7 @@ class ShareMailer < ActionMailer::Base
   end
   
   def weekly_digest(recipient_id)
-    @period = 2.weeks
+    @period = 1.week
     @recipient = User.find(recipient_id)
     @threads = @recipient.missed_threads_in_period(@period)
     
