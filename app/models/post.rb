@@ -113,14 +113,18 @@ class Post < ActiveRecord::Base
   end
   
   def self.most_discussed_in_period(period, limit)
-    candidates = shared.where(["created_at > ?", period.ago])
+    candidates = shared.where(["created_at > ?", (period * 4).ago])
     threads = candidates.sort_by do |post|
-      -1 * (1000 * post.thread_participants.size + post.comments.sum(&:word_count))
+      -1 * (1000 * post.thread_participants(period).size + post.comments.where(["created_at > ?", period.ago]).sum(&:word_count))
     end.first(limit)
   end
   
-  def thread_participants
-    ([sharer] | comments.map(&:user)).uniq
+  def thread_participants(period = nil)
+    if period
+      ([sharer] | comments.where(["created_at > ?", period.ago]).map(&:user)).uniq
+    else
+      ([sharer] | comments.map(&:user)).uniq
+    end
   end
   
   def refresh(attrs)
