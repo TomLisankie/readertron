@@ -162,6 +162,10 @@ class Post < ActiveRecord::Base
     "http:#{Domain.url}#{path}"
   end
   
+  def share_url_with_email_token(user)
+    "http:#{Domain.url}#{path}?email_token=#{user.share_token.first(10)}"
+  end
+  
   def path
     "/reader/posts/#{id}"
   end

@@ -20,8 +20,16 @@ class Comment < ActiveRecord::Base
     "http:#{Domain.url}#{path}"
   end
   
+  def url_with_email_token(user)
+    "http:#{Domain.url}#{path_with_email_token(user.share_token.first(10))}"
+  end
+  
   def path
     "/reader/posts/#{post.id}#comment-#{id}"
+  end
+  
+  def path_with_email_token(token)
+    "/reader/posts/#{post.id}?email_token=#{token}#comment-#{id}"
   end
     
   private

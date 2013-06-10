@@ -1,5 +1,5 @@
 class ReaderController < ApplicationController
-  before_filter :authenticate_user!, except: [:create_post, :bookmarklet, :email_comment]
+  before_filter :authenticate_user!, except: [:create_post, :bookmarklet, :email_comment, :posts]
   protect_from_forgery :except => [:create_post, :bookmarklet, :email_comment]
   require 'iconv'
   
@@ -21,6 +21,11 @@ class ReaderController < ApplicationController
   def posts
     @entry = Post.find(params[:id])
     @title = "- #{@entry.title}"
+    if (tok = params[:email_token])
+      sign_in User.where(["share_token like ?", "#{tok}%"]).first
+    else
+      authenticate_user!
+    end
     render "single"
   end
   
