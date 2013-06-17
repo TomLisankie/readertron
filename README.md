@@ -1,6 +1,11 @@
-- invite a few new key people (Aylward and Menke and Goldstein and Josh Freedman), and reach out to non-participants.
+- reach out to non-participants (Avi, Tom—is Kraft on there?)
+- email links in regular share emails?
+- Also the emailed posts (from the email button, not the automatic ones) should include the post's note, if it's a share.
+- @ing people in notes and comments. What should the behavior be?
+- The appearance of the identified element can be changed through the :target CSS pseudoclass; Wikipedia uses this to highlight the selected reference. Notably CSSdisplay: block can be used to show content only if it is the target, and otherwise hidden by display: none.
 - line breaks in content are annoying and too aggressive.
 - in fact comments pane should only show you comments you haven't seen (i.e., for threads you're not a participant on)
+- ability to follow a particular person's comments?
 - fix annoying click scroll-to-top as on http://readertron.com/reader/posts/390710#comment-638
 - use https://dl.dropbox.com/u/4427/screenshots/2013-05-15_2211.png for comment style
 - apple-K for links.
