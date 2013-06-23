@@ -36,11 +36,11 @@ module ApplicationHelper
   end
   
   def truncated_post_content(post, user)
-    truncate(post.content, :length => 500, :omission => "... <a href='#{post.share_url_with_email_token(user)}'>(continued)</a>")
+    truncate(post.content, :length => 1000, :omission => "... <a href='#{post.share_url_with_email_token(user)}'>(continued)</a>")
   end
   
   def truncated_comment_content(comment, user)
-    truncate(comment.content, :length => 500, :omission => "... <a href='#{comment.url_with_email_token(user)}'>(continued)</a>")
+    truncate(comment.content, :length => 1000, :omission => "... <a href='#{comment.url_with_email_token(user)}'>(continued)</a>")
   end
   
   def comment_date(date)

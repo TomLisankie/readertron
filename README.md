@@ -1,7 +1,6 @@
 - New invitees: Alkire, Kraft. Reach out to non-participants.
 - email links in regular share emails?
-- maybe double the length of the excerpts in share emails.
-- Also the emailed posts (from the email button, not the automatic ones) should include the post's note, if it's a share.
+- Do a better job getting favicons.
 - @ing people in notes and comments. What should the behavior be?
 - The appearance of the identified element can be changed through the :target CSS pseudoclass; Wikipedia uses this to highlight the selected reference. Notably CSSdisplay: block can be used to show content only if it is the target, and otherwise hidden by display: none.
 - in fact comments pane should only show you comments you haven't seen (i.e., for threads you're not a participant on)
