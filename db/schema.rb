@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511224336) do
+ActiveRecord::Schema.define(:version => 20130626020244) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130511224336) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130511224336) do
     t.boolean  "shared",           :default => false
     t.integer  "original_post_id"
     t.text     "note"
+    t.datetime "deleted_at"
   end
 
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"
@@ -121,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20130511224336) do
     t.string   "name"
     t.string   "instapaper_username"
     t.string   "instapaper_password"
-    t.datetime "last_checked_comment_stream_at", :default => '2013-05-04 22:49:42'
+    t.datetime "last_checked_comment_stream_at", :default => '2013-05-06 01:38:42'
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

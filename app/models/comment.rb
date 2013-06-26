@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :user
   belongs_to :post
   validates_presence_of :user

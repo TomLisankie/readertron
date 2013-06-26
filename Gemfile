@@ -31,6 +31,8 @@ gem 'daemons'
 
 gem 'sendgrid'
 
+gem 'paranoia'
+
 group :development do
   gem 'ruby-debug-base19'
   gem 'ruby-debug19'

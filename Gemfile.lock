@@ -104,6 +104,8 @@ GEM
     mysql2 (0.3.11)
     nokogiri (1.4.7)
     orm_adapter (0.4.0)
+    paranoia (1.2.0)
+      activerecord (>= 3.0.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     premailer (1.7.3)
@@ -218,6 +220,7 @@ DEPENDENCIES
   libv8 (~> 3.11.8)
   mysql2
   nokogiri
+  paranoia
   premailer-rails
   pry
   pygments.rb

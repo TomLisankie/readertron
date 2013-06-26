@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  acts_as_paranoid
+  
   belongs_to :feed
   has_many :unreads, dependent: :destroy
   has_many :comments, dependent: :destroy
