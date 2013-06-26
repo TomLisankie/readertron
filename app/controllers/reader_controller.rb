@@ -5,17 +5,25 @@ class ReaderController < ApplicationController
   
   def index
     redirect_to "/reader/posts/#{params[:post_id]}" if params[:post_id].present?
+  end
+  
+  def subscriptions
     @shared, @unshared = current_user.subscriptions(:include => :feeds).partition {|s| s.feed.shared?}
-    
-    @entries = Post.cached(current_user.unreads.unshared.order("published ASC").limit(10).map(&:post_id)) rescue []
-    Rails.cache.write("#{current_user.id}__chron", current_user.unreads.unshared.map(&:post_id))
-    
+        
     @unread_counts, @shared_unread_count = current_user.unread_counts
 
     @title = "(#{@unread_count = @unread_counts.values.sum})"
+    @unread_count = @unread_counts.values.sum
     @comment_unseen_count = current_user.comment_unseen_count
     @shared_unread_count = current_user.shared_unread_count_total
     @regular_unread_count = @unread_count - @shared_unread_count
+    render layout: false
+  end
+  
+  def index_entries
+    @entries = Post.cached(current_user.unreads.unshared.order("published ASC").limit(10).map(&:post_id)) rescue []
+    Rails.cache.write("#{current_user.id}__chron", current_user.unreads.unshared.map(&:post_id))
+    render layout: false
   end
   
   def posts

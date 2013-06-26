@@ -13,7 +13,7 @@ $(document).ready(function() {
 		window.location = "/";
 	});
 	
-	$("#subscriptions li").click(function() {
+	$("#subscriptions li").live("click", function() {
 		SETTINGS.feed_id = $(this).split_id();
 		SETTINGS.page = 0;
 		update_items_filter_control_counts();
@@ -32,7 +32,7 @@ $(document).ready(function() {
 		$(this).attr("placeholder", placeholderStack.pop());
 	})
 	
-	$("#subscriptions h3").click(function() {
+	$("#subscriptions h3").live("click", function() {
 		if ($(this).attr("id") == "my-shared-items") {
 			window.location = "/reader/mine";
 			return false;

@@ -1,0 +1,34 @@
+<% u = @comment_unseen_count %>
+<h3 id="comment-stream">
+	<a href="/reader/stream" class="<%= 'has_unreads' if u > 0 %>">Comments</a>
+	<span class="unread_count" id="comment-unseen-count" style="<%= u > 0 ? '' : 'display: none;' %>">(<%= u %>)</span>
+</h3>
+<h3 feed_id="<%= current_user.feed.id %>" id="my-shared-items">
+	<a href="#">My Shared Items</a>
+</h3>
+<% u = @shared_unread_count %>
+<h3 id="shared-items-link" feed_id="shared">
+	<a href="#" class="<%= 'has_unreads' if u > 0 %>">Other Shared Items</a>
+	<span class="unread_count" id="shared-unread-count" style="<%= u > 0 ? '' : 'display: none;' %>">(<%= u %>)</span>
+</h3>
+	<ul>
+		<% @shared.each do |subscription| %>
+			<%= render "subscription", subscription: subscription %>
+		<% end %>
+	</ul>
+<h3>
+	<% u = @regular_unread_count %>
+	<a id="all-items-link" href="#" class="<%= 'has_unreads' if u > 0 %>">All Items</a>
+	<span class="unread_count" id="total-unread-count" style="<%= u > 0 ? '' : 'display: none;' %>">(<%= u %>)</span>
+</h3>
+<ul>
+<% @unshared.each do |subscription| %>
+	<%= render "subscription", subscription: subscription %>
+<% end %>
+</ul>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("title").text("Readertron <%= @title %>");
+	});
+</script>
