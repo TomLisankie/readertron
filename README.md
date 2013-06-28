@@ -25,7 +25,6 @@
 - don't allow unload if a comment box is open, too.
 - blockquote formatting in preview...
 - markdown formatting in actual show views should be very similar, if not identical, to preview.
-- use scribd for pdfs
 - the embedded doc snaps to the middle of the page.
 - the embedded doc sometimes has a toolbar and sometimes doesn't.
 - refactor comment code.

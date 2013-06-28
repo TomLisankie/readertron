@@ -32,7 +32,7 @@
       <div class="post">
         <% if @post.url.starts_with?("#quickpost-") %>
           <%= markdown(@post.content) %>
-        <% elsif @post.url.include?("youtube.com") || @post.url.include?("docs.google.com") %>
+        <% elsif @post.url.include?("youtube.com") || @post.url.include?("scribd.com") %>
   		  [This share includes embedded content: <a href="http://readertron.com/reader/posts/<%= @post.id %>">click here to view it</a>.]
   		 <% else %>
           <%= clean(urlify_urls(@post.content)) %>

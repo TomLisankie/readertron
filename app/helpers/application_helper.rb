@@ -24,7 +24,7 @@ module ApplicationHelper
     sanitize(html, tags: %w(object embed))
   end
   
-  def clean_google_doc(html)
+  def clean_scribd_doc(html)
     sanitize(html, tags: %w(iframe))
   end
 

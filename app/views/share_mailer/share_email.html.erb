@@ -15,7 +15,7 @@
       <div class="post">
         <% if @share.url.starts_with?("#quickpost-") %>
           <%= markdown(@share.content) %>
-        <% elsif @share.url.include?("youtube.com") || @share.url.include?("docs.google.com") %>
+        <% elsif @share.url.include?("youtube.com") || @share.url.include?("scribd.com") %>
 		  [This share includes embedded content: <a href="http://readertron.com/reader/posts/<%= @share.id %>">click here to view it</a>.]
 		 <% else %>
           <%= clean(urlify_urls(@share.content)) %>

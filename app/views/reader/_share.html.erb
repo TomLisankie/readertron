@@ -52,8 +52,8 @@
 									<% else %>
 										<% if entry.url.include?("youtube.com") %>
 											<%= clean_youtube(entry.content) %>
-										<% elsif entry.url.include?("docs.google") %>
-											<%= clean_google_doc(entry.content) %>
+										<% elsif entry.url.include?("scribd.com") %>
+											<%= clean_scribd_doc(entry.content) %>
 										<% else %>
 											<%= clean(urlify_urls(entry.content)) %>
 										<% end %>

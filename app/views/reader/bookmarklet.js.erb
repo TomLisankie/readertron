@@ -122,10 +122,10 @@ try {
 	if (window.location.host.indexOf("youtube") != -1) {
 		var video_url = $("link[itemprop='embedURL']").attr('href');
 		var text = '<object width="640" height="390"> <param name="movie" value="' + video_url + '"></param> <param name="allowScriptAccess" value="always"></param> <embed src="' + video_url + '" type="application/x-shockwave-flash" allowscriptaccess="always" width="640" height="390"></embed> </object>'
-	} else if (window.location.host.indexOf("docs.google") != -1) {
-		var meta = document.getElementsByTagName("meta")[6];
-		var doc_url = meta.getAttribute("content");
-		var text = '<iframe src="' + doc_url + '" width="923" height="900"></iframe>'
+	} else if (window.location.host.indexOf("scribd") != -1) {
+		var matches = document.URL.match(/scribd\.com\/doc\/(.*?)\//);
+		var docId = matches[1];
+		var text = '<p style="margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;"> <a title="View Interview with John Horton Conway on Scribd" href="' + document.URL + '" style="text-decoration: underline;" >' + document.title + '</a></p><iframe class="scribd_iframe_embed" src="http://www.scribd.com/embeds/' + docId + '/content?start_page=1&view_mode=scroll&show_recommendations=false" data-auto-height="false" data-aspect-ratio="0.767659574468085" scrolling="no" id="doc_43414" width="922" height="600" frameborder="0"></iframe>'
 	} else {
 		var text = window.getSelection();
 		var objRange = text.getRangeAt(0);
