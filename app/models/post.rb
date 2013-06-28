@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :unreads, dependent: :destroy
   has_many :comments, dependent: :destroy
   
-  validates_uniqueness_of :url, unless: ->(post) { post.shared? }
+  validates_uniqueness_of :url, scope: :deleted_at, unless: ->(post) { post.shared? }
   validate :not_a_shady_duplicate
   validates_presence_of :url
   validates_presence_of :title
