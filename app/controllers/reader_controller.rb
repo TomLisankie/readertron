@@ -1,6 +1,6 @@
 class ReaderController < ApplicationController
-  before_filter :authenticate_user!, except: [:create_post, :bookmarklet, :email_comment, :posts]
-  protect_from_forgery :except => [:create_post, :bookmarklet, :email_comment]
+  before_filter :authenticate_user!, except: [:create_post, :bookmarklet, :email_comment, :email_share, :posts]
+  protect_from_forgery :except => [:create_post, :bookmarklet, :email_comment, :email_share]
   require 'iconv'
   
   def index
@@ -204,6 +204,23 @@ class ReaderController < ApplicationController
     post = Post.find(params["recipient"][/comment-replies-(.*?)@/, 1])
     content = params["stripped-text"]
     post.comments.create(user: user, content: content)
+    render :text => "OK", :status => 200
+  rescue Exception => e
+    Report.create(report_type: "failed_mailgun", content: {email: params, exception: e})
+  end
+  
+  def email_share
+    user = User.find_by_email(params["sender"])
+    post = user.feed.posts.create!(
+      content: utf8clean(params["stripped-text"]),
+      url: utf8clean("#quickpost-#{user.name.snake}-#{Time.now.to_i}"),
+      title: utf8clean(params[:subject]),
+      published: Time.now,
+      shared: true
+    )
+    post.update_attributes!({original_post_id: post.id})
+    Post.delay.send_share_emails(post.id)
+    
     render :text => "OK", :status => 200
   rescue Exception => e
     Report.create(report_type: "failed_mailgun", content: {email: params, exception: e})
