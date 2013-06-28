@@ -181,8 +181,9 @@ class Post < ActiveRecord::Base
   
   def absolutize_relative_image_paths!
     new_content = "" + content
-    image_urls = content.scan(/<img.*?src=['"](.*?)['"]/).flatten
-    image_urls.each do |image_url|
+    doc = Nokogiri::HTML(content)
+    doc.css("img").each do |image|
+      image_url = image['src']
       begin absolute_image_url = URI.join(url, image_url).to_s rescue next end
       new_content = new_content.gsub(image_url, absolute_image_url)
     end
