@@ -30,5 +30,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("title").text("Readertron <%= @title %>");
+		$("#new-items-count-visible").text("<%= @regular_unread_count %>");
+		$("#new-items-count-hidden").text("<%= @regular_unread_count %>");
+		update_items_filter_control_counts();
 	});
 </script>
