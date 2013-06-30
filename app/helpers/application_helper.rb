@@ -27,12 +27,18 @@ module ApplicationHelper
   def clean_scribd_doc(html)
     sanitize(html, tags: %w(iframe))
   end
-
-  def clean(html)
+  
+  def actually_clean(html)
     raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({
                           elements: Sanitize::Config::RELAXED[:elements] + ["style"],
                           remove_contents: ["script", "style"]
                         })).gsub(/<\s*?br\s*?\/?\s*?>/, "<p></p>").gsub("\n\n", "<p></p>"))
+  end
+
+  def clean(html)
+    actually_clean(html)
+    rescue ArgumentError => e
+      actually_clean(html.encode('utf-8', 'iso-8859-1'))
   end
   
   def truncated_post_content(post, user)
