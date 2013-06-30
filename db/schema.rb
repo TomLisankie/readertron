@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130628040437) do
+ActiveRecord::Schema.define(:version => 20130630170301) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -68,10 +68,12 @@ ActiveRecord::Schema.define(:version => 20130628040437) do
     t.integer  "original_post_id"
     t.text     "note"
     t.datetime "deleted_at"
+    t.string   "reader_id"
   end
 
   add_index "posts", ["deleted_at"], :name => "index_posts_on_deleted_at"
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"
+  add_index "posts", ["reader_id"], :name => "index_posts_on_reader_id"
   add_index "posts", ["shared"], :name => "index_posts_on_shared"
   add_index "posts", ["url", "shared", "deleted_at"], :name => "index_posts_on_url_and_shared_and_deleted_at", :unique => true
 

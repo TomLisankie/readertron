@@ -1,4 +1,4 @@
-<% feed = Post.find(entry.original_post_id).feed %>
+<% feed = Post.find_by_id(entry.original_post_id).try(:feed) || entry.feed %>
 <div class="entry-author">
 	<span class="entry-sharer-name">Shared by <%= entry.sharer == current_user ? "you" : entry.sharer.name %></span>
 	<span class="entry-icons-placeholder">
