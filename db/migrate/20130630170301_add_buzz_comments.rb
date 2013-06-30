@@ -28,7 +28,8 @@ class AddBuzzComments < ActiveRecord::Migration
           begin
             html = Nokogiri::HTML(File.open(path).read)
             url = html.css(".original-content a")[-2].try(:[], "href") || html.css(".entry-content a")[-2].try(:[], "href")
-            post = Post.reader.find_by_url(url)
+            next if url.nil?
+            post = user.feed.posts.find_by_url(url)
             if post.nil?
               post = user.feed.posts.create!({
                 title: HTMLEntities.new.decode(html.css(".entry-content b").inner_html).presence || "(title unknown)",
