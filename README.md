@@ -1,4 +1,6 @@
 - weekly digest thing about words written should include a link to the predominant comment(s)
+- single post should show within the regular pane.
+- old reader announcement
 - arrange todos
 - go back to sending share emails one at a time
 - share emails should use the magic links

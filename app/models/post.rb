@@ -36,6 +36,10 @@ class Post < ActiveRecord::Base
     order("created_at DESC")
   end
   
+  def self.reader
+    where("reader_id IS NOT NULL")
+  end
+  
   def self.unread_for_user(user)
     joins("JOIN unreads ON posts.id = unreads.post_id").where("unreads.user_id = #{user.id}")
   end
