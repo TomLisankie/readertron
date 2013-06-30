@@ -343,7 +343,18 @@ html, body, input {
 .entry .comments .comment {
 	margin-top: 5px;
 	padding-top: 5px;
+	border-bottom: dotted 1px #ddd;
+	padding-bottom: 11px;
 }
+
+.entry .comments .comment:last-of-type {
+	border-bottom: none;
+}
+
+.preview-content .comment:last-of-type {
+	padding-bottom: 0px !important;
+	border: 1px solid #cacaca !important;
+};
 
 .the-comment-content p:first-of-type {
   display: inline;
