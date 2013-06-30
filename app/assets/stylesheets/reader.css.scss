@@ -519,8 +519,18 @@ html, body, input {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-#viewer-refresh {
+#search-bar-main-container {
 	float: left;
+  width: 155px;
+  margin-left: 12px;
+}
+
+#search-bar-main {
+  color: #333;
+  font-size: 13px;
+  padding: 5px;
+  width: 132px;
+  height: 15px;
 }
 
 .jfk-button img {
@@ -948,7 +958,7 @@ ol#add-subscriptions li {
 	line-height: 27px;
 	list-style: none;
 	margin: 0 2px;
-	margin-left: 16px;
+	margin-left: 0px;
 	min-width: 46px;
 	outline: none;
 	padding: 0 18px 0 6px;
@@ -1647,4 +1657,16 @@ form.preview-selected .preview-content {
 
 .js-comment {
 	padding-top: 0px !important;
+}
+
+#search-bar-container {
+  margin-top: 10px;
+}
+
+#search-bar {
+  color: #333;
+  font-size: 14px;
+  padding: 5px;
+  margin: 0 auto;
+  width: 650px;
 }

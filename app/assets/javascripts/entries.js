@@ -143,7 +143,7 @@ $.fn.set_as_current_entry = function(should_snap) {
 	if (should_snap)
 		this.snap_to_top();
 
-	if (this.freshly_unread()) {
+	if (this.freshly_unread() && !$("#stream #right-pane #search-results").length) {
 		this.removeClass("unread");
 		if (!this.hasClass("dirty")) {
 			var that = this;

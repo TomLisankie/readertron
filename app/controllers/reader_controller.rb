@@ -186,6 +186,11 @@ class ReaderController < ApplicationController
     @title += " (#{current_user.comment_unseen_count})" if current_user.comment_unseen_count > 0
   end
   
+  def search
+    @page = (params[:page].to_i || 1)
+    @results = Post.search(current_user, params)
+  end
+  
   def bookmarklet
     @token = params[:token]
     respond_to do |format|

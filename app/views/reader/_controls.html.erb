@@ -1,8 +1,4 @@
-<div id="controls">
-	<div role="button" id="viewer-refresh" class="jfk-button jfk-button-standard" tabindex="0" title="Refresh" style="-webkit-user-select: none;">
-		<img src="/assets/refresh.png" alt="" class="jfk-button-img">
-	</div>
-	
+<div id="controls">	
 	<div id="unread-or-all" class="jfk-button jfk-button-standard">
 		<div class="menu-button-caption"><span id="new-items-count-visible" class="do-not-hide items-filter-control-count"><%= @regular_unread_count %></span> new items</div>
 		<div class="menu-button-dropdown">&nbsp;</div>
@@ -27,6 +23,10 @@
 	</div>
 	
 	<div id="quickpost-button">Quickpost</div>
+  
+	<div id="search-bar-main-container" tabindex="0" style="-webkit-user-select: none;">
+    <input type="text" id="search-bar-main" placeholder="Search Readertron"/>
+	</div>
 	
 	<div id="settings-button" class="jfk-button jfk-button-standard">
 		<div class="menu-button-caption"><img src="/assets/gear.png" alt="" class="jfk-button-img"></div>
@@ -44,3 +44,14 @@
 	
 	<div id="logo"><span>readertron</span><img src="/assets/rss-bot-small.png"/></div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+	  $("#search-bar-main").keyup(function(e) {
+  		if (e.keyCode == 13) {
+  			window.location = "/reader/search?query=" + encodeURIComponent($(this).val());
+  			return false;
+  		};
+	  });
+  });
+</script>

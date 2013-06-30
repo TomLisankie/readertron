@@ -1,17 +1,6 @@
 $(document).ready(function() {
-	$("#viewer-refresh").mouseover(function() {
-		$(this).removeClass("jfk-button-standard").addClass("jfk-button-hover");
-	});
-
-	$("#viewer-refresh").mouseout(function() {
-		$(this).removeClass("jfk-button-hover").addClass("jfk-button-standard");
-	});
-
-	$("#viewer-refresh").click(function() {
-		SETTINGS.page = 0;
-		fetch_entries();
-		return false;
-	});
+  
+  
 	
 	$("#unread-or-all").mouseover(function() {
 		$(this).removeClass("jfk-button-standard").addClass("jfk-button-hover");

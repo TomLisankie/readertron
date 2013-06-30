@@ -15,6 +15,48 @@ class Post < ActiveRecord::Base
   
   after_create :generate_unreads, :cache, :absolutize_relative_image_paths!
   
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+  
+  mapping do
+    indexes :id, type: 'integer'
+    indexes :feed_id, type: 'integer'
+    indexes :comment
+    indexes :title, boost: 10
+    indexes :content
+    indexes :author
+    indexes :published, type: 'date'
+    indexes :url
+    indexes :shared, type: 'boolean'
+    indexes :note, boost: 5
+    indexes :reader_id
+    indexes :user
+    indexes :visible_to
+  end
+  
+  def self.search(user, params)
+    tire.search(load: true, page: params[:page].to_i || 1) do
+      query { string params[:query], default_operator: "AND"} if params[:query].present?
+      filter :or, user.subscriptions_as_array_of_hashes
+    end
+  end
+  
+  def visible_to
+    feed.subscriptions.map(&:user_id)
+  end
+  
+  def to_indexed_json
+    to_json(methods: [:comment, :user])
+  end
+  
+  def user
+    sharer.try(:name)
+  end
+  
+  def comment
+    comments.map { |c| "#{c.user.name}: #{c.content}" }.join("\n")
+  end
+  
   def self.for_user(user)
     joins("JOIN feeds ON feeds.id = posts.feed_id JOIN subscriptions ON feeds.id = subscriptions.feed_id")
       .where("subscriptions.user_id = #{user.id}")

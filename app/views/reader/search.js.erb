@@ -1,0 +1,6 @@
+$('#search-results').append('<%= j render partial: "search_results", locals: { results: @results } %>');
+<% if @results.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@results) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

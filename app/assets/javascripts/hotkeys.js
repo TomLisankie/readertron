@@ -60,6 +60,12 @@ $(document).ready(function() {
 		$(document).bind('keydown', 'shift+I', function(e) {
 			fire_instapaper()
 		});
+    
+		$(document).bind('keydown', '/', function(e) {
+			$("#search-bar-main").focus();
+      $("#search-bar-main").select();
+      return false;
+		});
 	};	
 });
 

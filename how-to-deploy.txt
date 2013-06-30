@@ -5,6 +5,8 @@
 * Recompile assets (bundle exec rake assets:precompile)
 * Reset the cache (kill memcached and bring it up with `/usr/bin/memcached -d -m 64 -p 11211 -u memcache -l 127.0.0.1`)
 * Seed the cache (Unread.where("user_id != 4").select {|u| u.post.present?}.each {|u| puts "*" * 100; Rails.cache.write("post-#{u.post_id}", u.post.to_partial); puts "*" * 100})
+* Reindex the elasticsearch index:
+  - rake environment tire:import CLASS=Post FORCE=true
 * Kick the delayed job workers:
 	- script/delayed_job stop
 	- RAILS_ENV=production script/delayed_job start

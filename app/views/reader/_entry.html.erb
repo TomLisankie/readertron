@@ -1,3 +1,5 @@
+<% unreadable = true if local_assigns[:unreadable].nil? %>
+
 <div class="entry <%= is_unread ? "unread" : "read" %>"
 	 style="height: auto;" id="entry-<%= index %>"
 	 post_id="<%= entry.id %>"
@@ -40,40 +42,42 @@
 			</div>
 		</div>
 
-		<div class="card-actions card-bottom">
-			<div class="entry-actions">
-				<span class="item-star <%= star_class(entry) %> link unselectable" title="Add star"></span>
-				<wbr><wbr>
-				<span class="share-with-note <%= share_with_note_class(entry) %>"><span class="link unselectable">Share with note</span></span>
-				<wbr>
-				<span class="read-state-not-kept-unread read-state link unselectable" title="Keep unread">Keep unread</span>
-				<wbr>
-				<span class="email email-inactive link" title="Email">Email</span>
-				<wbr>
-				<span class="instapaper instapaper-inactive link" title="Instapaper">Send to Instapaper</span>
-				<wbr>
-			</div>
-		</div>
+    <% if unreadable %>
+  		<div class="card-actions card-bottom">
+  			<div class="entry-actions">
+  				<span class="item-star <%= star_class(entry) %> link unselectable" title="Add star"></span>
+  				<wbr><wbr>
+  				<span class="share-with-note <%= share_with_note_class(entry) %>"><span class="link unselectable">Share with note</span></span>
+  				<wbr>
+  				<span class="read-state-not-kept-unread read-state link unselectable" title="Keep unread">Keep unread</span>
+  				<wbr>
+  				<span class="email email-inactive link" title="Email">Email</span>
+  				<wbr>
+  				<span class="instapaper instapaper-inactive link" title="Instapaper">Send to Instapaper</span>
+  				<wbr>
+  			</div>
+  		</div>
 		
-		<div class="card-share-with-note" style="display: none;">
-      <%= form_tag("/reader/share_with_note", :method => "post", :remote => true) do %>
-			  <%= text_area_tag(:note_content) %>
-			  <div class="after-actions">
-			    <%= submit_tag("Share With Note") %>
-			    <a href="#" class="cancel-share-with-note">Cancel</a>
-			  </div>
-			<% end %>
-		</div>
+  		<div class="card-share-with-note" style="display: none;">
+        <%= form_tag("/reader/share_with_note", :method => "post", :remote => true) do %>
+  			  <%= text_area_tag(:note_content) %>
+  			  <div class="after-actions">
+  			    <%= submit_tag("Share With Note") %>
+  			    <a href="#" class="cancel-share-with-note">Cancel</a>
+  			  </div>
+  			<% end %>
+  		</div>
 
-		<div class="card-email" style="display: none;">
-      <%= form_tag("/reader/email_post", :method => "post", :remote => true) do %>
-        <input type="text" name="recipient" placeholder="recipient@example.com"/>
-			  <%= text_area_tag(:message) %>
-			  <div class="after-actions">
-			    <%= submit_tag("Send email") %>
-			    <a href="#" class="cancel-email">Cancel</a>
-			  </div>
-			<% end %>
-		</div>
+  		<div class="card-email" style="display: none;">
+        <%= form_tag("/reader/email_post", :method => "post", :remote => true) do %>
+          <input type="text" name="recipient" placeholder="recipient@example.com"/>
+  			  <%= text_area_tag(:message) %>
+  			  <div class="after-actions">
+  			    <%= submit_tag("Send email") %>
+  			    <a href="#" class="cancel-email">Cancel</a>
+  			  </div>
+  			<% end %>
+  		</div>
+    <% end %>
 	</div>
 </div>

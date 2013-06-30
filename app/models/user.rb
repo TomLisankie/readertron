@@ -144,4 +144,8 @@ class User < ActiveRecord::Base
   def word_count_from_quickposts(period)
     quickposts.where(["created_at > ?", period.ago]).map {|p| p.content.word_count}.sum / 2
   end
+  
+  def subscriptions_as_array_of_hashes
+    subscriptions.map {|s| {:term => {:feed_id => s.feed_id}}}
+  end
 end
