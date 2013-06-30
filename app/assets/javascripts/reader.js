@@ -33,10 +33,6 @@ $(document).ready(function() {
 	})
 	
 	$("#subscriptions h3").live("click", function() {
-		if ($(this).attr("id") == "my-shared-items") {
-			window.location = "/reader/mine";
-			return false;
-		};
 		if ($(this).attr("id") == "comment-stream") {
 			window.location = "/reader/stream";
 			return false;

@@ -37,12 +37,6 @@ class ReaderController < ApplicationController
     render "single"
   end
   
-  def mine
-    @shares = current_user.feed.posts.revshared.limit(10)
-    @title = "- My Shared Items"
-    render "mine"
-  end
-  
   def entries
     if params[:items_filter] == 'unread'
       @entries = Post.unread_for_options(current_user, params[:date_sort], @page = params[:page].to_i, params[:feed_id]) 
