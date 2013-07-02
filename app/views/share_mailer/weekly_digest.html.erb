@@ -8,7 +8,7 @@
 <ul>
 	<% most_discussed = Post.most_discussed_in_period(@period, 1).first %>
 	<li>Most Discussed Share: <strong><%= most_discussed.sharer.name %></strong> for "<%= link_to(most_discussed.title, most_discussed.share_url_with_email_token(@recipient)) %>"</li>
-	<li>Most Words Written: <strong><%= (u = User.has_most_words_in_period(@period)).name %></strong> (<%= number_with_delimiter(u.words_written_in_period(@period)) %> words)</li>
+	<li>Most Words Written: <strong><%= (u = User.has_most_words_in_period(@period)).name %></strong> (<%= number_with_delimiter(u.words_written_in_period(@period)) %> words, esp. <a href="<%= u.post_with_most_words(@period) %>">here</a>)</li>
 </ul>
 
 <h2>Some great posts you may have missed:</h2>

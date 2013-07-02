@@ -218,6 +218,12 @@ class Post < ActiveRecord::Base
   def path
     "/reader/posts/#{id}"
   end
+  
+  def note_word_count
+    return 0 if note.nil?
+    renderer = Redcarpet::Markdown.new(HTMLwithPygmentsAndTargetBlankAutolinks, autolink: true, fenced_code_blocks: true)
+    Sanitize.clean(renderer.render(note), elements: ['p', 'span', 'a', 'b', 'em', 'strong', 'i'], remove_contents: true).word_count
+  end
 
   def to_partial(is_unread = true)
     view = ActionView::Base.new(ActionController::Base.view_paths, {})

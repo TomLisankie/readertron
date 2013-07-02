@@ -18,7 +18,8 @@ class Comment < ActiveRecord::Base
   handle_asynchronously :notify_relevant_users
   
   def word_count
-    content.word_count
+    renderer = Redcarpet::Markdown.new(HTMLwithPygmentsAndTargetBlankAutolinks, autolink: true, fenced_code_blocks: true)
+    Sanitize.clean(renderer.render(content), elements: ['p', 'span', 'a', 'b', 'em', 'strong', 'i'], remove_contents: true).word_count
   end
   
   def url

@@ -1,16 +1,13 @@
-- weekly digest thing about words written should include a link to the predominant comment(s)
-- single post should show within the regular pane.
 - old reader announcement
-- deferred loading of images?
 - arrange todos
-- go back to sending share emails one at a time
-- share emails should use the magic links
+- Do a better job getting favicons and feed names.
+- go back to sending share emails one at a time, share emails should use the magic links
 - change the copy in share emails to make the clickable area of "go to the post's page" slightly bigger
 - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
+- single post should show within the regular pane.
 - mentions in comments should send an email with a different subject line than normal
 - New invitees: Alkire, Kraft. Reach out to non-participants.
 - email links in regular share emails?
-- Do a better job getting favicons.
 - @ing people in notes and comments. What should the behavior be?
 - The appearance of the identified element can be changed through the :target CSS pseudoclass; Wikipedia uses this to highlight the selected reference. Notably CSSd`isplay: block can be used to show content only if it is the target, and otherwise hidden by display: none.
 - in fact comments pane should only show you comments you haven't seen (i.e., for threads you're not a participant on)

@@ -44,6 +44,14 @@ class User < ActiveRecord::Base
     end.first(4)
   end
   
+  def post_with_most_words(period)
+    (feed.posts.where(["created_at > ?", period.ago]).map {|p| [p.share_url, p.note_word_count]} +
+    comments.where(["created_at > ?", period.ago]).map {|c| [c.url, c.word_count]} +
+    quickposts.where(["created_at > ?", period.ago]).map {|p| [p.share_url, p.content.word_count / 2]}).sort_by do |t|
+      -t[1]
+    end.first[0]
+  end
+  
   def words_written_in_period(period)
     word_count_from_notes(period) + word_count_from_comments(period) + word_count_from_quickposts(period)
   end
@@ -134,7 +142,7 @@ class User < ActiveRecord::Base
   end
   
   def word_count_from_notes(period)
-    feed.posts.where(["created_at > ?", period.ago]).sum {|p| p.note.try(:word_count) || 0}
+    feed.posts.where(["created_at > ?", period.ago]).sum {|p| p.note_word_count}
   end
   
   def word_count_from_comments(period)
