@@ -64,6 +64,7 @@ $(document).ready(function() {
 		SETTINGS.page = 0;
 		SETTINGS.items_filter = "all";
 		$("#unread-or-all .menu-button-caption").text("All items");
+		update_items_filter_control_counts();	
 		fetch_entries();
 	});
 	
