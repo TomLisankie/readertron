@@ -3,7 +3,7 @@
 	<div class="comment-body">
 		<span class="comment-author"><%= comment.user.name %> <span class="comment-timestamp">-</span></span> 
 		<span class="the-comment-content"><%= markdown(comment.content) %></span>
-		<span class="comment-timestamp"><%= comment_date(comment.updated_at) %></span>
+		<span class="comment-timestamp"><a href="<%= comment.url %>" target="_blank"><%= comment_date(comment.updated_at) %></a></span>
 		<% if comment.user == current_user %>
 			<span class="comment-actions">
 				<a href="#" class="comment-edit-link">Edit</a> | <a href="#" class="comment-delete-link">Delete</a>

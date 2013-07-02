@@ -377,6 +377,11 @@ html, body, input {
 	font-weight: normal;
 }
 
+.comment-timestamp a {
+	color: #666 !important;
+	text-decoration: none;
+}
+
 .entry .comments .comment-add-form {
 	margin-top: 10px;
 }
