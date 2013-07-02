@@ -11,7 +11,9 @@
       <% if @results.present? %>
       	<%= render partial: "search_results", locals: { results: @results } %>
       <% else %>
-        No results for <b><%= params[:query] %></b>. Try another search!
+        <div id="no-search-results-message">
+          No results for <b><%= params[:query] %></b> :(. Try another search!
+        </div>
       <% end %>
     </div>
 		<%= will_paginate @results %>

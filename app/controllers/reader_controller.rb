@@ -187,6 +187,7 @@ class ReaderController < ApplicationController
   end
   
   def search
+    @title = %{- Search results for "#{params[:query]}"}
     @page = (params[:page].to_i || 1)
     @results = Post.search(current_user, params)
   end
