@@ -21,6 +21,7 @@ class Post < ActiveRecord::Base
   mapping do
     indexes :id, type: 'integer'
     indexes :feed_id, type: 'integer'
+    indexes :feed_name
     indexes :comment
     indexes :title, boost: 10
     indexes :content
@@ -47,6 +48,10 @@ class Post < ActiveRecord::Base
   
   def to_indexed_json
     to_json(methods: [:comment, :user])
+  end
+  
+  def feed_name
+    feed.title
   end
   
   def user
