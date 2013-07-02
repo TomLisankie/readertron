@@ -40,8 +40,12 @@
 <%= render "markdown_help" %>
 
 <script type="text/javascript">
+  var entries_request;
 	$(document).ready(function() {
 		$("#subscriptions").load("/reader/subscriptions");
-		$("#entries").load("/reader/index_entries");
+		
+    entries_request = $.get("/reader/index_entries", function(ret) {
+		  $("#entries").html(ret);
+		})
 	});
 </script>

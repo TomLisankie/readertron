@@ -159,9 +159,11 @@ var next_post = function(offset) {
 };
 
 var fetch_entries = function() {
+  entries_request.abort();
+  
 	$("#entries").empty();
 	$("#loading-area-container").show();
-	$.get("/reader/entries", SETTINGS, function(ret) {
+	entries_request = $.get("/reader/entries", SETTINGS, function(ret) {
 		scrollFetchFlag = true;
 		$("#entries").html(ret);
 		$("#loading-area-container").hide();
