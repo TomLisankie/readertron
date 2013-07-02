@@ -9,9 +9,6 @@ class Comment < ActiveRecord::Base
   
   after_create :notify_relevant_users
   
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
-  
   def notify_relevant_users
     ShareMailer.new_comment_email(other_thread_participants.map(&:email), self).deliver
   end
