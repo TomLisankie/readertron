@@ -154,6 +154,6 @@ class User < ActiveRecord::Base
   end
   
   def subscriptions_as_array_of_hashes
-    subscriptions.map {|s| {:term => {:feed_id => s.feed_id}}}
+    subscriptions.map {|s| {:term => {:feed_id => s.feed_id}}} | [{:term => {:feed_id => feed.id}}]
   end
 end
