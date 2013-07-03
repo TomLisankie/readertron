@@ -1,4 +1,15 @@
+- search should be faster
+  - any indexing problems on the database because of reader_id and/or deleted_at?
+  - run as a service somewhere else?
+- does search consume memory?
+- what happens when a feed fetch happens? do we kill the box because of indexing new posts?
 - old reader announcement
+  - 7302 archived posts, 2840 comments, including some favorites: (http://readertron.com/reader/posts/407166, http://readertron.com/reader/posts/409028, http://readertron.com/reader/posts/409095, http://readertron.dev/reader/posts/407738)
+  - example searches you can do (with links to search results)
+    - "user:cobb consciousness" (turns up stuff like http://readertron.com/reader/posts/51763)
+    - "comment:(avinash saltines)"
+    - "shared:true "marginal revolution" krugman"
+  - caveat about it being broken and slow
 - arrange todos
 - Do a better job getting favicons and feed names.
 - go back to sending share emails one at a time, share emails should use the magic links

@@ -1,0 +1,68 @@
+<% entry_title = entry.highlight.try(:title).try(:first) || entry.title %>
+<% entry_content = entry.highlight.try(:content).try(:first) || entry.content %>
+<% entry_note = entry.highlight.try(:note).try(:first) || entry.note %>
+<% entry_feed_name = entry.highlight.try(:feed_name).try(:first) || entry.feed_name %>
+<% comment = entry.highlight.try(:comment).try(:first) || entry.comment %>
+
+<div 
+	class="entry unread shared"
+	style="height: auto;"
+	id="entry-<%= index %>"
+	post_id="<%= entry.id %>"
+	feed_id="<%= entry.feed_id %>"
+	unread_selectors="feed-<%= entry.feed_id %>-unread-count shared-unread-count"
+>
+	<div class="card card-common">
+		<div class="card-content">
+			<div class="entry-container">
+				<div class="entry-main">
+					<%= render partial: "entry_note_result", locals: {entry: entry, entry_note: entry_note} %>
+					<div class="entry-date">
+						<a href="/reader/posts/<%= entry.id %>" target="_blank"><%= pretty_date(entry.published.to_time) %></a>
+					</div>
+					<h2 class="entry-title">
+						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= raw(entry_title) %></a>
+					</h2>
+					<div class="entry-title-go-to">
+						<h2 class="entry-title"></h2>
+						<div class="entry-icons">
+							<div class="item-star star link unselectable empty">
+								<h2 class="entry-title"></h2>
+							</div>
+						</div>
+					</div>
+					<%= render "share_authorstring_result", entry: entry %>
+					<div class="entry-debug"></div>
+					<div class="entry-annotations"></div>
+					<div class="entry-body">
+						<div>
+							<div class="item-body">
+								<div>
+									<% if entry.url.starts_with?("#quickpost-") %>
+										<div class="rendered-content"><%= markdown(entry_content) %></div>
+									<% else %>
+										<% if entry.url.include?("youtube.com") %>
+											<%= clean_youtube(entry_content) %>
+										<% elsif entry.url.include?("scribd.com") %>
+											<%= clean_scribd_doc(entry_content) %>
+										<% else %>
+											<%= clean(urlify_urls(entry_content)) %>
+										<% end %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="comments">
+			<div class="comments-top">
+				Comments <span class="comments-count">(<%= entry.comment_count %>)</span>
+			</div>
+			<div class="comments-container">
+        <%= raw(comment) %>
+			</div>
+		</div>		
+	</div>
+</div>

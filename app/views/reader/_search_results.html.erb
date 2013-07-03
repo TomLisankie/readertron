@@ -1,5 +1,4 @@
 <% results.each_with_index do |result, index| %>
-  <% locals = {entry: result, index: (index + @page * 10), is_unread: result.unread_for_user?(current_user)} %> 
-  <% locals = locals.merge({unreadable: false}) %>
-  <%= render :partial => (result.shared? ? "share" : "entry"), :locals => locals %>
+  <% locals = {entry: result, index: (index + @page * 10)} %> 
+  <%= render :partial => (result.shared ? "share_result" : "entry_result"), :locals => locals %>
 <% end %>

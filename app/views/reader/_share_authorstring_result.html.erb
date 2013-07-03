@@ -1,0 +1,19 @@
+<div class="entry-author">
+	<span class="entry-sharer-name">Shared by <%= entry.user == current_user.name ? "you" : entry.user %></span>
+	<span class="entry-icons-placeholder">
+		<% if entry.feed_name == entry.user %>
+			<% if entry.url.starts_with?("#quickpost-") %>
+				as a Quickpost
+			<% else %>
+				from the "Note in Readertron" bookmarklet
+			<% end %>
+		<% else %>
+			<span class="entry-source-title-parent">from <a class="entry-source-title" target="_blank" href="/#"><%= entry_feed_name %></a></span>
+			<% if entry.author %>
+				<span class="entry-author-parent">
+					by <span class="entry-author-name"><%= entry.author %></span>
+				</span>
+			<% end %>
+		<% end %>
+	</span>
+</div>

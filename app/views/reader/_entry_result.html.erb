@@ -1,0 +1,47 @@
+<% entry_title = entry.highlight.try(:title).try(:first) || entry.title %>
+<% entry_content = entry.highlight.try(:content).try(:first) || entry.content %>
+<% entry_feed_name = entry.highlight.try(:feed_name).try(:first) || entry.feed_name %>
+
+<div class="entry unread"
+	 style="height: auto;" id="entry-<%= index %>"
+	 post_id="<%= entry.id %>"
+	 feed_id="<%= entry.feed_id %>"
+	 unread_selectors="feed-<%= entry.feed_id %>-unread-count total-unread-count"
+>
+	<div class="card card-common">
+		<div class="card-content">
+			<div class="entry-container">
+				<div class="entry-main">
+					<div class="entry-date">
+						<%= pretty_date(entry.published.to_time) %>
+					</div>
+					<h2 class="entry-title">
+						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= raw(entry_title) %></a>
+					</h2>
+					<div class="entry-title-go-to">
+						<h2 class="entry-title"></h2>
+						<div class="entry-icons">
+							<div class="item-star star link unselectable empty">
+								<h2 class="entry-title"></h2>
+							</div>
+						</div>
+					</div>
+					<div class="entry-author">
+						<span class="entry-icons-placeholder"><span class="entry-source-title-parent">from <a class="entry-source-title" target="_blank" href="/#"><%= raw(entry_feed_name) %></a></span><% if entry.author %> <span class="entry-author-parent">by <span class="entry-author-name"><%= entry.author %></span></span> <% end %></span>
+					</div>
+					<div class="entry-debug"></div>
+					<div class="entry-annotations"></div>
+					<div class="entry-body">
+						<div>
+							<div class="item-body">
+								<div>
+									<%= clean(urlify_urls(entry_content)) %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+</div>

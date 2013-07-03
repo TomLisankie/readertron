@@ -14,15 +14,18 @@ class Post < ActiveRecord::Base
   validates_presence_of :content
   
   after_create :generate_unreads, :cache, :absolutize_relative_image_paths!
+  after_save :reindex!
+  after_destroy :reindex!
   
   include Tire::Model::Search
-  include Tire::Model::Callbacks
   
   mapping do
     indexes :id, type: 'integer'
+    indexes :original_post_id, type: 'integer'
     indexes :feed_id, type: 'integer'
     indexes :feed_name
     indexes :comment
+    indexes :comment_count, type: 'integer'
     indexes :title, boost: 10
     indexes :content
     indexes :author
@@ -32,14 +35,26 @@ class Post < ActiveRecord::Base
     indexes :note, boost: 5
     indexes :reader_id
     indexes :user
-    indexes :visible_to
   end
   
   def self.search(user, params)
-    tire.search(load: true, page: params[:page].to_i || 1) do
+    tire.search(page: params[:page].to_i || 1) do
       query { string params[:query], default_operator: "AND"} if params[:query].present?
       filter :or, user.subscriptions_as_array_of_hashes
+      highlight :title, :content, :comment, :note, options: {tag: '<strong class="search-highlight">', number_of_fragments: 0}
     end
+  end
+  
+  def reindex!
+    Post.delay.perform_reindex!(id)
+  end
+
+  def self.perform_reindex!(post_id)
+    Post.find(post_id).tire.update_index
+  end
+  
+  def comment_count
+    comments.count
   end
   
   def visible_to
@@ -47,7 +62,7 @@ class Post < ActiveRecord::Base
   end
   
   def to_indexed_json
-    to_json(methods: [:comment, :user])
+    to_json(methods: [:comment, :user, :comment_count, :feed_name])
   end
   
   def feed_name
@@ -59,7 +74,7 @@ class Post < ActiveRecord::Base
   end
   
   def comment
-    comments.map { |c| "#{c.user.name}: #{c.content}" }.join("\n")
+    comments.map { |c| c.to_partial }.join("\n")
   end
   
   def self.for_user(user)
