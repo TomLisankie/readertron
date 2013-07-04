@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.perform_reindex!(post_id)
-    Post.find(post_id).tire.update_index
+    Post.with_deleted.find(post_id).tire.update_index
   end
   
   def comment_count

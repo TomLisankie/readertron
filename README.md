@@ -1,3 +1,7 @@
+3. deploy and reindex
+4. write note
+
+- why two index delayed jobs on adding a post?
 - search should be faster
   - any indexing problems on the database because of reader_id and/or deleted_at?
   - run as a service somewhere else?
