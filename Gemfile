@@ -32,8 +32,6 @@ gem 'daemons'
 
 gem 'sendgrid'
 
-gem 'paranoia'
-
 gem 'tire'
 
 group :development do

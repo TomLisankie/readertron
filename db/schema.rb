@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130630170301) do
+ActiveRecord::Schema.define(:version => 20130706223354) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -19,10 +19,8 @@ ActiveRecord::Schema.define(:version => 20130630170301) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.datetime "deleted_at"
   end
 
-  add_index "comments", ["deleted_at"], :name => "index_comments_on_deleted_at"
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
@@ -67,15 +65,13 @@ ActiveRecord::Schema.define(:version => 20130630170301) do
     t.boolean  "shared",           :default => false
     t.integer  "original_post_id"
     t.text     "note"
-    t.datetime "deleted_at"
     t.string   "reader_id"
   end
 
-  add_index "posts", ["deleted_at"], :name => "index_posts_on_deleted_at"
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"
   add_index "posts", ["reader_id"], :name => "index_posts_on_reader_id"
   add_index "posts", ["shared"], :name => "index_posts_on_shared"
-  add_index "posts", ["url", "shared", "deleted_at"], :name => "index_posts_on_url_and_shared_and_deleted_at", :unique => true
+  add_index "posts", ["url"], :name => "index_posts_on_url"
 
   create_table "reports", :force => true do |t|
     t.string   "report_type"

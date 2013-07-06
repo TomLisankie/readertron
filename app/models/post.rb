@@ -1,12 +1,9 @@
 class Post < ActiveRecord::Base
-  acts_as_paranoid
-  
   belongs_to :feed
   has_many :unreads, dependent: :destroy
   has_many :comments, dependent: :destroy
   
-  validates_uniqueness_of :url, scope: :deleted_at, unless: ->(post) { post.shared? }
-  validates_uniqueness_of :reader_id, scope: [:feed_id, :deleted_at], if: ->(post) { post.reader_id.present? }
+  validates_uniqueness_of :url, unless: ->(post) { post.shared? }
   validate :not_a_shady_duplicate
   validates_presence_of :url
   validates_presence_of :title
@@ -41,8 +38,16 @@ class Post < ActiveRecord::Base
     tire.search(page: params[:page].to_i || 1) do
       query { string params[:query], default_operator: "AND"} if params[:query].present?
       filter :or, user.subscriptions_as_array_of_hashes
-      highlight :title, :content, :comment, :note, options: {tag: '<strong class="search-highlight">', number_of_fragments: 0}
+      highlight :title, :comment, :note, options: {tag: '<strong class="search-highlight">', number_of_fragments: 0}
     end
+  end
+  
+  def self.delete_old_posts
+    has_no_unreads.unshared.where(["published < ?", 3.months.ago]).delete_all
+  end
+  
+  def self.has_no_unreads
+    where("(SELECT count(1) FROM unreads u WHERE u.post_id = posts.id) = 0")
   end
   
   def reindex!

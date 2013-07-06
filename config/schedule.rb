@@ -19,4 +19,8 @@ every :sunday, :at => '3pm' do
   runner "User.send_weekly_digests"
 end
 
+every 1.month do
+  runner "Post.delete_old_posts"
+end
+
 # Learn more: http://github.com/javan/whenever

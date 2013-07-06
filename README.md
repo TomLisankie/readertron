@@ -1,12 +1,12 @@
-3. deploy and reindex
-4. write note
-
-- why two index delayed jobs on adding a post?
+- write note about search
+- don't highlight content
 - search should be faster
-  - any indexing problems on the database because of reader_id and/or deleted_at?
+  - look at logs
+  - any indexing problems on the database because of reader_id and/or deleted_at? (why is Post.shared.count so slow?)
   - run as a service somewhere else?
-- does search consume memory?
-- what happens when a feed fetch happens? do we kill the box because of indexing new posts?
+  - why two index delayed jobs on adding a post?
+  - does search consume memory?
+  - what happens when a feed fetch happens? do we kill the box because of indexing new posts?
 - old reader announcement
   - 7302 archived posts, 2840 comments, including some favorites: (http://readertron.com/reader/posts/407166, http://readertron.com/reader/posts/409028, http://readertron.com/reader/posts/409095, http://readertron.dev/reader/posts/407738)
   - example searches you can do (with links to search results)
