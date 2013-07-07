@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   
   after_create :generate_unreads, :cache, :absolutize_relative_image_paths!
   after_save :reindex!
-  after_destroy :reindex!
+  before_destroy :remove_from_index!
   
   include Tire::Model::Search
   
@@ -55,7 +55,11 @@ class Post < ActiveRecord::Base
   end
 
   def self.perform_reindex!(post_id)
-    Post.with_deleted.find(post_id).tire.update_index
+    Post.find(post_id).tire.update_index
+  end
+  
+  def remove_from_index!
+    self.index.remove self
   end
   
   def comment_count
