@@ -6,7 +6,7 @@
 	</div>
 
 	<div id="right-pane">
-		<div id="search-bar-container"><input type="text" id="search-bar" placeholder="Search Readertron" value="<%= params[:query] %>"/></div>
+		<div id="search-bar-container"><input type="text" id="search-bar" tabindex="1" placeholder="Search Readertron" value="<%= params[:query] %>"/></div>
 		<div id="search-results">
       <% if @results.present? %>
       	<%= render partial: "search_results", locals: { results: @results } %>

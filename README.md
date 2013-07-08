@@ -1,12 +1,13 @@
 - write note about search
-- don't highlight content
+- readertron weekly digest should be "from" "Readertron Weekly Digest" and the subject line should be comment content...
+- add Aylward, add Kraft
+- check on followers graph
+- now that we're deleting old posts, allow starring.
 - search should be faster
-  - look at logs
+  - keep an eye on memory usage
   - any indexing problems on the database because of reader_id and/or deleted_at? (why is Post.shared.count so slow?)
-  - run as a service somewhere else?
   - why two index delayed jobs on adding a post?
-  - does search consume memory?
-  - what happens when a feed fetch happens? do we kill the box because of indexing new posts?
+  - upgrade to ubuntu 12.04 and oracle java 7.
 - old reader announcement
   - 7302 archived posts, 2840 comments, including some favorites: (http://readertron.com/reader/posts/407166, http://readertron.com/reader/posts/409028, http://readertron.com/reader/posts/409095, http://readertron.dev/reader/posts/407738)
   - example searches you can do (with links to search results)
@@ -15,7 +16,6 @@
     - "shared:true "marginal revolution" krugman"
   - caveat about it being broken and slow
 - arrange todos
-- Do a better job getting favicons and feed names.
 - go back to sending share emails one at a time, share emails should use the magic links
 - change the copy in share emails to make the clickable area of "go to the post's page" slightly bigger
 - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
