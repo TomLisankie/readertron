@@ -1,0 +1,45 @@
+- "1 new items."
+- write note about search
+  - old reader announcement
+    - 7302 archived posts, 2840 comments, including some favorites: (http://readertron.com/reader/posts/407166, http://readertron.com/reader/posts/409028, http://readertron.com/reader/posts/409095, http://readertron.dev/reader/posts/407738)
+    - example searches you can do (with links to search results)
+      - "user:cobb consciousness" (turns up stuff like http://readertron.com/reader/posts/51763)
+      - "comment:(avinash saltines)"
+      - "shared:true "marginal revolution" krugman"
+- add Aylward, add Kraft, add Alkire
+- scribd doc with secret_password param should automatically include it in embed url so that the embed works
+- one-click evernote integration.
+- prevent email duplicates and share/unshare/share rss problem with little delay (same with comments)
+- readertron weekly digest should be "from" "Readertron Weekly Digest" and the subject line should be comment content...
+- now that we're deleting old posts, allow starring.
+- collapsed view
+- producer vs. consumpto (ratio of stories shared to read).
+- "you haven't shared in a while"
+- search should be faster
+  - keep an eye on memory usage
+  - why two index delayed jobs on adding a post?
+  - upgrade to ubuntu 12.04 and oracle java 7.
+- go back to sending share emails one at a time, share emails should use the magic links
+- change the copy in share emails to make the clickable area of "go to the post's page" slightly bigger
+- mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
+- mentions in comments should send an email with a different subject line than normal
+- single post should show within the regular pane.
+- Reach out to non-participants.
+- email links in regular share emails?
+- @ing people in notes and comments. What should the behavior be?
+- The appearance of the identified element can be changed through the :target CSS pseudoclass; Wikipedia uses this to highlight the selected reference. Notably CSSd`isplay: block can be used to show content only if it is the target, and otherwise hidden by display: none.
+- in fact comments pane should only show you comments you haven't seen (i.e., for threads you're not a participant on)
+- ability to follow a particular person's comments?
+- fix annoying click scroll-to-top as on http://readertron.com/reader/posts/390710#comment-638
+- apple-K for links.
+- option persisted on users to sort things "newest first".
+- simple graphs on the admin page.
+- fix "mark all as read"
+- printing a post
+- better, simpler flow for adding new feeds.
+- publish button
+- keep an eye on feeds that haven't gotten a post in a while.
+- is Feedzirra not getting new posts quickly enough?
+- absolutizing relative URLs within posts, as in post 62 (in production).
+- mobile site
+- look at 404s to see which images are still broken?
