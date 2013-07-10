@@ -1102,6 +1102,14 @@ a.delete-share {
   background-color: transparent;
   border: none
 }
+.markdown-body blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+.markdown-body blockquote, {
+  margin: 15px 0;
+}
 .highlight {
   background: #ffffff
 }
@@ -1653,6 +1661,10 @@ form.preview-selected .preview-content {
 
 .markdown-body>*:last-child {
 	margin-bottom: 0 !important;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0px;
 }
 
 .comment p.drag-and-drop, .comment-add-form p.drag-and-drop {

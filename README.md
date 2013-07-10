@@ -1,11 +1,14 @@
 - write note about search
-- readertron weekly digest should be "from" "Readertron Weekly Digest" and the subject line should be comment content...
+- turn highlighting back on in content in search and make the class work. do something about URLs?
 - add Aylward, add Kraft
+- scribd doc with secret_password param should automatically include it in embed url so that the embed works
+- prevent email duplicates and share/unshare/share rss problem with little delay (same with comments)
+- readertron weekly digest should be "from" "Readertron Weekly Digest" and the subject line should be comment content...
 - check on followers graph
 - now that we're deleting old posts, allow starring.
 - search should be faster
   - keep an eye on memory usage
-  - any indexing problems on the database because of reader_id and/or deleted_at? (why is Post.shared.count so slow?)
+  - any indexing problems on the database because of reader_id? (why is Post.shared.count so slow?)
   - why two index delayed jobs on adding a post?
   - upgrade to ubuntu 12.04 and oracle java 7.
 - old reader announcement
@@ -38,11 +41,6 @@
 - "like" button?
 
 - don't allow unload if a comment box is open, too.
-- blockquote formatting in preview...
-- markdown formatting in actual show views should be very similar, if not identical, to preview.
-- the embedded doc snaps to the middle of the page.
-- the embedded doc sometimes has a toolbar and sometimes doesn't.
-- refactor comment code.
 
 * Better, simpler flow for adding new feeds.
 * A public feed/blog for users
