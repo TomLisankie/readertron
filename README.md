@@ -36,11 +36,7 @@
 - option persisted on users to sort things "newest first".
 - simple graphs on the admin page.
 - fix "mark all as read"
-- mark as read from the single page
-- prevent duplicate share emails
 - "like" button?
-
-- don't allow unload if a comment box is open, too.
 
 * Better, simpler flow for adding new feeds.
 * A public feed/blog for users

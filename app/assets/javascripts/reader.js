@@ -88,17 +88,18 @@ $(document).ready(function() {
 	});
 	
 	window.onbeforeunload = function (e) {
-	  window.scrollTo(0, 0)
-	  
 	  // For IE<8 and Firefox prior to version 4
-	  if (e && $("#quickpost-form").length) {
+	  if (e && ($("#quickpost-form").length || $("textarea[name='comment_content']:visible").length || $('.preview-content:visible').length)) {
 	    e.returnValue = 'You still have unsaved changes!';
 	  };
 
 	  // For Chrome, Safari, IE8+ and Opera 12+
-	  if ($("#quickpost-form").length)
+	  if ($("#quickpost-form").length || $("textarea[name='comment_content']:visible").length || $('.preview-content:visible').length) {
+      alert("thing!!!")
 	  	return 'You still have unsaved changes!';
+    };
 	  
+    window.scrollTo(0, 0)
 	};
 });
 
