@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
     tire.search(page: params[:page].to_i || 1) do
       query { string params[:query], default_operator: "AND"} if params[:query].present?
       filter :or, user.subscriptions_as_array_of_hashes
-      highlight :title, :comment, :note, options: {tag: '<strong class="search-highlight">', number_of_fragments: 0}
+      highlight :title, :comment, :content, :note, options: {tag: '<strong class="search-highlight">', number_of_fragments: 0}
     end
   end
   

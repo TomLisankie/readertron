@@ -31,6 +31,7 @@ module ApplicationHelper
   def actually_clean(html)
     raw(Sanitize.clean(html, Sanitize::Config::RELAXED.merge({
                           elements: Sanitize::Config::RELAXED[:elements] + ["style"],
+                          attributes: Sanitize::Config::RELAXED[:attributes].merge({'strong' => ['class']}),
                           remove_contents: ["script", "style"]
                         })).gsub(/<\s*?br\s*?\/?\s*?>/, "<p></p>").gsub("\n\n", "<p></p>"))
   end

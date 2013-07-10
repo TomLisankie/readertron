@@ -1,5 +1,4 @@
 - write note about search
-- turn highlighting back on in content in search and make the class work. do something about URLs?
 - add Aylward, add Kraft
 - scribd doc with secret_password param should automatically include it in embed url so that the embed works
 - prevent email duplicates and share/unshare/share rss problem with little delay (same with comments)

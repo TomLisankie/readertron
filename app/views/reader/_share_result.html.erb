@@ -1,5 +1,9 @@
 <% entry_title = entry.highlight.try(:title).try(:first) || entry.title %>
-<% entry_content = entry.highlight.try(:content).try(:first) || entry.content %>
+<% if entry.url.include?("youtube.com") || entry.url.include?("scribd.com") %>
+  <% entry_content = entry.content %>
+<% else %>
+  <% entry_content = entry.highlight.try(:content).try(:first) || entry.content %>
+<% end %>
 <% entry_note = entry.highlight.try(:note).try(:first) || entry.note %>
 <% entry_feed_name = entry.highlight.try(:feed_name).try(:first) || entry.feed_name %>
 <% comment = entry.highlight.try(:comment).try(:first) || entry.comment %>
