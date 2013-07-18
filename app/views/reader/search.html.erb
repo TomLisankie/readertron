@@ -3,10 +3,15 @@
 
 	<div id="explanatory-note">
 		<p><a href="/">Click here</a> to load the rest of the interface.</p>
+    <p>It's possible to do advanced searches:</p>
+    <p>Search for a specific user's stuff:<br/> <a href="/reader/search?query=user%3Acobb%20consciousness"><code>user:cobb consciousness</code></a></p>
+    <p>Search in comments:<br/> <a href="/reader/search?query=comment%3A(avinash%20saltines)"><code>comment:(avinash saltines)</code></a></p>
+    <p>Match exact phrases:<br/> <a href="/reader/search?query=%22marginal%20revolution%22%20shared%3Atrue%20krugman"><code>"marginal revolution" shared:true krugman</code></a></p>
 	</div>
 
 	<div id="right-pane">
 		<div id="search-bar-container"><input type="text" id="search-bar" tabindex="1" placeholder="Search Readertron" value="<%= params[:query] %>"/></div>
+    
 		<div id="search-results">
       <% if @results.present? %>
       	<%= render partial: "search_results", locals: { results: @results } %>
