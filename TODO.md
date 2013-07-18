@@ -1,12 +1,23 @@
-- "1 new items."
-- write note about search
-  - old reader announcement
-    - 7302 archived posts, 2840 comments, including some favorites: (http://readertron.com/reader/posts/407166, http://readertron.com/reader/posts/409028, http://readertron.com/reader/posts/409095, http://readertron.dev/reader/posts/407738)
-    - example searches you can do (with links to search results)
-      - "user:cobb consciousness" (turns up stuff like http://readertron.com/reader/posts/51763)
-      - "comment:(avinash saltines)"
-      - "shared:true "marginal revolution" krugman"
+- move away from fixed with, fix that bug, and get the pages displaying nicely on tablets and phones
+  - fix search results
+  - fix singleton pages (move them within regular pane?!?)
+- share later
+  - or throttling
+  - what would the second-order effects be?
+- put search examples etc. underneath search bar on search page.
+  - "user:cobb consciousness" (turns up stuff like http://readertron.com/reader/posts/51763)
+  - "comment:(avinash saltines)"
+  - "shared:true "marginal revolution" krugman"
+- style in bookmarklet should be clean and consistent on any website. expanding the note area should be easier. ideally we'd get the github box in the bookmarklet.
+- fix timezone of comments
+- comment box should be taller to begin with, and expandable to whatever size you want
+- fix spacing before timestamp/permalink of certain comments (as here: http://readertron.com/reader/posts/417247)
+- change subject line of comment emails to distinguish them more from shares
+- zen mode for long comments
+- scroll up on search results should move blue bar too
+- more responsive "Quickpost" submit button.
 - add Aylward, add Kraft, add Alkire
+- ability to add a comment from within search results, without having to click the permalink
 - scribd doc with secret_password param should automatically include it in embed url so that the embed works
 - one-click evernote integration.
 - prevent email duplicates and share/unshare/share rss problem with little delay (same with comments)
@@ -22,11 +33,13 @@
 - go back to sending share emails one at a time, share emails should use the magic links
 - change the copy in share emails to make the clickable area of "go to the post's page" slightly bigger
 - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
+- a "Mentions" thing in the sidebar
 - mentions in comments should send an email with a different subject line than normal
 - single post should show within the regular pane.
 - Reach out to non-participants.
 - email links in regular share emails?
 - @ing people in notes and comments. What should the behavior be?
+- mentioning @all
 - The appearance of the identified element can be changed through the :target CSS pseudoclass; Wikipedia uses this to highlight the selected reference. Notably CSSd`isplay: block can be used to show content only if it is the target, and otherwise hidden by display: none.
 - in fact comments pane should only show you comments you haven't seen (i.e., for threads you're not a participant on)
 - ability to follow a particular person's comments?
