@@ -71,26 +71,7 @@ $(document).ready(function() {
 		SETTINGS.date_sort = "chron";
 		fetch_entries();
 	});
-	
-	$("#mark-all-as-read").mouseover(function() {
-		$(this).removeClass("jfk-button-standard").addClass("jfk-button-hover");
-	});
-
-	$("#mark-all-as-read").mouseout(function() {
-		$(this).removeClass("jfk-button-hover").addClass("jfk-button-standard");
-	});
-
-	$("#mark-all-as-read").click(function() {
-		$(".entry:first").zero();
 		
-		$.post("/reader/mark_all_as_read", {feed_id: SETTINGS.feed_id}, function(ret) {
-			SETTINGS.page = 0;
-			fetch_entries();
-			broadcast("Marked all entries as read.")
-		});
-		return false;
-	});
-	
 	$("#quickpost-button").mouseover(function() {
 		$(this).addClass("hover");
 	});

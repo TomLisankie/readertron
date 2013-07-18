@@ -128,19 +128,6 @@ class ReaderController < ApplicationController
     ShareMailer.bookmarklet_failure_report(e, params).deliver
   end
   
-  def mark_all_as_read
-    if feed_id = params[:feed_id]
-      if feed_id == "shared"
-        current_user.unreads.shared.destroy_all
-      else
-        current_user.unreads.for_feed(feed_id).destroy_all
-      end
-    else
-      current_user.unreads.unshared.destroy_all
-    end
-    render text: "OK"
-  end
-  
   def edit_note
     entry = Post.find(params[:post_id])
     entry.update_attributes!({note: params[:content]})
