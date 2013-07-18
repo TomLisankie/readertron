@@ -366,7 +366,7 @@ html, body, input {
 	border: 1px solid #cacaca !important;
 };
 
-.the-comment-content p:first-of-type {
+.the-comment-content p:first-of-type, .the-comment-content p:last-of-type {
   display: inline;
 }
 
@@ -1495,14 +1495,14 @@ a.tabnav-tab, a.tabnav-tab:visited {
 .previewable-comment-form textarea {
 	display: block;
 	width: 100%;
-	min-height: 100px;
-	max-height: 300px;
+	min-height: 200px;
+	max-height: 500px;
 	padding: 10px;
 	resize: vertical;
 }
 
 .bubble textarea {
-	min-height: 100px;
+	min-height: 200px;
 	padding: 7px 8px;
 	color: #333;
 	background-color: #fff;

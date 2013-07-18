@@ -1,11 +1,3 @@
-- comment box should be taller to begin with, and expandable to whatever size you want
-- fix spacing before timestamp/permalink of certain comments (as here: http://readertron.com/reader/posts/417247)
-
-- put search examples etc. underneath search bar on search page.
-  - "user:cobb consciousness" (turns up stuff like http://readertron.com/reader/posts/51763)
-  - "comment:(avinash saltines)"
-  - "shared:true "marginal revolution" krugman"
-
 - Not sure how much harder this is, but can you have people's comments be unread items next to their name in "Other Shared Items"?
 
 - zen mode for long comments
