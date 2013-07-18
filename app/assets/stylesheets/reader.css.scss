@@ -6,8 +6,16 @@ html, body, input {
 	font-family: arial, sans-serif;
 }
 
+#panes {
+  height: 100%;
+  width: 100%;
+  margin:0;
+  padding:0;
+}
+
 #left-pane {
 	position: fixed;
+  float: left;
 	width: 240px;
 	top: 10px;
 	left: 10px;
@@ -127,13 +135,15 @@ html, body, input {
 }
 
 #right-pane {
-	position: absolute;
-	left: 270px;
-	top: 0px;
-	width: 960px;
+  max-width: 950px;
+  margin: 0 auto;
+  margin-left: 250px;
+  padding-right: 10px;
 }
 
 #right-pane #entries {
+  margin-left: 3px;
+  margin-right: 3px;
 	margin-top: 50px;
 	margin-bottom: 400px;
 }
@@ -157,7 +167,7 @@ html, body, input {
 }
 
 .entry .entry-body {
-	width: 650px;
+	max-width: 650px;
 }
 
 .card { 
@@ -461,8 +471,11 @@ html, body, input {
 
 #controls {
 	position: fixed;
+  top: 0px;
+  left: 257px;
+  min-width: 680px;
+  width: 951px;
 	height: 30px;
-	width: 960px;
 	background-color: white;
 	padding-bottom: 5px;
 	padding-top: 10px;
@@ -1010,7 +1023,8 @@ table#current-subscriptions a.subscriptions-page-feed-link {
 }
 
 #single #explanatory-note, #stream #explanatory-note {
-	margin-top: 50px;
+  float: left;
+	margin-top: 20px;
 	margin-left: 20px;
 	width: 220px;
 	font-family: 'Inika';

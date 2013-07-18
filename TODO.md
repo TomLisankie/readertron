@@ -1,6 +1,3 @@
-- move away from fixed with, fix that bug, and get the pages displaying nicely on tablets and phones
-  - fix search results
-  - fix singleton pages (move them within regular pane?!?)
 - share later
   - or throttling
   - what would the second-order effects be?
