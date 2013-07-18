@@ -2,6 +2,8 @@
 
 Readertron is an attempt to revive the old "social" Google Reader, and an experiment in building useful software for my friends.
 
+![readertron](https://f.cloud.github.com/assets/21294/772686/0fce7620-e918-11e2-8d25-e1a8cc111da4.png)
+
 ## Motivation
 
 *What follows is a lament I wrote on Feb 15, 2012, four months after Google [discontinued its social features](http://googlereader.blogspot.com/2011/10/new-in-reader-fresh-design-and-google.html).*
