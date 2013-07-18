@@ -13,7 +13,7 @@
 			<div class="entry-container">
 				<div class="entry-main">
 					<div class="entry-date">
-						<%= pretty_date(entry.published.to_time) %>
+						<%= pretty_date(entry.published.to_time.in_eastern_time) %>
 					</div>
 					<h2 class="entry-title">
 						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= raw(entry_title) %></a>

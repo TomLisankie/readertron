@@ -51,6 +51,7 @@ module ApplicationHelper
   end
   
   def comment_date(date)
+    date = date.in_eastern_time
     if date >= 1.month.ago
       date.strftime("(#{time_ago_in_words(date)} ago)")
     else

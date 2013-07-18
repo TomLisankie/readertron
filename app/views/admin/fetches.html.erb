@@ -6,7 +6,7 @@
 	<th>Especial problem feeds</th>
 <% @fetches.each do |f| %>
 	<tr>
-		<td><%= f.created_at.strftime("%b #{f.created_at.day}, %Y %I:%M %p") %></td>
+		<td><%= f.created_at.in_eastern_time.strftime("%b #{f.created_at.in_eastern_time.day}, %Y %I:%M %p") %></td>
 		<td><%= distance_of_time_in_words(f[:content][:time]) %></td>
 		<td><%= f[:content][:posts] %></td>
 		<td><%= f[:content][:failed_fetches].length %></td>

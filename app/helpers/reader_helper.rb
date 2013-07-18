@@ -1,6 +1,6 @@
 module ReaderHelper
   def pretty_date(date)
-    date.strftime("%b #{date.day}, %Y %I:%M %p")
+    date.in_eastern_time.strftime("%b #{date.in_eastern_time.day}, %Y %I:%M %p")
   end
   
   def star_class(post)
