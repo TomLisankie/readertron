@@ -81,6 +81,15 @@ html, body, input {
 	font-weight: bold;
 }
 
+#subscriptions #comment-stream.has_unreads a {
+  font-weight: bold;
+}
+
+#subscriptions #comment-stream.has_unreads .unread_count {
+  color: red !important;
+  font-weight: bold;
+}
+
 #subscriptions h3:hover {
 	background-color: #eee;
 }
@@ -168,6 +177,7 @@ html, body, input {
 
 .entry .entry-body {
 	max-width: 650px;
+  overflow: hidden;
 }
 
 .card { 
@@ -539,7 +549,7 @@ html, body, input {
 
 #search-bar-main-container {
 	float: left;
-  width: 155px;
+  width: 255px;
   margin-left: 12px;
 }
 
@@ -547,7 +557,7 @@ html, body, input {
   color: #333;
   font-size: 13px;
   padding: 5px;
-  width: 132px;
+  width: 232px;
   height: 15px;
 }
 
@@ -1024,8 +1034,8 @@ table#current-subscriptions a.subscriptions-page-feed-link {
 
 #single #explanatory-note, #stream #explanatory-note {
   float: left;
-	margin-top: 20px;
-	margin-left: 20px;
+	margin-top: 30px;
+	margin-left: 24px;
 	width: 220px;
 	font-family: 'Inika';
 }

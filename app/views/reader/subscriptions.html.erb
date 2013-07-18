@@ -1,11 +1,11 @@
-<% u = @comment_unseen_count %>
-<h3 id="comment-stream">
-	<a href="/reader/stream" class="<%= 'has_unreads' if u > 0 %>">Comments</a>
-	<span class="unread_count" id="comment-unseen-count" style="<%= u > 0 ? '' : 'display: none;' %>">(<%= u %>)</span>
-</h3>
 <h3 feed_id="<%= current_user.feed.id %>" id="my-shared-items">
 	<a href="#">My Shared Items</a>
   <span class="unread_count" id="feed-<%= current_user.feed.id %>-unread-count" style="display: none;">(0)</span>
+</h3>
+<% u = @comment_unseen_count %>
+<h3 id="comment-stream" class="<%= 'has_unreads' if u > 0 %>">
+	<a href="/reader/stream">Comments</a>
+	<span class="unread_count" id="comment-unseen-count" style="<%= u > 0 ? '' : 'display: none;' %>">(<%= u %> new)</span>
 </h3>
 <% u = @shared_unread_count %>
 <h3 id="shared-items-link" feed_id="shared">
