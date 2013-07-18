@@ -1,7 +1,5 @@
 - Not sure how much harder this is, but can you have people's comments be unread items next to their name in "Other Shared Items"?
 
-- zen mode for long comments
-
 - @ing people in notes and comments. What should the behavior be?
 - mentioning @all
 - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
@@ -48,3 +46,4 @@
 - is Feedzirra not getting new posts quickly enough?
 - absolutizing relative URLs within posts, as in post 62 (in production).
 - look at 404s to see which images are still broken?
+- zen mode for long comments?
