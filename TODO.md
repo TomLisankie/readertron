@@ -1,10 +1,15 @@
-- people's gravatars, on sidebar and in notes
+- @ing people in notes and comments.
+  - mentioning @all
+  - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
+  - a "Mentions" thing in the sidebar
+  - mentions in comments should send an email with a different subject line than normal
 
-- @ing people in notes and comments. What should the behavior be?
-- mentioning @all
-- mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
-- a "Mentions" thing in the sidebar
-- mentions in comments should send an email with a different subject line than normal
+- use redis for unreads instead of database
+
+- refactor /entries
+  - it'll render anything and paginate it
+  - controller just gets a collection, doesn't care what of
+  - "mark_as_read" and so on in the javascript work for entries, shares, comments, etc.
 
 - one-click evernote integration.
 
@@ -38,7 +43,6 @@
 - fix annoying click scroll-to-top as on http://readertron.com/reader/posts/390710#comment-638
 - apple-K for links.
 - option persisted on users to sort things "newest first".
-- simple graphs on the admin page.
 - printing a post
 - better, simpler flow for adding new feeds.
 - publish button
@@ -50,3 +54,5 @@
 - zen mode for long comments?
 
 - Not sure how much harder this is, but can you have people's comments be unread items next to their name in "Other Shared Items"?
+
+- people's gravatars, on sidebar and in notes

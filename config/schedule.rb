@@ -13,6 +13,7 @@ end
 
 every 1.day do
   runner "Report.daily"
+  runner "Report.append_to_historical_data"
 end
 
 every :sunday, :at => '3pm' do
