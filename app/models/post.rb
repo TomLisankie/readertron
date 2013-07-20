@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   after_create :generate_unreads, :cache, :absolutize_relative_image_paths!
   after_save :reindex!
   before_destroy :remove_from_index!
+  before_save :clean_title
   
   include Tire::Model::Search
   
@@ -278,5 +279,9 @@ class Post < ActiveRecord::Base
   def send_share_emails
     return unless shared?
     ShareMailer.share_email(feed.users.map(&:email), self).deliver
+  end
+  
+  def clean_title
+    self.title = HTMLEntities.new.decode(title)
   end
 end
