@@ -1,15 +1,37 @@
-- @ing people in notes and comments.
-  - mentioning @all
-  - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
-  - a "Mentions" thing in the sidebar
-  - mentions in comments should send an email with a different subject line than normal
+- better sharing from mobile
+
+- maybe the same red in the comment stream as in the "(2 new)" message? Plus a little "New" thing? That fades when you click them? (Think about this again w/r/t redis refactor)
+
+- clicking "my shared items" should automatically set the sort settings correctly
+
+- "1 new items"
+
+- every post should have a "single" page (but should be within pane)
 
 - use redis for unreads instead of database
+
+- clean up and improve and simplify code
+
+- nicer style for blockquotes (maybe just italicize them? maybe not?)?
 
 - refactor /entries
   - it'll render anything and paginate it
   - controller just gets a collection, doesn't care what of
   - "mark_as_read" and so on in the javascript work for entries, shares, comments, etc.
+
+- @ing people in notes and comments.
+  - find the nearest sentence and excerpt that as the subject line, though still be sure to mention who's mentioning you
+  - mentioning @all
+  - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
+  - a "Mentions" thing in the sidebar
+  - mentions in comments should send an email with a different subject line than normal
+  
+- now that we're deleting old posts, allow starring.
+
+- use sendgrid webhooks to track opens/clicks as a way of marking things read. http://sendgrid.com/docs/API_Reference/Webhooks/event.html
+- also if you go to a single post, mark as read
+
+- graphs on "manage" page should be line charts plotting your comments + shares against the community's, and it should go back all time
 
 - one-click evernote integration.
 
@@ -27,7 +49,6 @@
 - ability to add a comment from within search results, without having to click the permalink
 - scribd doc with secret_password param should automatically include it in embed url so that the embed works
 - readertron weekly digest should be "from" "Readertron Weekly Digest" and the subject line should be comment content...
-- now that we're deleting old posts, allow starring.
 - collapsed view
 - producer vs. consumpto (ratio of stories shared to read).
 - "you haven't shared in a while"
