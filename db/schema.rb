@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130706223354) do
+ActiveRecord::Schema.define(:version => 20130721012146) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20130706223354) do
     t.string   "instapaper_username"
     t.string   "instapaper_password"
     t.datetime "last_checked_comment_stream_at", :default => '2013-05-06 01:38:42'
+    t.string   "fingerprint"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

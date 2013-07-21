@@ -1,8 +1,15 @@
+1. mentions
+2. redis unreads
+3. everything (including singles) w/in the main pane refactor
+4. new comments ui
+5. other stuff
+
 - better sharing from mobile
 
 - maybe the same red in the comment stream as in the "(2 new)" message? Plus a little "New" thing? That fades when you click them? (Think about this again w/r/t redis refactor)
 
 - clicking "my shared items" should automatically set the sort settings correctly
+- if you click on someone's feed that has no new items, automatically go to 'all' and revchron
 
 - "1 new items"
 

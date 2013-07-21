@@ -13,4 +13,6 @@
 	var MY_FEED_ID = "<%= current_user.feed.id %>";
 	
 	var INSTAPAPER = {username: "<%= current_user.instapaper_username %>", password: "<%= current_user.instapaper_password %>"}
+  
+  var USERS = <%= raw(User.select([:id, :fingerprint, :name, :email]).map { |u| {id: u.id, name: u.name, fingerprint: u.fingerprint, email: u.email} }.to_json) %>;
 </script>

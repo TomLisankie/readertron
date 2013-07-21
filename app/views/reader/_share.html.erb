@@ -77,7 +77,7 @@
 			<div class="comment-add-form">
 				<a href="#" class="add-comment-link">Add Comment</a>
 				<%= form_tag("/reader/create_comment", :method => "post", :style => "display: none;") do %>
-				  <%= render "github_textarea", textarea: text_area_tag(:comment_content) %>
+				  <%= render "github_textarea", textarea: text_area_tag(:comment_content, nil, class: 'atwho-inputor') %>
 				  <div class="after-actions">
 				    <%= submit_tag("Add Comment") %>
 				    <a href="#" class="cancel-comment-add">Cancel</a>

@@ -86,6 +86,17 @@ $(document).ready(function() {
 	$(".entry.stream-comment").live("click", function() {
 		window.location = $(this).find("a.entry-title-link").attr("href") + "#comment-" + $(this).attr("comment_id");
 	});
+  
+  $('.atwho-inputor').live('focus', function(e) {
+    if ($(e.target).data('already_bound') != 'yes') {
+      $(e.target).atwho({
+        at: '@',
+        data: USERS,
+        tpl: "<li data-value='${fingerprint}'>${name} <small>${email}</small></li>"
+      });
+      $(e.target).data('already_bound', 'yes');
+    };
+  });
 	
 	window.onbeforeunload = function (e) {
 	  // For IE<8 and Firefox prior to version 4
@@ -95,7 +106,6 @@ $(document).ready(function() {
 
 	  // For Chrome, Safari, IE8+ and Opera 12+
 	  if ($("#quickpost-form").length || $("textarea[name='comment_content']:visible").length || $('.preview-content:visible').length) {
-      alert("thing!!!")
 	  	return 'You still have unsaved changes!';
     };
 	  

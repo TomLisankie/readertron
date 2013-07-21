@@ -16,6 +16,7 @@
 //= require jquery.scrollTo
 //= require jquery.slimScroll
 //= require jquery.ui.draggable.min
+//= require jquery.atwho
 //= require showdown
 //= require facebox
 //= require_tree .

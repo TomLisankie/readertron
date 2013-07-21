@@ -10,6 +10,7 @@ module ApplicationHelper
 
   def markdown(text)
     renderer = Redcarpet::Markdown.new(HTMLwithPygmentsAndTargetBlankAutolinks, autolink: true, fenced_code_blocks: true)
+    text = Mentions.wrap(text)
     sanitize(renderer.render(text))
   end
   
