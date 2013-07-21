@@ -12,6 +12,6 @@ class String
     begin_at = [i - chars_available / 2, 0].max
     chars_available = chars_available - (i - begin_at)
     go_to = j + chars_available
-    self[/.{#{begin_at}}\b(\S.{0,#{go_to - 1}}\W)/, 1] || ''
+    self.gsub("\n", " ")[/.{#{begin_at}}\b(\S.{0,#{go_to - 1}}\W)/, 1] || ''
   end
 end

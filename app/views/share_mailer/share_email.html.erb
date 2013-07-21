@@ -22,7 +22,7 @@
         <% end %>
       </div>
 
-      <p>(Reply to this email to comment. See more on the <a href="http://readertron.com/reader/posts/<%= @share.id %>">post's page</a>.)</p>
+      <p>(Reply to this email to comment. <a href="<%= @share.share_url_with_email_token(@recipient) %>">See more on the post's page</a>.)</p>
 
 	<p>- Readertron</p>
   </body>

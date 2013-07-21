@@ -278,7 +278,20 @@ class Post < ActiveRecord::Base
   
   def send_share_emails
     return unless shared?
-    ShareMailer.share_email(feed.users.map(&:email), self).deliver
+    
+    mentionable_text = url.starts_with?("#quickpost-") ? content : note
+    
+    mentioned_users = []
+    Mentions.get(mentionable_text).each do |mention|
+      recipient = User.find_by_fingerprint(mention[:fingerprint])
+      mentioned_users << recipient
+      excerpt = mentionable_text.excerpt(mention[:indices][0], mention[:indices][1], 60).strip
+      ShareMailer.share_email(recipient, self, mentioned: {excerpt: "..#{excerpt}.."}).deliver
+    end
+    
+    (feed.users - mentioned_users).each do |recipient|
+      ShareMailer.share_email(recipient, self, mentioned: false).deliver
+    end
   end
   
   def clean_title

@@ -8,6 +8,7 @@ class ShareMailer < ActionMailer::Base
   def new_comment_email(recipient, comment, options = {})
     @comment = comment
     @post = @comment.post
+    @recipient = recipient
     
     subject = if options[:mentioned]
       %(#{comment.user.name} mentioned you: "#{options[:mentioned][:excerpt]}")
@@ -16,7 +17,7 @@ class ShareMailer < ActionMailer::Base
     end
     
     sendgrid_category subject
-    mail(to: recipient.email, subject: subject, reply_to: "comment-replies-#{comment.post.id}@readertron.mailgun.org")
+    mail(to: @recipient.email, subject: subject, reply_to: "comment-replies-#{comment.post.id}@readertron.mailgun.org")
   end
 
   def post_email(post_id, sender_id, message, recipient)
@@ -35,14 +36,19 @@ class ShareMailer < ActionMailer::Base
     mail(to: "jsomers@gmail.com", subject: "Bookmarklet trouble")
   end
   
-  def share_email(recipients, share)
+  def share_email(recipient, share, options = {})
     @share = share
     @sharer = @share.sharer
+    @recipient = recipient
     
-    subject = %(Readertron: #{@sharer.name} shared "#{@share.title}" with you)
+    subject = if options[:mentioned]
+      %(#{@sharer.name} mentioned you: "#{options[:mentioned][:excerpt]}")
+    else
+      %(Readertron: #{@sharer.name} shared "#{@share.title}" with you)
+    end
+    
     sendgrid_category subject
-    sendgrid_recipients recipients
-    mail(to: "notifications@readertron.com", subject: subject, reply_to: "comment-replies-#{@share.id}@readertron.mailgun.org")
+    mail(to: @recipient.email, subject: subject, reply_to: "comment-replies-#{@share.id}@readertron.mailgun.org")
   end
   
   def weekly_digest(recipient_id)
