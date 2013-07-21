@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
     Mentions.get(content).each do |mention|
       recipient = User.find_by_fingerprint(mention[:fingerprint])
       mentioned_users << recipient
-      excerpt = content.excerpt(mention[:indices][0], mention[:indices][1], 60)
+      excerpt = content.excerpt(mention[:indices][0], mention[:indices][1], 60).strip
       ShareMailer.new_comment_email(recipient, self, mentioned: {excerpt: "..#{excerpt}.."}).deliver
     end
     

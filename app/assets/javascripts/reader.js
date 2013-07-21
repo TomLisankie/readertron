@@ -92,6 +92,7 @@ $(document).ready(function() {
       $(e.target).atwho({
         at: '@',
         data: USERS,
+        limit: 7,
         tpl: "<li data-value='${fingerprint}'>${name} <small>${email}</small></li>"
       });
       $(e.target).data('already_bound', 'yes');

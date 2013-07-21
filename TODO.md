@@ -1,6 +1,6 @@
 1. mentions
 2. redis unreads
-3. everything (including singles) w/in the main pane refactor
+3. everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
 4. new comments ui
 5. other stuff
 
@@ -26,12 +26,7 @@
   - controller just gets a collection, doesn't care what of
   - "mark_as_read" and so on in the javascript work for entries, shares, comments, etc.
 
-- @ing people in notes and comments.
-  - find the nearest sentence and excerpt that as the subject line, though still be sure to mention who's mentioning you
-  - mentioning @all
-  - mentions in share note shouldn't do anything extra, just bold the text, unless the person you're mentioning doesn't follow you. in that case the share should be sent to them anyway, with a note that they were mentioned specifically
-  - a "Mentions" thing in the sidebar
-  - mentions in comments should send an email with a different subject line than normal
+- don't allow unload if you've got a pending ajax request
   
 - now that we're deleting old posts, allow starring.
 
