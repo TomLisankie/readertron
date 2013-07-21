@@ -18,7 +18,7 @@
             </h2>
             <div class="stream-comment-content">
 				<span class="comment-author"><%= comment.user.name %> <span class="comment-timestamp"><%= comment_date(comment.updated_at) %>:</span></span> 
-				<span class="the-comment-content"><%= markdown(comment.content) %></span>
+				<span class="the-comment-content"><%= markdown(Mentions.wrap(comment.content)) %></span>
             </div>
           </div>
         </div>

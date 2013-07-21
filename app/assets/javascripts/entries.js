@@ -113,7 +113,8 @@ $(document).ready(function() {
 		if (okay) {
 			var that = this;
 			$.post("/reader/delete_share", {post_id: $(this).closest(".entry").attr("post_id")}, function(ret) {
-				location.reload();
+        $(that).closest('.entry').remove()
+				broadcast("Share deleted successfully.");
 			})
 		}
 		return false;

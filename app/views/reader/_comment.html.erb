@@ -2,7 +2,7 @@
 <div class="comment" comment_id="<%= comment.id %>">
 	<div class="comment-body">
 		<span class="comment-author"><%= comment.user.name %> <span class="comment-timestamp">-</span></span> 
-		<span class="the-comment-content"><%= markdown(comment.content) %></span>
+		<span class="the-comment-content"><%= markdown(Mentions.wrap(comment.content)) %></span>
 		<span class="comment-timestamp"><a href="<%= comment.url %>" target="_blank"><%= comment_date(comment.updated_at) %></a></span>
 		<% if comment.user == current_user %>
 			<span class="comment-actions">

@@ -12,6 +12,6 @@
 		  </div>
 		<% end %>
 	<% end %>
-	<div class="note-content"><%= markdown("<strong>#{entry.feed.title}:</strong> #{entry.note}") %></div>
+	<div class="note-content"><%= markdown("<strong>#{entry.feed.title}:</strong> #{Mentions.wrap(entry.note)}") %></div>
 </div>
 <% end %>

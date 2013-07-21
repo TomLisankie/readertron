@@ -13,4 +13,8 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+  var USERS = <%= raw(User.select([:id, :fingerprint, :name, :email]).map { |u| {id: u.id, name: u.name, fingerprint: u.fingerprint, email: u.email} }.to_json) %>;
+</script>
+
 <%= render "markdown_help" %>

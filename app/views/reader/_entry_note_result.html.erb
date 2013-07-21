@@ -1,5 +1,5 @@
 <% if entry_note.present? %>
 <div class="entry-note">
-	<div class="note-content"><%= markdown("<strong>#{entry.feed_name}:</strong> #{raw(entry_note)}") %></div>
+	<div class="note-content"><%= markdown("<strong>#{entry.feed_name}:</strong> #{raw(Mentions.wrap(entry_note))}") %></div>
 </div>
 <% end %>

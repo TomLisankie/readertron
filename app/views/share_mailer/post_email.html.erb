@@ -13,13 +13,13 @@
       <h1><%= @post.title %></h1>
       <% if @post.note.present? %>
         <div class="note" style="padding: 5px; background-color: #D6EEF8; margin-bottom: 10px;">
-          <%= markdown("<strong>#{@post.feed.title}:</strong> #{@post.note}") %>
+          <%= markdown("<strong>#{@post.feed.title}:</strong> #{Mentions.wrap(@post.note)}") %>
         </div>
       <% end %>
 
       <div class="post">
         <% if @post.url.starts_with?("#quickpost-") %>
-          <%= markdown(@post.content) %>
+          <%= markdown(Mentions.wrap(@post.content)) %>
         <% else %>
           <%= clean(urlify_urls(@post.content)) %>
         <% end %>

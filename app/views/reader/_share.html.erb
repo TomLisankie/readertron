@@ -41,7 +41,7 @@
 							<div class="item-body">
 								<div>
 									<% if entry.url.starts_with?("#quickpost-") %>
-										<div class="rendered-content"><%= markdown(entry.content) %></div>
+										<div class="rendered-content"><%= markdown(Mentions.wrap(entry.content)) %></div>
 										<% if entry.sharer == current_user %>
 											<div id="quickpost-edit-form" style="display: none;">
 										  	  	<%= text_area_tag(:content, entry.content) %>
