@@ -348,7 +348,7 @@ html, body, input {
 .entry .comments {
 	border-top: 1px solid #DDD;
 	padding: 10px;
-	width: 650px;
+	max-width: 650px;
 }
 
 .entry .comments .comments-top {
@@ -1044,7 +1044,7 @@ table#current-subscriptions a.subscriptions-page-feed-link {
 	float: right;
 }
 .entry-note form textarea {
-	width: 650px;
+	max-width: 650px;
 	height: 50px;
 	min-height: 50px;
 	margin-left: 40px;
@@ -1077,7 +1077,7 @@ table.bordered td {
 }
 
 #quickpost-form .preview {
-	width: 650px;
+	max-width: 650px;
 }
 
 .entry.stream-comment {
@@ -1099,7 +1099,7 @@ table.bordered td {
 .stream-comment-content {
 	margin-top: 10px;
 	padding-left: 25px;
-	width: 650px
+	max-width: 650px
 }
 
 a.delete-share {
@@ -1376,7 +1376,7 @@ a.delete-share {
 }
 
 #quickpost-form textarea, #quickpost-edit-form textarea {
-	width: 650px;
+	max-width: 650px;
 	height: 250px;
 	min-height: 250px;
 }
@@ -1704,7 +1704,7 @@ form.preview-selected .preview-content {
   font-size: 14px;
   padding: 5px;
   margin: 0 auto;
-  width: 650px;
+  max-width: 650px;
 }
 
 #no-search-results-message {
