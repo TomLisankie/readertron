@@ -88,14 +88,14 @@ class Mentions
     return [] unless text =~ /[@]/
 
     possible_entries = []
-    text.to_s.scan(REGEXEN[:valid_mention_or_list]) do |before, at, screen_name, list_slug|
+    text.to_s.scan(REGEXEN[:valid_mention_or_list]) do |before, at, fingerprint, list_slug|
       match_data = $~
       after = $'
       unless after =~ REGEXEN[:end_mention_match]
         start_position = match_data.char_begin(3) - 1
         end_position = match_data.char_end(list_slug.nil? ? 3 : 4)
         possible_entries << {
-          :screen_name => screen_name,
+          :fingerprint => fingerprint,
           :list_slug => list_slug || "",
           :indices => [start_position, end_position]
         }
@@ -104,7 +104,7 @@ class Mentions
 
     if block_given?
       possible_entries.each do |mention|
-        yield mention[:screen_name], mention[:list_slug], mention[:indices].first, mention[:indices].last
+        yield mention[:fingerprint], mention[:list_slug], mention[:indices].first, mention[:indices].last
       end
     end
     

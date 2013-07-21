@@ -5,14 +5,18 @@ class ShareMailer < ActionMailer::Base
   include SendGrid
   sendgrid_category :use_subject_lines
   
-  def new_comment_email(recipients, comment)
+  def new_comment_email(recipient, comment, options = {})
     @comment = comment
     @post = @comment.post
     
-    subject = %(Readertron: #{comment.user.name} commented on "#{comment.post.title}")
+    subject = if options[:mentioned]
+      %(#{comment.user.name} mentioned you: "#{options[:mentioned][:excerpt]}")
+    else
+      %(Readertron: New comment by #{comment.user.name} on "#{comment.post.title}")
+    end
+    
     sendgrid_category subject
-    sendgrid_recipients recipients
-    mail(to: "notifications@readertron.com", subject: subject, reply_to: "comment-replies-#{comment.post.id}@readertron.mailgun.org")
+    mail(to: recipient.email, subject: subject, reply_to: "comment-replies-#{comment.post.id}@readertron.mailgun.org")
   end
 
   def post_email(post_id, sender_id, message, recipient)
