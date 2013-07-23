@@ -175,9 +175,13 @@ html, body, input {
 	padding: 15px;
 }
 
+.entry .entry-body img {
+  max-width: 650px;
+}
+
 .entry .entry-body {
 	max-width: 650px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .card { 
