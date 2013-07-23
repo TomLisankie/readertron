@@ -1,10 +1,11 @@
-1. mentions
-2. redis unreads
-3. everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
-4. new comments ui
-5. other stuff
+- redis unreads
+- everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
+- new comments ui
+- other stuff
 
 - better sharing from mobile
+
+- two-paragraph comments collapse because of the first-of-type / last-of-type thing?
 
 - maybe the same red in the comment stream as in the "(2 new)" message? Plus a little "New" thing? That fades when you click them? (Think about this again w/r/t redis refactor)
 
@@ -28,7 +29,7 @@
 
 - don't allow unload if you've got a pending ajax request
   
-- now that we're deleting old posts, allow starring.
+- now that we're deleting old posts, allow starring. (and maybe starring should post to evernote if it's integrated?)
 
 - use sendgrid webhooks to track opens/clicks as a way of marking things read. http://sendgrid.com/docs/API_Reference/Webhooks/event.html
 - also if you go to a single post, mark as read

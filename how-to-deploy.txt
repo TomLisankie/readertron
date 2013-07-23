@@ -19,5 +19,4 @@
 * Write cron jobs
 	- whenever -w
   
-  
 * Who's not following who: User.all.each {|u| puts "#{u.name} is not followed by:\n"; (User.all - u.feed.users - [u]).each {|f| puts "\t-#{f.name}"}; puts "\n\n"}; nil

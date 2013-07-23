@@ -114,7 +114,7 @@ var readertron_execute = function(text) {
 	return false;
 };
 
-// try {
+try {
 	if (window.location.host.indexOf("youtube") != -1) {
 		var video_url = $("link[itemprop='embedURL']").attr('href');
 		var text = '<object width="640" height="390"> <param name="movie" value="' + video_url + '"></param> <param name="allowScriptAccess" value="always"></param> <embed src="' + video_url + '" type="application/x-shockwave-flash" allowscriptaccess="always" width="640" height="390"></embed> </object>'
@@ -190,6 +190,6 @@ var readertron_execute = function(text) {
     tpl: "<li data-value='${fingerprint}'>${name} <small>${email}</small></li>"
   });
   
-// } catch(err) {
-  // alert("You must make a selection to use the bookmarklet! Use the 'print' or 'full page' versions of articles when you can.");
-// };
+} catch(err) {
+  alert("You must make a selection to use the bookmarklet! Use the 'print' or 'full page' versions of articles when you can.");
+};
