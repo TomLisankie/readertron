@@ -8,13 +8,14 @@ class Comment < ActiveRecord::Base
   after_create :notify_relevant_users, :index_post
   
   def notify_relevant_users
-    
     mentioned_users = []
     Mentions.get(content).each do |mention|
       recipient = User.find_by_fingerprint(mention[:fingerprint])
-      mentioned_users << recipient
-      excerpt = content.excerpt(mention[:indices][0], mention[:indices][1], 60).strip
-      ShareMailer.new_comment_email(recipient, self, mentioned: {excerpt: "..#{excerpt}.."}).deliver
+      if !mentioned_users.include?(recipient)
+        mentioned_users << recipient
+        excerpt = content.excerpt(mention[:indices][0], mention[:indices][1], 60).strip
+        ShareMailer.new_comment_email(recipient, self, mentioned: {excerpt: "..#{excerpt}.."}).deliver
+      end
     end
     
     (other_thread_participants - mentioned_users).each do |recipient|
