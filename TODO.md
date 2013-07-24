@@ -3,6 +3,8 @@
 - new comments ui
 - other stuff
 
+- "content can't be blank" from bookmarklet (a parsing error? utf8?)
+
 - better sharing from mobile
 
 - two-paragraph comments collapse because of the first-of-type / last-of-type thing?

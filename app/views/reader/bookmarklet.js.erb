@@ -114,82 +114,85 @@ var readertron_execute = function(text) {
 	return false;
 };
 
-try {
-	if (window.location.host.indexOf("youtube") != -1) {
-		var video_url = $("link[itemprop='embedURL']").attr('href');
-		var text = '<object width="640" height="390"> <param name="movie" value="' + video_url + '"></param> <param name="allowScriptAccess" value="always"></param> <embed src="' + video_url + '" type="application/x-shockwave-flash" allowscriptaccess="always" width="640" height="390"></embed> </object>'
-	} else if (window.location.host.indexOf("scribd") != -1) {
-		var matches = document.URL.match(/scribd\.com\/doc\/(.*?)\//);
-		var docId = matches[1];
-		var text = '<p style="margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;"> <a title="View on Scribd" href="' + document.URL + '" style="text-decoration: underline;" >' + document.title + '</a></p><iframe class="scribd_iframe_embed" src="http://www.scribd.com/embeds/' + docId + '/content?start_page=1&view_mode=scroll&show_recommendations=false" data-auto-height="false" data-aspect-ratio="0.767659574468085" scrolling="no" id="doc_43414" width="922" height="600" frameborder="0"></iframe>'
-	} else {
-		var text = window.getSelection();
-		var objRange = text.getRangeAt(0);
-		var objClone = objRange.cloneContents();
-		var objDiv = document.createElement("div");
-		objDiv.appendChild(objClone);
-		text = objDiv.innerHTML;		
-	}
-  var div = $('<div>', {id: 'readertron-bookmarklet'})
-  div.attr('style', 'position: fixed; z-index: 99999; width: 500px; height: 400px; background-color: white !important; border: 3px solid #B4CEFE !important; top: 10px; right: 10px;')
-  
-	var img = $('<img>', {src: "<%= Domain.url %>/assets/logo-with-wordmark.png"});
-  img.attr('style', 'padding: 5px !important; position: absolute; top: 0px; left: 24px;');
-	div.append(img);
-  
-	var titlediv = $('<div>');
-  
-	var title = $('<input>', {id: 'readertron-title', value: document.title});
-  title.attr('style', 'color: #333 !important; font-size: 18px !important; font-family: Helvetica, arial, sans-serif !important; position: absolute; left: 40px; top: 40px; width: 400px;')
-  titlediv.append(title);
-  
-  div.append(titlediv)
-  
-	var contentdiv = $('<div>');
-  contentdiv.attr('style', 'padding: 0px 0px 0px 5px; height: 100px; overflow-y: scroll; position: absolute; top: 80px; width: 400px; left: 40px; font-family: arial, sans-serif !important; font-size: 12px !important; color: #333 !important; border: 1px solid #999 !important;')
-  contentdiv.html(text)
-  div.append(contentdiv)
+var text;
+if (window.location.host.indexOf("youtube") != -1) {
+	var video_url = $("link[itemprop='embedURL']").attr('href');
+	text = '<object width="640" height="390"> <param name="movie" value="' + video_url + '"></param> <param name="allowScriptAccess" value="always"></param> <embed src="' + video_url + '" type="application/x-shockwave-flash" allowscriptaccess="always" width="640" height="390"></embed> </object>'
+} else if (window.location.host.indexOf("scribd") != -1) {
+	var matches = document.URL.match(/scribd\.com\/doc\/(.*?)\//);
+	var docId = matches[1];
+	text = '<p style="margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;"> <a title="View on Scribd" href="' + document.URL + '" style="text-decoration: underline;" >' + document.title + '</a></p><iframe class="scribd_iframe_embed" src="http://www.scribd.com/embeds/' + docId + '/content?start_page=1&view_mode=scroll&show_recommendations=false" data-auto-height="false" data-aspect-ratio="0.767659574468085" scrolling="no" id="doc_43414" width="922" height="600" frameborder="0"></iframe>'
+} else {
+    var doSelect = function() {
+      try {
+    		text = window.getSelection();
+    		var objRange = text.getRangeAt(0);
+    		var objClone = objRange.cloneContents();
+    		var objDiv = document.createElement("div");
+    		objDiv.appendChild(objClone);
+    		text = objDiv.innerHTML;
+      } catch(err) {
+        alert("You must make a selection to use the bookmarklet! Use the 'print' or 'full page' versions of articles when you can.");
+        return false;
+      }
+    }()
+}
+var div = $('<div>', {id: 'readertron-bookmarklet'})
+div.attr('style', 'position: fixed; z-index: 99999; width: 500px; height: 400px; background-color: white !important; border: 3px solid #B4CEFE !important; top: 10px; right: 10px;')
 
-	var form = $('<form>', {'accept-charset': 'UTF-8', 'enctype': 'application/x-www-form-urlencoded;charset=UTF-8'});
+var img = $('<img>', {src: "<%= Domain.url %>/assets/logo-with-wordmark.png"});
+img.attr('style', 'padding: 5px !important; position: absolute; top: 0px; left: 24px;');
+div.append(img);
 
-	var textarea = $('<textarea>', {id: 'readertron-textarea', placeholder: 'Start writing here.'});
-  textarea.attr('style', 'width: 395px; height: 150px; margin: 5px 0px 20px 0px; padding: 5px; position: absolute; top: 180px; left: 40px; font: 13px Helvetica, arial, freesans, clean, sans-serif !important;')
-  
-	var quotes = $('<img>', {src: '<%= Domain.url %>/assets/bookmarklet-quotes.png'});
-  quotes.attr('style', 'position: absolute; top: 180px; left: 10px;')
-	div.append($(quotes));
-  
-	var closelink = $('<a>', {href: '#', text: 'Close this'});
-  closelink.attr('style', 'position: absolute; top: 10px; right: 10px; color: #4183C4 !important; font-size: 12px !important; font-family: arial !important; text-decoration: none !important; border-bottom: 1px solid #4183C4 !important')
-  closelink.click(function(e) {
-    var c = document.getElementById("readertron-bookmarklet"); c.parentNode.removeChild(c); e.preventDefault();
-  })
-	div.append(closelink);
-  
-	var submit = $('<a>', {href: '#', text: 'Post item'});
-  submit.attr('style', 'position: absolute; top: 350px; left: 40px; color: #4183C4 !important; font-size: 12px !important; font-family: arial !important; text-decoration: none !important; border-bottom: 1px solid #4183C4 !important')
-  
-	submit.click(function(e) {
-	  readertron_execute(text); e.preventDefault();
-	})
-  
-	form.append(textarea);
-	form.append(submit);
-	div.append(form);
-	
-  $('body').prepend(div);
-  
-  $('<style type="text/css">.atwho-view{position:absolute;top:0;left:0;display:none;margin-top:18px;background:#fff !important;border:1px solid #DDD !important;border-radius:3px !important;box-shadow:0 0 5px rgba(0,0,0,.1) !important;min-width:120px;z-index:999999999999}.atwho-view .cur{background:#36F !important;color:#fff !important}.atwho-view .cur small{color:#fff !important}.atwho-view strong{color:#36F !important}.atwho-view .cur strong{color:#fff !important;font:bold !important}.atwho-view ul{list-style:none !important;padding:0 !important;margin:auto !important; line-height: 1em !important;}.atwho-view ul li{margin-top: 0px !important; display:block;padding:5px 10px !important;border-bottom:1px solid #DDD !important;cursor:pointer !important; font: 13px Helvetica, arial, freesans, clean, sans-serif !important;}.atwho-view small{font-size:smaller !important;color:#777 !important;font-weight:400 !important}</style>').appendTo($('head'));
-  
-  $("#readertron-textarea").focus();
-  
-  $('#readertron-textarea').atwho({
-    at: '@',
-    data: USERS,
-    limit: 7,
-    tpl: "<li data-value='${fingerprint}'>${name} <small>${email}</small></li>"
-  });
-  
-} catch(err) {
-  alert("You must make a selection to use the bookmarklet! Use the 'print' or 'full page' versions of articles when you can.");
-};
+var titlediv = $('<div>');
+
+var title = $('<input>', {id: 'readertron-title', value: document.title});
+title.attr('style', 'color: #333 !important; font-size: 18px !important; font-family: Helvetica, arial, sans-serif !important; position: absolute; left: 40px; top: 40px; width: 400px;')
+titlediv.append(title);
+
+div.append(titlediv)
+
+var contentdiv = $('<div>');
+contentdiv.attr('style', 'padding: 0px 0px 0px 5px; height: 100px; overflow-y: scroll; position: absolute; top: 80px; width: 400px; left: 40px; font-family: arial, sans-serif !important; font-size: 12px !important; color: #333 !important; border: 1px solid #999 !important;')
+contentdiv.html(text)
+div.append(contentdiv)
+
+var form = $('<form>', {'accept-charset': 'UTF-8', 'enctype': 'application/x-www-form-urlencoded;charset=UTF-8'});
+
+var textarea = $('<textarea>', {id: 'readertron-textarea', placeholder: 'Start writing here.'});
+textarea.attr('style', 'width: 395px; height: 150px; margin: 5px 0px 20px 0px; padding: 5px; position: absolute; top: 180px; left: 40px; font: 13px Helvetica, arial, freesans, clean, sans-serif !important;')
+
+var quotes = $('<img>', {src: '<%= Domain.url %>/assets/bookmarklet-quotes.png'});
+quotes.attr('style', 'position: absolute; top: 180px; left: 10px;')
+div.append($(quotes));
+
+var closelink = $('<a>', {href: '#', text: 'Close this'});
+closelink.attr('style', 'position: absolute; top: 10px; right: 10px; color: #4183C4 !important; font-size: 12px !important; font-family: arial !important; text-decoration: none !important; border-bottom: 1px solid #4183C4 !important')
+closelink.click(function(e) {
+  var c = document.getElementById("readertron-bookmarklet"); c.parentNode.removeChild(c); e.preventDefault();
+})
+div.append(closelink);
+
+var submit = $('<a>', {href: '#', text: 'Post item'});
+submit.attr('style', 'position: absolute; top: 350px; left: 40px; color: #4183C4 !important; font-size: 12px !important; font-family: arial !important; text-decoration: none !important; border-bottom: 1px solid #4183C4 !important')
+
+submit.click(function(e) {
+  readertron_execute(text); e.preventDefault();
+})
+
+form.append(textarea);
+form.append(submit);
+div.append(form);
+
+$('body').prepend(div);
+
+$('<style type="text/css">.atwho-view{position:absolute;top:0;left:0;display:none;margin-top:18px;background:#fff !important;border:1px solid #DDD !important;border-radius:3px !important;box-shadow:0 0 5px rgba(0,0,0,.1) !important;min-width:120px;z-index:999999999999}.atwho-view .cur{background:#36F !important;color:#fff !important}.atwho-view .cur small{color:#fff !important}.atwho-view strong{color:#36F !important}.atwho-view .cur strong{color:#fff !important;font:bold !important}.atwho-view ul{list-style:none !important;padding:0 !important;margin:auto !important; line-height: 1em !important;}.atwho-view ul li{margin-top: 0px !important; display:block;padding:5px 10px !important;border-bottom:1px solid #DDD !important;cursor:pointer !important; font: 13px Helvetica, arial, freesans, clean, sans-serif !important;}.atwho-view small{font-size:smaller !important;color:#777 !important;font-weight:400 !important}</style>').appendTo($('head'));
+
+$("#readertron-textarea").focus();
+
+$('#readertron-textarea').atwho({
+  at: '@',
+  data: USERS,
+  limit: 7,
+  tpl: "<li data-value='${fingerprint}'>${name} <small>${email}</small></li>"
+});
