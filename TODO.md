@@ -3,6 +3,22 @@
 - new comments ui
 - other stuff
 
+- loader in preview pane is being pushed down?
+
+- why does $('#readertron-bookmarklet').atwho() not work on certain pages?
+
+- a person's comments should appear in their named feed
+
+- they should have unread status too
+
+- the counts should all work out
+
+- links to feeds and names in readertron should work
+
+- I shouldn't kill people's sessions every time I deploy
+
+- redis queues can include every feed X configuration of sort settings
+
 - "content can't be blank" from bookmarklet (a parsing error? utf8?)
 
 - better sharing from mobile
