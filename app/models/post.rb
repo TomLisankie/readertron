@@ -284,6 +284,8 @@ class Post < ActiveRecord::Base
     mentioned_users = []
     Mentions.get(mentionable_text).each do |mention|
       recipient = User.find_by_fingerprint(mention[:fingerprint])
+      next if recipient.nil?
+      
       if !mentioned_users.include?(recipient)
         mentioned_users << recipient
         excerpt = mentionable_text.excerpt(mention[:indices][0], mention[:indices][1], 60).strip
