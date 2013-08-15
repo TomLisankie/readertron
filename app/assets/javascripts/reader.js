@@ -16,7 +16,9 @@ $(document).ready(function() {
 	$("#subscriptions li").live("click", function() {
 		SETTINGS.feed_id = $(this).split_id();
 		SETTINGS.page = 0;
-		update_items_filter_control_counts();
+        
+    update_items_filter_control_counts();
+    
 		fetch_entries();
 		$("#subscriptions li, #subscriptions h3").removeClass("selected");
 		$(this).addClass("selected");
@@ -38,6 +40,21 @@ $(document).ready(function() {
 			return false;
 		};
 		SETTINGS.feed_id = $(this).attr("feed_id");
+    
+    if ($(this).attr("id") == "my-shared-items") {
+  		SETTINGS.items_filter = "all";
+  		SETTINGS.date_sort = "revchron";
+  		$("#chron").removeClass("jfk-button-checked").addClass("jfk-button-unchecked");
+  		$("#revchron").removeClass("jfk-button-unchecked").addClass("jfk-button-checked");
+  		$("#unread-or-all .menu-button-caption").text("All items");
+    } else {
+      update_items_filter_control_counts();
+      SETTINGS.items_filter = "unread";
+      SETTINGS.date_sort = "chron";
+  		$("#revchron").removeClass("jfk-button-checked").addClass("jfk-button-unchecked");
+  		$("#chron").removeClass("jfk-button-unchecked").addClass("jfk-button-checked");
+  		$("#unread-or-all .menu-button-caption").html("<span id='new-items-count-visible'>" + $("#new-items-count-hidden").text() + "</span> new items")
+    }
 		update_items_filter_control_counts();
 		$("#subscriptions li").removeClass("selected");
 		$("#subscriptions h3").removeClass("selected");
