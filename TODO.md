@@ -1,3 +1,5 @@
+- fix dupe shares!
+
 - redis unreads
 - everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
 - new comments ui
@@ -35,8 +37,6 @@
 - every post should have a "single" page (but should be within pane)
 
 - use redis for unreads instead of database
-
-- clean up and improve and simplify code
 
 - nicer style for blockquotes (maybe just italicize them? maybe not?)?
 

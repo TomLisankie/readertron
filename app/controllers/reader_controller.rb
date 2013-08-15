@@ -113,7 +113,7 @@ class ReaderController < ApplicationController
   
   def create_post
     @post = User.find_by_share_token(params[:token]).feed.posts.create(
-      content: utf8clean(params[:content]),
+      content: utf8clean(params[:content].presence || "[Click through to the original story.]"),
       url: utf8clean(params[:url]),
       note: utf8clean(params[:note]),
       title: utf8clean(params[:title]),
