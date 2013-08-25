@@ -22,7 +22,7 @@
 	<a id="all-items-link" href="#" class="<%= 'has_unreads' if u > 0 %>">All Items</a>
 	<span class="unread_count" id="total-unread-count" style="<%= u > 0 ? '' : 'display: none;' %>">(<%= u %>)</span>
 </h3>
-<ul>
+<ul class="unshared_subscriptions">
 <% @unshared.each do |subscription| %>
 	<%= render "subscription", subscription: subscription %>
 <% end %>
