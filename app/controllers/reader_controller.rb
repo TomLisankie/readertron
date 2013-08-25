@@ -125,7 +125,8 @@ class ReaderController < ApplicationController
     @origin = params[:origin]
     render layout: false
   rescue Exception => e
-    ShareMailer.bookmarklet_failure_report(e, params).deliver
+    sharer = User.find_by_share_token(params[:token]).try(:name)
+    ShareMailer.bookmarklet_failure_report(e, params.merge(sharer: sharer)).deliver
   end
   
   def edit_note

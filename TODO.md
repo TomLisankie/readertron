@@ -1,9 +1,20 @@
-- fix dupe shares!
+- sign out button
+
+- don't bold @mentions that don't refer to real people (this way we can also avoid the guards in the email code)
+
+- @mentions should be able to have punctuation after them. right now it seems to add a space.
+
+- scribd embeds should be wider.
+
+- and the mention subject line should (a) replace "@" with nothing (so that it reads more naturally) and (b) actually get the ellipses right.
+
+- debounce dupe shares!
 
 - redis unreads
+
 - everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
+
 - new comments ui
-- other stuff
 
 - loader in preview pane is being pushed down?
 
@@ -39,11 +50,6 @@
 - use redis for unreads instead of database
 
 - nicer style for blockquotes (maybe just italicize them? maybe not?)?
-
-- refactor /entries
-  - it'll render anything and paginate it
-  - controller just gets a collection, doesn't care what of
-  - "mark_as_read" and so on in the javascript work for entries, shares, comments, etc.
 
 - don't allow unload if you've got a pending ajax request
   

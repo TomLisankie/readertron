@@ -36,7 +36,7 @@
 					<%= render "share_authorstring", entry: entry %>
 					<div class="entry-debug"></div>
 					<div class="entry-annotations"></div>
-					<div class="entry-body">
+					<div class="entry-body <%= 'has_embed' if entry.url.include?('youtube.com') || entry.url.include?('scribd.com') %>">
 						<div>
 							<div class="item-body">
 								<div>

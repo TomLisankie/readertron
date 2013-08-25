@@ -184,6 +184,10 @@ html, body, input {
   overflow: hidden;
 }
 
+.entry .entry-body.has_embed {
+  max-width: none;
+}
+
 .card { 
 	border: 1px solid #DDD;
 	border-left: 2px solid #DDD;
