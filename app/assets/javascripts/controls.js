@@ -150,5 +150,9 @@ $(document).ready(function() {
 	$("#user-settings-link").click(function() {
 		window.location = "/users/edit";
 	});
+  
+	$("#sign-out-link").click(function() {
+		window.location = "/users/sign_out";
+	});
 	
 });
