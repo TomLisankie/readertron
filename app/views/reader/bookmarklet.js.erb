@@ -89,7 +89,7 @@ var USERS = <%= raw(User.select([:id, :fingerprint, :name, :email]).map { |u| {i
 })();
 
 var readertron_success = function(post_id) {
-	var div = $('<div>', {text: 'Your note has been shared successfully! (Post id: ' + post_id + ')'});
+	var div = $('<div>', {html: 'Your note has been shared successfully! (<a href="http://readertron.com/reader/posts/' + post_id + '">See it here</a>)'});
   div.attr('style', 'position: absolute; width: 490px; padding: 5px !important; top: 0px; font-family: Helvetica !important; font-size: 12px !important; font-weight: bold !important; background-color: #F9EDBE !important; text-align: center !important;')
 	$("#readertron-bookmarklet").append(div);
 	setTimeout('var c = document.getElementById("readertron-bookmarklet"); c.parentNode.removeChild(c)', 3000);

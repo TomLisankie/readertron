@@ -1,12 +1,16 @@
-- sign out button
-
 - don't bold @mentions that don't refer to real people (this way we can also avoid the guards in the email code)
+
+- if you type "@chip" and then hit space, it should auto-snap to "@Chip".
+
+- weekly digest shouldn't account for *this* sunday.
 
 - @mentions should be able to have punctuation after them. right now it seems to add a space.
 
-- scribd embeds should be wider.
-
 - and the mention subject line should (a) replace "@" with nothing (so that it reads more naturally) and (b) actually get the ellipses right.
+
+- "do you have data for individuals? i bet i have some interesting gaps and then catch-up days"
+
+- when does most readertron activity happen?
 
 - debounce dupe shares!
 
