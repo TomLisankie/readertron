@@ -384,8 +384,12 @@ html, body, input {
 	border: 1px solid #cacaca !important;
 };
 
-.the-comment-content p:first-of-type, .the-comment-content p:last-of-type {
+.the-comment-content p:first-of-type {
   display: inline;
+}
+
+.the-comment-content p:last-of-type {
+  margin-bottom: 5px;
 }
 
 .entry .comments .comment.featured {
