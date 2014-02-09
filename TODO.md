@@ -1,11 +1,37 @@
+- speed, snappiness, loading errors on my index page
+
+if you write an email to share@readertron.com (how to add to iPhone contacts?) with a URL and some text,
+
+- the subject line will be turned into the title
+- the URL will be found and Instapapered / Safari-Reader'd and turned into the body
+- whatever else is in the email will be turned into your note
+
+if instapaper-y thing fails, URL will be turned into body
+
+
+
+- clean up unreads of people who don't need them
+- redis unreads?
+
+- allow opening link in new tab on comment page
+
+- blockquotes broken? http://www.readertron.com/reader/posts/460109#comment-4340 (gives arrow pointing wrong way, + no `<blockquote>` tag.)
+
+- mobile bookmarklet?
+
+- safari's tech for getting the full readable version of articles. make a separate service?
+
+- mobile site
+
+- why are http://www.readertron.com/reader/posts/445915#comment-4234 and http://www.readertron.com/reader/posts/445915 different? why are the links from the weekly digest not autologin?
+
 - don't bold @mentions that don't refer to real people (this way we can also avoid the guards in the email code)
 
 - if you type "@chip" and then hit space, it should auto-snap to "@Chip".
 
 - weekly digest shouldn't account for *this* sunday.
 
-- @mentions should be able to have punctuation after them. right now it seems to add a space.
-
+- @mentions should be able to have punctuation after them (and before them, a la open parens). right now it seems to add a space.
 - and the mention subject line should (a) replace "@" with nothing (so that it reads more naturally) and (b) actually get the ellipses right.
 
 - "do you have data for individuals? i bet i have some interesting gaps and then catch-up days"
@@ -13,8 +39,6 @@
 - when does most readertron activity happen?
 
 - debounce dupe shares!
-
-- redis unreads
 
 - everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
 
@@ -25,20 +49,12 @@
 - why does $('#readertron-bookmarklet').atwho() not work on certain pages?
 
 - a person's comments should appear in their named feed
-
 - they should have unread status too
-
 - the counts should all work out
 
 - links to feeds and names in readertron should work
 
-- I shouldn't kill people's sessions every time I deploy
-
 - redis queues can include every feed X configuration of sort settings
-
-- "content can't be blank" from bookmarklet (a parsing error? utf8?)
-
-- better sharing from mobile
 
 - two-paragraph comments collapse because of the first-of-type / last-of-type thing?
 

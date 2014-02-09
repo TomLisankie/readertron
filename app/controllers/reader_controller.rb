@@ -198,11 +198,22 @@ class ReaderController < ApplicationController
   end
   
   def email_share
+    note = utf8clean(params["stripped-text"]).split(/https?:\/\/[\S]+/).first.try(:strip)
+    doc = Nokogiri::HTML(utf8clean(params['body-html'] || params['stripped-html']))
+    body = if (article = doc.at_css('#article'))
+      article.to_html
+    else
+      params['stripped-text'][/(https?:\/\/[\S]+)/, 1]
+    end
+    url = utf8clean(doc.at_css('a').try(:[], 'href') || params['stripped-text'][/(https?:\/\/[\S]+)/, 1])
+    
+    body = absolutize_relative_paths(url, body)
     user = User.find_by_email(params["sender"])
     post = user.feed.posts.create!(
-      content: utf8clean(params["stripped-text"]),
-      url: utf8clean("#quickpost-#{user.name.snake}-#{Time.now.to_i}"),
+      content: body,
+      url: url,
       title: utf8clean(params[:subject]),
+      note: note,
       published: Time.now,
       shared: true
     )
@@ -231,5 +242,16 @@ class ReaderController < ApplicationController
 
   def utf8clean(str)
     URI.unescape(str.force_encoding(Encoding::UTF_8))
+  end
+  
+  def absolutize_relative_paths(url, content)
+    new_content = "" + content
+    doc = Nokogiri::HTML(content)
+    doc.css("a").each do |link|
+      link_url = link['href']
+      begin absolute_link_url = URI.join(url, link_url).to_s rescue next end
+      new_content = new_content.gsub(link_url, absolute_link_url)
+    end
+    new_content
   end
 end
