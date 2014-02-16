@@ -241,7 +241,7 @@ class ReaderController < ApplicationController
   private
 
   def utf8clean(str)
-    URI.unescape(str.force_encoding(Encoding::UTF_8))
+    CGI.unescape(str.force_encoding(Encoding::UTF_8))
   end
   
   def absolutize_relative_paths(url, content)
