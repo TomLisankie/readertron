@@ -205,10 +205,17 @@ class ReaderController < ApplicationController
     else
       params['stripped-text'][/(https?:\/\/[\S]+)/, 1]
     end
-    url = utf8clean(doc.at_css('a').try(:[], 'href') || params['stripped-text'][/(https?:\/\/[\S]+)/, 1])
-    
-    body = absolutize_relative_paths(url, body)
+    url = utf8clean(doc.at_css('a').try(:[], 'href') || params['stripped-text'][/(https?:\/\/[\S]+)/, 1] || "")
     user = User.find_by_email(params["sender"])
+    
+    if body.blank? && url.blank?
+      url = "#quickpost-#{user.name.snake}-#{Time.now.to_i}"
+      body = params['stripped-text']
+      note = nil
+    else
+      body = absolutize_relative_paths(url, body)
+    end
+    
     post = user.feed.posts.create!(
       content: body,
       url: url,
