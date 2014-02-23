@@ -34,6 +34,8 @@ gem 'sendgrid'
 
 gem 'tire'
 
+gem 'browser'
+
 group :development do
   gem 'ruby-debug-base19'
   gem 'ruby-debug19'

@@ -33,6 +33,7 @@ GEM
     archive-tar-minitar (0.5.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    browser (0.4.0)
     builder (3.0.4)
     chronic (0.9.1)
     coderay (1.0.9)
@@ -231,6 +232,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  browser
   coffee-rails (~> 3.2.1)
   daemons
   dalli

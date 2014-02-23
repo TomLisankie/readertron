@@ -2,16 +2,23 @@
 <html>
 <head>
   <title>Readertron <%= @title %></title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <% if browser.mobile? %>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <%= stylesheet_link_tag "mobile/reader", :media => "all" %>
+    <%= javascript_include_tag "mobile" %>
+  <% else %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+  <% end %>
+  
   <%= csrf_meta_tags %>
   <link href="/assets/rss-bot-small.png" rel="shortcut icon"/>
   <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Inika' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<% if alert || notice %>
-	<div id="alert-container"><div id="alert"><%= alert || notice %></div></div>
+	<% if (alert || notice) && !browser.mobile? %>
+    <div id="alert-container"><div id="alert"><%= alert || notice %></div></div>
 	<% end %>
 	
 

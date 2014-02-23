@@ -1,0 +1,345 @@
+<!--
+- TODO: share by clicking icon
+- search bar
+- search results page
+- make sure widths are always good on stories
+-->
+
+<header id="main-header" class="main-header " role="banner" data-view="header">
+  <div id="main-nav" class="btn nav-button main-nav" data-button="header-nav" aria-controls="sections-nav">
+    <span class="hasjs"><a href="javascript:;" class="btn-link"><i class="icon icon-main-nav">Main Menu</i></a></span>
+  </div>
+  
+  <h1 class="logo"><a href="/"><i class="icon icon-logo">Readertron</i></a></h1>
+  
+  <div id="main-search" class="main-search btn" data-button="header-search" aria-controls="search-nav" style="display: none;">
+    <a href="javascript:;" class="btn-link"><i class="icon icon-main-search">Search</i></a>
+  </div>
+  
+  <div id="search-nav" class="search-nav" role="search" aria-hidden="true" aria-expanded="false" data-view-el="header-search">
+    <div id="nav-search-container" class="nav-search-container " data-search-container="">
+    </div>
+  </div>
+</header>
+
+<div id="read-unread-switcher">
+  <h3>Sort Settings</h3>
+  
+  <a href="#" id="read">Show All Items</a> | <a href="#" id="unread">Show Unread Items Only</a><br>
+  <a href="#" id="chron">Chronological</a> | <a href="#" id="revchron">Reverse Chronological</a>
+</div>
+
+<div id="subscriptions"></div>
+
+<div id="entries">
+  <div style="margin: 0 auto; width: 100px; margin-top: 100px; text-align: center; color: #ddd;">
+    <img src="/assets/ajax-circle-loader.gif"/><br/>
+    <small style="font-family: Arial;">POPULATING...</small>
+  </div>
+</div>
+
+<div id="loader">
+  <img src="/assets/ajax-circle-loader.gif"/><br/>
+  <small style="font-family: Arial;">Fetching more...</small>
+</div>
+
+<div id="entries-loader" style="display: none;">
+	<img class="ajax-loader-img" src="/assets/ajax-loader.gif"/>
+</div>
+
+<div id="end-of-the-line" style="display: none;">
+	You have no more items!
+</div>
+
+<script type="text/javascript">
+  var entries_request;
+  var update_items_filter_control_counts = function() {};
+  var scrollFetchFlag = true;
+  
+	var SETTINGS = {
+		date_sort: "chron",
+		items_filter: "unread",
+		feed_id: "",
+		page: 0
+	};
+  
+  var append_entries = function() {
+    $("#loader").show()
+  	$.get("/reader/entries", SETTINGS, function(ret) {
+  		if (ret.indexOf("no-entries-msg") != -1) {
+  			$("#loader").hide();
+  			$("#entries").append($("#end-of-the-line").clone().show());
+  			scrollFetchFlag = false;
+  		} else {
+  			$("#entries").append(ret);
+        $("#loader").hide();
+  			scrollFetchFlag = true;			
+  		}
+  	});
+  };
+  
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+  
+  function sameOrigin(url) {
+    // test that a given url is a same-origin URL
+    // url could be relative or scheme relative or absolute
+    var host = document.location.host; // host + port
+    var protocol = document.location.protocol;
+    var sr_origin = '//' + host;
+    var origin = protocol + sr_origin;
+    // Allow absolute or scheme relative URLs to same origin
+    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+      (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+      // or any other URL that isn't scheme relative or absolute i.e relative.
+      !(/^(\/\/|http:|https:).*/.test(url));
+  }
+  
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+        // Send the token to same-origin, relative URLs only.
+        // Send the token only if the method warrants CSRF protection
+        // Using the CSRFToken value acquired earlier
+        xhr.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr("content"));
+      }
+    }
+  });
+  
+  $.fn.toggle = function(span_selector, precondition, f) {
+  	var $span = this.find(span_selector);
+  	$span.hasClass(precondition) ? f(this, true) : f(this, false);
+  };
+  
+  $.fn.split_id = function() {
+  	return this.attr("id").split("-")[1];
+  };
+  
+	$(document).ready(function() {
+    $("#subscriptions").load("/reader/subscriptions");
+		
+    entries_request = $.get("/reader/index_entries", function(ret) {
+		  $("#entries").html(ret);
+		});
+    
+    var fetch_entries = function() {
+      entries_request.abort();
+  
+    	$("#entries").empty();
+    	$("#entries-loader").show();
+      $("#subscriptions").load("/reader/subscriptions");
+    	entries_request = $.get("/reader/entries", SETTINGS, function(ret) {
+    		scrollFetchFlag = true;
+    		$("#entries").html(ret);
+    		$("#entries-loader").hide();
+    		window.scrollTo(0, 0);
+    	});
+    };
+    
+  	$(".view-all-items").live("click", function() {
+  		SETTINGS.page = 0;
+  		SETTINGS.items_filter = "all";
+  		update_items_filter_control_counts();	
+  		fetch_entries();
+  	});
+    
+    $("#subscriptions li").live("click", function() {
+  		SETTINGS.feed_id = $(this).split_id();
+  		SETTINGS.page = 0;
+      
+      update_items_filter_control_counts();
+  
+  		fetch_entries();
+  		$("#subscriptions li, #subscriptions h3").removeClass("selected");
+  		$(this).addClass("selected");
+      
+      $("#subscriptions, #read-unread-switcher").removeClass("opened");
+  		return false;
+  	});
+    
+  	$("#subscriptions h3").live("click", function() {
+  		if ($(this).attr("id") == "comment-stream") {
+  			window.location = "/reader/stream";
+  			return false;
+  		};
+  		SETTINGS.feed_id = $(this).attr("feed_id");
+    
+      if ($(this).attr("id") == "my-shared-items") {
+    		SETTINGS.items_filter = "all";
+    		SETTINGS.date_sort = "revchron";
+      } else {
+        update_items_filter_control_counts();
+        SETTINGS.items_filter = "unread";
+        SETTINGS.date_sort = "chron";
+      }
+  		update_items_filter_control_counts();
+  		$("#subscriptions li").removeClass("selected");
+  		$("#subscriptions h3").removeClass("selected");
+  		$(this).addClass("selected");
+  		SETTINGS.page = 0;
+      
+      $("#subscriptions, #read-unread-switcher").removeClass("opened");
+  		fetch_entries();
+    
+  		return false;
+  	});
+    
+    $('a.entry-title-link').live('click', function(e) {
+      e.preventDefault()
+    })
+    
+    $('a.entry-source-title').live('click', function(e) {
+      var href = $(this).closest('.entry').find('a.entry-title-link').attr('href')
+      $(this).attr('href', href)
+    })
+    
+    $('.entry-header').hammer().on("tap", "a", function(event) {
+      return false;
+    });
+    
+    $("#main-nav").click(function(e) {
+      e.preventDefault()
+      
+      $('#subscriptions, #read-unread-switcher').toggleClass('opened')
+    });
+    
+    $("#read-unread-switcher #read").click(function(e) {
+      e.preventDefault()
+      
+      SETTINGS.items_filter = "all";
+      $('#subscriptions, #read-unread-switcher').removeClass('opened')
+      fetch_entries()
+    })
+    
+    $("#read-unread-switcher #unread").click(function(e) {
+      e.preventDefault()
+      
+      SETTINGS.items_filter = "unread";
+      $('#subscriptions, #read-unread-switcher').removeClass('opened')
+      fetch_entries()
+    })
+    
+    $("#read-unread-switcher #chron").click(function(e) {
+      e.preventDefault()
+      
+      SETTINGS.date_sort = "chron";
+      $('#subscriptions, #read-unread-switcher').removeClass('opened')
+      fetch_entries()
+    });
+    
+    $("#read-unread-switcher #revchron").click(function(e) {
+      e.preventDefault()
+      
+      SETTINGS.date_sort = "revchron";
+      $('#subscriptions, #read-unread-switcher').removeClass('opened')
+      fetch_entries()
+    })
+    
+    $('.read-state').live('click', function(e) {
+      var $this = $(this)
+      var $entry = $this.closest('.entry')
+      
+      if ($this.hasClass('read-state-not-kept-unread')) {
+        $this.removeClass('read-state-not-kept-unread')
+        $this.addClass('read-state-kept-unread')
+        
+        $entry.removeClass('read')
+        $.post("/reader/mark_as_unread", { post_id: $entry.attr("post_id") });
+      } else {
+        $this.removeClass('read-state-kept-unread')
+        $this.addClass('read-state-not-kept-unread')
+        
+        $entry.addClass('read')
+        $.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
+      }
+    });
+    
+    $('#entries').hammer().on("tap", ".entry-header", function(event) {
+      event.preventDefault()
+      var $entry = $(this).closest('.entry');
+      
+      $entry.toggleClass('opened');
+      
+      if ($entry.hasClass('shared')) {
+        var $note = $entry.find('.entry-note').detach()
+        $entry.find('.entry-body').prepend($note);
+      }
+      
+      if (!$entry.find('.read-state-kept-unread').length) {
+        if (!$entry.hasClass('read')) {
+          $entry.addClass("read");
+     			$.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
+        }
+      }
+    });
+    
+  	$(".comments .add-comment-link").live("click", function() {
+  		var $entry = $(this).closest(".entry");
+  		$entry.find(".comment-add-form form").show();
+  		$entry.find(".comment-add-form form textarea").focus();
+  		$(this).hide();
+  		return false;
+  	});
+    
+  	$(".comments .cancel-comment-add").live("click", function() {
+  		$(this).closest(".comment-add-form").find("form").hide();
+  		$(this).closest(".comments").find(".add-comment-link").show();
+  		return false;
+  	});
+    
+  	$(".comments .comment-add-form input[type=submit]").live("click", function() {
+  		add_comment($(this).closest(".entry"));
+  		return false;
+  	});
+    
+    $.fn.get_int = function() {
+    	return parseInt(this.text().replace(/[^0-9]/g, ""));
+    };
+
+    $.fn.replace_int = function(n) {
+    	this.text(this.text().replace(/[0-9]+/, n));
+    	return this;
+    };
+
+    $.fn.notch = function(n, simple) {
+    	if (typeof(simple) == "undefined") { simple = false };
+    	var new_n = this.get_int() + n;
+    	this.replace_int(new_n);
+    	if (simple) {
+    		return null;
+    	} else {
+    		(new_n == 0) ? this.hide().parent().removeClass("unread") : this.show().parent().addClass("unread");
+    		update_items_filter_control_counts();
+    	};
+    };
+    
+    var add_comment = function($entry) {
+    	var comment_content = $entry.find(".comment-add-form textarea[name=comment_content]").val();
+    	var post_id = $entry.attr("post_id");
+    	$entry.find(".comment-add-form form").hide();
+    	$entry.find(".comments .add-comment-link").show();
+    	$entry.find(".comments-count").notch(+1, true);
+    	$entry.find(".comments-container").append($("#entries-loader").clone().show());
+    	$.post("/reader/create_comment", {post_id: post_id, comment_content: comment_content}, function(ret) {
+  			$entry.find(".comments-container").append(ret);
+  			$entry.find(".comments-container #entries-loader").remove();
+    	});
+    	return false;
+    };
+    
+  	$(".item-body a:not(.cancel-edit-quickpost)").live("click", function() {
+  		window.open($(this).attr("href"), '_blank');
+  		return false;
+  	});
+    
+    $(document).scroll(function() {
+      if (scrollFetchFlag && ($(document).height() - $(window).scrollTop() < 600)) {
+				SETTINGS.page = SETTINGS.page + 1;
+				scrollFetchFlag = false;
+        append_entries();
+      }
+    });
+	});
+</script>

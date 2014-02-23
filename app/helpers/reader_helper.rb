@@ -1,5 +1,7 @@
 module ReaderHelper
   def pretty_date(date)
+    return '' unless date
+    
     date.in_eastern_time.strftime("%b #{date.in_eastern_time.day}, %Y %I:%M %p")
   end
   

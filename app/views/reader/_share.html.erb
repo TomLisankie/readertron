@@ -12,28 +12,30 @@
 		<div class="card-content">
 			<div class="entry-container">
 				<div class="entry-main">
-					<%= render partial: "entry_note", locals: {entry: entry} %>
-					<div class="entry-date">
-						<a href="/reader/posts/<%= entry.id %>" target="_blank"><%= pretty_date(entry.published) %></a>
-						<% if entry.url.starts_with?("#quickpost-") && entry.sharer == current_user %>
-							<strong><a href="#" class="edit-quickpost">Edit</a></strong>
-						<% end %>
-						<% if entry.sharer == current_user %>
-							<strong><a href="#" class="delete-share">Delete Share [X]</a></strong>
-						<% end %>
-					</div>
-					<h2 class="entry-title">
-						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= entry.title %></a>
-					</h2>
-					<div class="entry-title-go-to">
-						<h2 class="entry-title"></h2>
-						<div class="entry-icons">
-							<div class="item-star star link unselectable empty">
-								<h2 class="entry-title"></h2>
-							</div>
-						</div>
-					</div>
-					<%= render "share_authorstring", entry: entry %>
+          <div class="entry-header">
+  					<%= render partial: "entry_note", locals: {entry: entry} %>
+  					<div class="entry-date">
+  						<a href="/reader/posts/<%= entry.id %>" target="_blank"><%= pretty_date(entry.published) %></a>
+  						<% if entry.url.starts_with?("#quickpost-") && entry.sharer == current_user %>
+  							<strong><a href="#" class="edit-quickpost">Edit</a></strong>
+  						<% end %>
+  						<% if entry.sharer == current_user %>
+  							<strong><a href="#" class="delete-share">Delete Share [X]</a></strong>
+  						<% end %>
+  					</div>
+  					<h2 class="entry-title">
+  						<a class="entry-title-link" target="_blank" href="<%= entry.url %>"><%= entry.title %></a>
+  					</h2>
+  					<div class="entry-title-go-to">
+  						<h2 class="entry-title"></h2>
+  						<div class="entry-icons">
+  							<div class="item-star star link unselectable empty">
+  								<h2 class="entry-title"></h2>
+  							</div>
+  						</div>
+  					</div>
+  					<%= render "share_authorstring", entry: entry %>
+          </div>
 					<div class="entry-debug"></div>
 					<div class="entry-annotations"></div>
 					<div class="entry-body <%= 'has_embed' if entry.url.include?('youtube.com') || entry.url.include?('scribd.com') %>">
