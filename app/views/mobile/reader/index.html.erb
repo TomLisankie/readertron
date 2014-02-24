@@ -118,6 +118,7 @@
   };
   
 	$(document).ready(function() {
+    window.scroll(0, 0)
     $("#subscriptions").load("/reader/subscriptions");
 		
     entries_request = $.get("/reader/index_entries", function(ret) {
@@ -145,7 +146,8 @@
   		fetch_entries();
   	});
     
-    $("#subscriptions li").live("click", function() {
+    $("#subscriptions").hammer().on("tap", "li", function(e) {
+      e.preventDefault()
   		SETTINGS.feed_id = $(this).split_id();
   		SETTINGS.page = 0;
       
@@ -159,7 +161,21 @@
   		return false;
   	});
     
-  	$("#subscriptions h3").live("click", function() {
+    $("#subscriptions").hammer().on("touch", "li, h3", function(e) {
+      e.preventDefault()
+      
+      $(this).addClass('selected')
+    })
+    
+    $("#subscriptions").hammer().on("release", "li, h3", function(e) {
+      e.preventDefault()
+      
+      $(this).removeClass('selected')
+    })
+    
+  	$("#subscriptions").hammer().on("tap", "h3", function(e) {
+      e.preventDefault()
+      
   		if ($(this).attr("id") == "comment-stream") {
   			window.location = "/reader/stream";
   			return false;
