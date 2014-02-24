@@ -297,17 +297,9 @@
       
       var $entry = $(this).closest('.entry');
       
-      if (!$entry.find('.read-state-kept-unread').length) {
-        if (!$entry.hasClass('read')) {
-          $entry.addClass("read");
-     			$.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
-        }
-      } else {
-        $entry.find('.read-state-kept-unread').removeClass('read-state-kept-unread').addClass('read-state-not-kept-unread')
-        if (!$entry.hasClass('read')) {
-          $entry.addClass("read");
-     			$.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
-        }
+      if (!$entry.hasClass('read')) {
+   			$.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
+        $entry.addClass('read')
       }
     })
     
@@ -317,12 +309,11 @@
       var $entry = $(this).closest('.entry');
       
       if ($entry.hasClass('read')) {
-   			$.post("/reader/mark_as_unread", { post_id: $entry.attr("post_id") }, function(ret) {
-   			  $entry.hide()
-   			});
-      } else {
-        $entry.hide()
+   			$.post("/reader/mark_as_unread", { post_id: $entry.attr("post_id") });
+        $entry.find('.read-state').addClass('read-state-kept-unread').removeClass('read-state-not-kept-unread')
       }
+      
+      $entry.removeClass('read')
     })
     
   	$(".comments .add-comment-link").live("click", function() {
