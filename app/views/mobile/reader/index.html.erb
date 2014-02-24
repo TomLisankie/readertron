@@ -1,5 +1,6 @@
-<!--
-- TODO: share by clicking icon
+<!-- TODO:
+- ability to go to original on a share
+- share by clicking icon
 - search bar
 - search results page
 - make sure widths are always good on stories
@@ -290,6 +291,39 @@
         }
       }
     });
+    
+    $("#entries").hammer({ drag_lock_to_axis: true }).on("swipeleft, dragleft", ".entry-header", function(event) {
+      event.gesture.preventDefault()
+      
+      var $entry = $(this).closest('.entry');
+      
+      if (!$entry.find('.read-state-kept-unread').length) {
+        if (!$entry.hasClass('read')) {
+          $entry.addClass("read");
+     			$.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
+        }
+      } else {
+        $entry.find('.read-state-kept-unread').removeClass('read-state-kept-unread').addClass('read-state-not-kept-unread')
+        if (!$entry.hasClass('read')) {
+          $entry.addClass("read");
+     			$.post("/reader/mark_as_read", { post_id: $entry.attr("post_id") });
+        }
+      }
+    })
+    
+    $("#entries").hammer({ drag_lock_to_axis: true }).on("swiperight, dragright", ".entry-header", function(event) {
+      event.gesture.preventDefault()
+      
+      var $entry = $(this).closest('.entry');
+      
+      if ($entry.hasClass('read')) {
+   			$.post("/reader/mark_as_unread", { post_id: $entry.attr("post_id") }, function(ret) {
+   			  $entry.hide()
+   			});
+      } else {
+        $entry.hide()
+      }
+    })
     
   	$(".comments .add-comment-link").live("click", function() {
   		var $entry = $(this).closest(".entry");
