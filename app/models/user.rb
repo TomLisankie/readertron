@@ -39,7 +39,8 @@ class User < ActiveRecord::Base
   end
   
   def self.sign_up!(name, email, fingerprint)
-    u = new(:name => name, :email => email, :password => "readertron", :password_confirmation => "readertron", :fingerprint => fingerprint)
+    u = new(:name => name, :email => email, :password => "readertron", :password_confirmation => "readertron")
+    u.fingerprint = fingerprint
     u.save!
     
     x = User.find(148)
