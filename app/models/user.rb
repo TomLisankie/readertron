@@ -38,6 +38,18 @@ class User < ActiveRecord::Base
     end.first
   end
   
+  def self.sign_up!(name, email, fingerprint)
+    u = new(:name => name, :email => email, :password => "readertron", :password_confirmation => "readertron", :fingerprint => fingerprint)
+    u.save!
+    
+    x = User.find(148)
+    u.subscriptions.detect { |s| s.feed_id == x.feed.id }.destroy
+    
+    (User.all - [x]).each do |user|
+      user.subscriptions.create(feed: u.feed)
+    end
+  end
+  
   def missed_threads_in_period(period)
     Post.most_discussed_in_period(period, 50).reject do |post|
       post.thread_participants.include?(self)
