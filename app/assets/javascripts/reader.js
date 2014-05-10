@@ -84,6 +84,14 @@ $(document).ready(function() {
 		update_items_filter_control_counts();	
 		fetch_entries();
 	});
+
+  if ($("#single").length > 0) {
+    $(".entry:first").click()
+  }
+
+  if ($("#sign-in").length > 0) {
+    $("#user_email").focus()
+  }
 	
 	if ($("#entries").length > 0) {
 		$(document).scroll(function() {
