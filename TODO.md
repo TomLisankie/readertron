@@ -1,6 +1,3 @@
-- debounce dupe shares!
-- rewrite relative URLs in posts, as when I had to do it manually on http://readertron.com/reader/posts/512353
-
 - follow an article without commenting on it
 
 - speed, snappiness, loading errors on my index page

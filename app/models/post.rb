@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :published
   validates_presence_of :content
   
-  after_create :generate_unreads, :cache, :absolutize_relative_image_paths!
+  after_create :generate_unreads, :cache, :absolutize_paths!
   after_save :reindex!
   before_destroy :remove_from_index!
   before_save :clean_title
@@ -271,14 +271,22 @@ class Post < ActiveRecord::Base
     view.render(partial: "reader/entry", locals: {entry: self, index: id, is_unread: is_unread})
   end
   
-  def absolutize_relative_image_paths!
+  def absolutize_paths!
     new_content = "" + content
     doc = Nokogiri::HTML(content)
+
     doc.css("img").each do |image|
       image_url = image['src']
       begin absolute_image_url = URI.join(url, image_url).to_s rescue next end
       new_content = new_content.gsub(image_url, absolute_image_url)
     end
+
+    doc.css("a").each do |anchor|
+      href = anchor['href']
+      begin absolute_href = URI.join(url, href).to_s rescue next end
+      new_content = new_content.gsub(href, absolute_href)
+    end
+
     if new_content != content
       update_attributes!(content: new_content)
       cache
