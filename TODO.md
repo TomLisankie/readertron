@@ -1,14 +1,9 @@
+- debounce dupe shares!
+- rewrite relative URLs in posts, as when I had to do it manually on http://readertron.com/reader/posts/512353
+
+- follow an article without commenting on it
+
 - speed, snappiness, loading errors on my index page
-
-if you write an email to share@readertron.com (how to add to iPhone contacts?) with a URL and some text,
-
-- the subject line will be turned into the title
-- the URL will be found and Instapapered / Safari-Reader'd and turned into the body
-- whatever else is in the email will be turned into your note
-
-if instapaper-y thing fails, URL will be turned into body
-
-
 
 - clean up unreads of people who don't need them
 - redis unreads?
@@ -29,16 +24,11 @@ if instapaper-y thing fails, URL will be turned into body
 
 - if you type "@chip" and then hit space, it should auto-snap to "@Chip".
 
-- weekly digest shouldn't account for *this* sunday.
-
 - @mentions should be able to have punctuation after them (and before them, a la open parens). right now it seems to add a space.
 - and the mention subject line should (a) replace "@" with nothing (so that it reads more naturally) and (b) actually get the ellipses right.
 
 - "do you have data for individuals? i bet i have some interesting gaps and then catch-up days"
-
 - when does most readertron activity happen?
-
-- debounce dupe shares!
 
 - everything (including singles) w/in the main pane refactor (options like 'commentable' and 'mark-as-unread-able')
 
@@ -84,8 +74,6 @@ if instapaper-y thing fails, URL will be turned into body
 
 - style in bookmarklet should be clean and consistent on any website. expanding the note area should be easier. ideally we'd get the github box in the bookmarklet.
 
-- prevent email duplicates and share/unshare/share rss problem with little delay (same with comments)
-
 - share later
   - or throttling
   - what would the second-order effects be?
@@ -100,10 +88,8 @@ if instapaper-y thing fails, URL will be turned into body
 - producer vs. consumpto (ratio of stories shared to read).
 - "you haven't shared in a while"
 - search
-  - keep an eye on memory usage
   - why two index delayed jobs on adding a post?
   - upgrade to ubuntu 12.04 and oracle java 7.
-- go back to sending share emails one at a time, share emails should use the magic links
 - change the copy in share emails to make the clickable area of "go to the post's page" slightly bigger
 - single post should show within the regular pane.
 - Reach out to non-participants.

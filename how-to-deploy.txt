@@ -5,13 +5,15 @@
 * Recompile assets (`bundle exec rake assets:precompile`)
 * Reset the cache (kill memcached and bring it up with `/usr/bin/memcached -d -m 64 -p 11211 -u memcache -l 127.0.0.1`)
 * Seed the cache (`Unread.where("user_id != 4").select {|u| u.post.present?}.each {|u| puts "*" * 100; Rails.cache.write("post-#{u.post_id}", u.post.to_partial); puts "*" * 100}`)
+* Kill and bring up elasticsearch if necessary with:
+  - `cd elasticsearch/elasticsearch-0.90.2/; ES_MAX_MEM=496m bin/elasticsearch`
 * Reindex the elasticsearch index:
   - `bundle exec rake environment tire:import CLASS=Post FORCE=true RAILS_ENV=production`
 * Kick the delayed job workers:
 	- `script/delayed_job stop`
 	- `RAILS_ENV=production script/delayed_job start`
 * Restart server
-	- `sudo /opt/nginx/sbin/nginx -s reload`
+	- `sudo /opt/nginx/sbin/nginx -s reload` (or just `sudo /opt/nginx/sbin/nginx` if just rebooted)
 	- unicorn:
 		- `ps aux | grep unicorn`
 		- `kill -9 [pid]`
