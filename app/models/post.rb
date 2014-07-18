@@ -188,9 +188,18 @@ class Post < ActiveRecord::Base
   end
   
   def self.send_share_emails(id)
-    find(id).send_share_emails
+    post = find(id)
+    Delayed::Job.where("handler like '%debounce_sending_of_share_emails%' AND handler like '%user_id_#{post.feed_id}_user_id%' AND handler like '%#{post.url}%'").delete_all
+    debounce_sending_of_share_emails(id, "user_id_#{post.feed_id}_user_id", post.url)
   end
-  
+
+  class << self
+    def debounce_sending_of_share_emails(id, user_id, url)
+      find(id).send_share_emails
+    end
+    handle_asynchronously :debounce_sending_of_share_emails, :run_at => Proc.new { 10.minutes.from_now }
+  end
+
   def self.most_discussed_in_period(period, limit)
     candidates = shared.where(["created_at > ?", (period * 4).ago])
     threads = candidates.sort_by do |post|
