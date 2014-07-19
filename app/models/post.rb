@@ -42,9 +42,13 @@ class Post < ActiveRecord::Base
       highlight :title, :comment, :content, :note, options: {tag: '<strong class="search-highlight">', number_of_fragments: 0}
     end
   end
+
+	def self.post_staleness_threshold
+		3.months.ago
+	end
   
   def self.delete_old_posts
-    has_no_unreads.unshared.where(["published < ?", 3.months.ago]).delete_all
+    has_no_unreads.unshared.where(["published < ?", post_staleness_threshold]).delete_all
   end
   
   def self.has_no_unreads

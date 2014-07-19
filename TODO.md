@@ -1,3 +1,4 @@
+- comment view the whole thing shouldn't be clickable
 - follow an article without commenting on it
 
 - speed, snappiness, loading errors on my index page
@@ -12,8 +13,6 @@
 - mobile bookmarklet?
 
 - safari's tech for getting the full readable version of articles. make a separate service?
-
-- mobile site
 
 - why are http://www.readertron.com/reader/posts/445915#comment-4234 and http://www.readertron.com/reader/posts/445915 different? why are the links from the weekly digest not autologin?
 
