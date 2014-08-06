@@ -13,10 +13,11 @@
 	- `script/delayed_job stop`
 	- `RAILS_ENV=production script/delayed_job start`
 * Restart server
-	- `sudo /opt/nginx/sbin/nginx -s reload` (or just `sudo /opt/nginx/sbin/nginx` if just rebooted)
+	- `sudo /opt/nginx/sbin/nginx -s reload`
+  - (or just `sudo /opt/nginx/sbin/nginx` if server just rebooted)
 	- unicorn:
 		- `ps aux | grep unicorn`
-		- `kill -9 [pid]`
+		- `kill [pid]`
 		- `bundle exec unicorn -c config/unicorn.rb -D -E production`
 * Write cron jobs
 	- `whenever -w`

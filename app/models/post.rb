@@ -276,23 +276,29 @@ class Post < ActiveRecord::Base
   end
   
   def absolutize_paths!
-    new_content = "" + content
-    doc = Nokogiri::HTML(content)
+    doc = Nokogiri::HTML::DocumentFragment.parse(content)
+    replaced_something = false
 
     doc.css("img").each do |image|
       image_url = image['src']
       begin absolute_image_url = URI.join(url, image_url).to_s rescue next end
-      new_content = new_content.gsub(image_url, absolute_image_url)
+      if absolute_image_url != image_url
+        image['src'] = absolute_image_url
+        replaced_something = true
+      end
     end
 
     doc.css("a").each do |anchor|
       href = anchor['href']
       begin absolute_href = URI.join(url, href).to_s rescue next end
-      new_content = new_content.gsub(href, absolute_href)
+      if absolute_href != href
+        anchor['href'] = absolute_href
+        replaced_something = true
+      end
     end
 
-    if new_content != content
-      update_attributes!(content: new_content)
+    if replaced_something
+      update_attributes!(content: doc.to_html)
       cache
     end
   end

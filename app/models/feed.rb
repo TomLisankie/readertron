@@ -119,8 +119,6 @@ class Feed < ActiveRecord::Base
     
     entries.each_with_index do |entry, i|
       break if entry.published && cutoff && (entry.published < cutoff)
-      # In the old regime, old posts that are deleted are replenished here.
-      # In the new regime, no new post can be older than the date at which it would have been deleted
       this_posts_date = (entry.published || (begin Date.parse(entry.summary) rescue i.days.ago end))
       threshold_date = Post.post_staleness_threshold
       next if this_posts_date < threshold_date
