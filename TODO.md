@@ -1,3 +1,9 @@
+- old posts coming back (kat thing)?
+- why isn't story order deterministic? (seeing unexpected results on mobile on reload)
+- font size on mobile esp. gmail
+- make it easier to share pdfs. it should "just work" from a URL ending in .pdf. embedly?
+- bookmarklet should give spinner and remove "submit" button on click
+
 - comment view the whole thing shouldn't be clickable
 - follow an article without commenting on it
 
