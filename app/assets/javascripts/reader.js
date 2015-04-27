@@ -43,7 +43,7 @@ $(document).ready(function() {
     
     if ($(this).attr("id") == "my-shared-items") {
   		SETTINGS.items_filter = "all";
-  		SETTINGS.date_sort = "revchron";
+  		SETTINGS.date_sort = "revshared";
   		$("#chron").removeClass("jfk-button-checked").addClass("jfk-button-unchecked");
   		$("#revchron").removeClass("jfk-button-unchecked").addClass("jfk-button-checked");
   		$("#unread-or-all .menu-button-caption").text("All items");
