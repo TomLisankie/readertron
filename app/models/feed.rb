@@ -74,27 +74,14 @@ class Feed < ActiveRecord::Base
       end
     end
 
-    t, failed_fetches, fallback_failed_fetches = Time.now, [], []
+    t = Time.now
     posts_count = Post.count(1)
     
-    Feedzirra::Feed.fetch_and_parse(unshared.map(&:feed_url), max_redirects: 5, timeout: 10,
-      on_success: lambda {|feed_url, fz| if feed = find_by_feed_url(feed_url) then feed.refresh(fz) end},
-      on_failure: lambda do |feed_url, response_code, response_header, response_body|
-        failed_fetches << [feed_url, response_code]
-        begin
-          fz2 = Feedzirra::Feed.parse(Feedzirra::Feed.fetch_raw(feed_url))
-          if feed = find_by_feed_url(feed_url) then feed.refresh(fz2) end
-        rescue Exception => e
-          fallback_failed_fetches << [feed_url, "Fallback failure: #{e}"]
-        end
-      end
-    )
+    Feed.find_each(&:refresh)
 
     Report.create(report_type: "Feed.refresh", content: {
       time: Time.now - t,
-      posts: Post.count(1) - posts_count,
-      failed_fetches: failed_fetches,
-      fallback_failed_fetches: fallback_failed_fetches
+      posts: Post.count(1) - posts_count
     })
   end
   
